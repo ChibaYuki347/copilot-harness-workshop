@@ -81,6 +81,7 @@ Delegate specialized work — research, code review, rubber-ducking — to focus
 | Looking for copy-paste examples | [Recipes](recipes/index.md) |
 | Planning a team rollout | [Case study: team rollout](case-studies/team-rollout.md) |
 | Looking up a specific config key | [Reference](reference/cli-commands.md) |
+| Want hands-on homework | [Exercises](exercises/index.md) — 6 graded labs + a capstone |
 
 ## A note on accuracy
 

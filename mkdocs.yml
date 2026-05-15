@@ -152,6 +152,15 @@ plugins:
             Hook events: フックイベント
             File layout: ファイル配置
             Glossary: 用語集
+            Exercises: 演習
+            How to use this track: このトラックの使い方
+            "1 · Custom Instructions": "1 · カスタムインストラクション"
+            "2 · Prompt Files": "2 · プロンプトファイル"
+            "3 · Skills": "3 · スキル"
+            "4 · MCP Servers": "4 · MCP サーバー"
+            "5 · Custom Agents": "5 · カスタムエージェント"
+            "6 · Hooks": "6 · フック"
+            "Capstone: release-notes pipeline": キャップストーン — リリースノートパイプライン
 
 nav:
   - Home: index.md
@@ -184,6 +193,15 @@ nav:
       - reference/hook-events.md
       - reference/file-layout.md
       - reference/glossary.md
+  - Exercises:
+      - "How to use this track": exercises/index.md
+      - "1 · Custom Instructions": exercises/01-custom-instructions.md
+      - "2 · Prompt Files": exercises/02-prompt-files.md
+      - "3 · Skills": exercises/03-skills.md
+      - "4 · MCP Servers": exercises/04-mcp.md
+      - "5 · Custom Agents": exercises/05-agents.md
+      - "6 · Hooks": exercises/06-hooks.md
+      - "Capstone: release-notes pipeline": exercises/capstone.md
 
 watch:
   - examples

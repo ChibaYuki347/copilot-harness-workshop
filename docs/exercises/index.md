@@ -1,0 +1,95 @@
+# 🧪 Exercises
+
+**Hands-on homework you can do on your own machine after reading the rest of this
+site.** Each exercise is small, self-contained, and ends with an *objective* signal
+that tells you it worked — not "looks about right".
+
+## How this track is structured
+
+The exercises layer on top of each other. If you do them in order, the artifacts
+you build in one exercise can be reused in the next — and the **Capstone** combines
+four of them into a single working pipeline.
+
+| # | Exercise | Layer | Difficulty | Time |
+|---|---|---|---|---|
+| 1 | [Custom Instructions](01-custom-instructions.md) | Always-on context | 🟢 Beginner | ~20 min |
+| 2 | [Prompt Files](02-prompt-files.md) | Reusable prompt | 🟢 Beginner | ~25 min |
+| 3 | [Skills](03-skills.md) | Reusable workflow + scripts | 🟡 Intermediate | ~45 min |
+| 4 | [MCP](04-mcp.md) | External tools | 🟡 Intermediate | ~30 min |
+| 5 | [Custom Agents](05-agents.md) | Delegated specialist | 🟡 Intermediate | ~30 min |
+| 6 | [Hooks](06-hooks.md) | Lifecycle automation | 🟡 Intermediate | ~30 min |
+| ✨ | [Capstone — release-notes pipeline](capstone.md) | All of the above | 🟡 Intermediate | ~45 min |
+
+## Before you start
+
+!!! warning "Work in a scratch repo"
+    Don't do these exercises in a repo you care about. Spin up a fresh one:
+
+    ```bash
+    mkdir ~/copilot-harness-lab && cd "$_"
+    git init && git commit --allow-empty -m "init"
+    ```
+
+    Every exercise assumes you're in a git repo where you can safely create files.
+
+You'll need:
+
+- **Copilot CLI** installed and authenticated — see
+  [Getting Started → Installation](../getting-started/installation.md).
+- **`git`** and a recent shell. The hooks exercise uses `bash`; macOS/Linux/WSL all
+  work.
+- **`gh` CLI** (optional) — only needed for the *stretch goals* on the prompt-files
+  and capstone exercises.
+
+## How each page is shaped
+
+Every exercise page follows the same template, so you can skim it the same way
+every time:
+
+1. **Learning objectives** — what you'll be able to do at the end.
+2. **Time & difficulty** — what you're signing up for.
+3. **Prerequisites** — files, accounts, tools.
+4. **Checkpoint commit** — `git commit -am "before-exercise"` so you can `git
+   reset --hard` if you want to start over.
+5. **Scenario** — one paragraph framing the problem.
+6. **Steps** — numbered, each with a verifiable outcome.
+7. **Definition of done** — an objective checklist (commands, files, exit codes).
+8. **Reference solution** — collapsible, prefers snippets from
+   [`examples/`](https://github.com/ChibaYuki347/copilot-harness-workshop/tree/main/examples)
+   so you can copy-paste real files.
+9. **Cleanup** — how to remove what you added.
+10. **Troubleshooting** — the two or three failure modes you're most likely to hit.
+11. **What not to do** — gotchas that bite later.
+12. **Stretch goals** — 1–3 ideas to take it further.
+
+## A note on verification
+
+Most exercises verify with **commands**, not with "does Copilot's reply *seem*
+right". Useful built-in checks you'll see repeatedly:
+
+| Command | Tells you |
+|---|---|
+| `/env` | Which instructions / skills / agents / hooks / MCP servers loaded for this session. |
+| `/instructions` | Specifically the instruction files in scope. |
+| `/skills` | Loaded skills. |
+| `/mcp show` | Connected MCP servers and their tools. |
+| `/agent` | The custom-agent picker, showing what's available. |
+| `copilot --debug …` | Stream of tool calls, hook firings, MCP traffic. |
+
+If the right file is loaded, it shows up in `/env`. If it doesn't, the problem is
+**discovery**, not the model.
+
+## Cleaning up
+
+At the end of every exercise there's a **Cleanup** block. If you stop midway, the
+shortest reset is:
+
+```bash
+git restore --staged . && git checkout -- . && git clean -fd
+```
+
+…inside your scratch repo. That undoes every file the exercise had you create.
+
+---
+
+Ready? Start with **[1 · Custom Instructions](01-custom-instructions.md)**.

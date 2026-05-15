@@ -87,6 +87,7 @@ Copilot にコーディング規約を一度だけ教えれば、どこでも従
 | コピペできる例が欲しい | [レシピ集](recipes/index.md) |
 | チーム導入を計画中 | [ケーススタディ: チーム導入](case-studies/team-rollout.md) |
 | 設定キーをピンポイントで調べたい | [リファレンス](reference/cli-commands.md) |
+| 手を動かして練習したい | [演習](exercises/index.md) — 段階的に進む 6 つのラボ＋キャップストーン |
 
 ## 正確性について
 
