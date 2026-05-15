@@ -1,0 +1,190 @@
+site_name: Copilot Harness Workshop
+site_url: https://chibayuki347.github.io/copilot-harness-workshop/
+site_description: >-
+  A practical guide to customizing GitHub Copilot CLI with Custom Instructions,
+  Prompt Files, Skills, Hooks, MCP servers, and Custom Agents.
+site_author: Yuki Chiba
+repo_name: ChibaYuki347/copilot-harness-workshop
+repo_url: https://github.com/ChibaYuki347/copilot-harness-workshop
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2026 Yuki Chiba — MIT License
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/robot-happy-outline
+    repo: fontawesome/brands/github
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - content.action.edit
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ChibaYuki347/copilot-harness-workshop
+  alternate:
+    - name: English
+      link: /copilot-harness-workshop/
+      lang: en
+    - name: 日本語
+      link: /copilot-harness-workshop/ja/
+      lang: ja
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      base_path:
+        - .
+        - docs
+        - examples
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search:
+      lang: [en, ja]
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: ja
+          name: 日本語
+          build: true
+          nav_translations:
+            Home: ホーム
+            Getting Started: はじめに
+            What is Copilot CLI?: Copilot CLI とは
+            Installation: インストール
+            Your first session: 最初のセッション
+            Slash commands tour: スラッシュコマンド入門
+            Customizations: カスタマイズ
+            Overview: 概要
+            Custom Instructions: カスタムインストラクション
+            Prompt Files & Slash Commands: プロンプトファイルとスラッシュコマンド
+            Skills: スキル
+            Hooks: フック
+            MCP Servers: MCP サーバー
+            Custom Agents: カスタムエージェント
+            Recipes: レシピ
+            "Recipe: PR Review Skill": レシピ — PR レビュースキル
+            "Recipe: GitHub MCP server": レシピ — GitHub MCP サーバー
+            "Recipe: session-end secret scan": レシピ — セッション終了時のシークレットスキャン
+            "Recipe: path-specific instructions": レシピ — パス指定インストラクション
+            "Recipe: multi-agent workflow": レシピ — マルチエージェントワークフロー
+            Case Studies: ケーススタディ
+            Solo developer: 個人開発者
+            Team rollout: チーム導入
+            Reference: リファレンス
+            CLI commands: CLI コマンド
+            Hook events: フックイベント
+            File layout: ファイル配置
+            Glossary: 用語集
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - getting-started/what-is-copilot-cli.md
+      - getting-started/installation.md
+      - getting-started/first-session.md
+      - getting-started/slash-commands.md
+  - Customizations:
+      - Overview: customizations/index.md
+      - customizations/custom-instructions.md
+      - customizations/prompt-files.md
+      - customizations/skills.md
+      - customizations/hooks.md
+      - customizations/mcp.md
+      - customizations/agents.md
+  - Recipes:
+      - recipes/index.md
+      - recipes/pr-review-skill.md
+      - recipes/github-mcp-server.md
+      - recipes/session-end-secret-scan.md
+      - recipes/path-specific-instructions.md
+      - recipes/multi-agent-workflow.md
+  - Case Studies:
+      - case-studies/index.md
+      - case-studies/solo-developer.md
+      - case-studies/team-rollout.md
+  - Reference:
+      - reference/cli-commands.md
+      - reference/hook-events.md
+      - reference/file-layout.md
+      - reference/glossary.md
+
+watch:
+  - examples
+  - README.md

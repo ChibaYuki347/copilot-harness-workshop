@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "matcher": "^(edit|create)$",
+        "bash": ".github/hooks/pre-commit-format/format.sh",
+        "cwd": ".",
+        "env": {
+          "FORMAT_LANG": "auto"
+        },
+        "timeoutSec": 30
+      }
+    ]
+  }
+}

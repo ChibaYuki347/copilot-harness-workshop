@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/session-logger/log-session-start.sh",
+        "cwd": ".",
+        "env": {
+          "LOG_DIR": ".copilot-logs"
+        },
+        "timeoutSec": 10
+      }
+    ],
+    "sessionEnd": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/session-logger/log-session-end.sh",
+        "cwd": ".",
+        "env": {
+          "LOG_DIR": ".copilot-logs"
+        },
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+# Python / venv
+.venv/
+venv/
+__pycache__/
+*.pyc
+.python-version
+
+# MkDocs build output
+site/
+.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+*.swp
+
+# Copilot CLI session state (don't ship local sessions)
+.copilot/sessions/
+.copilot/cache/
+
+# Node (if anyone adds JS tooling later)
+node_modules/
+
+# Logs
+*.log

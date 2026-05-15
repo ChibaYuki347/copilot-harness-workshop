@@ -1,0 +1,39 @@
+/* Tighten code blocks a touch, brand-friendly accents. */
+:root {
+  --md-code-font: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* Add a soft border on admonitions so quote-style callouts don't blend in. */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 8px;
+}
+
+/* Hero feature grid used on the home page. */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.feature-card {
+  background: var(--md-code-bg-color);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--md-accent-fg-color);
+}
+
+.feature-card h3 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+.feature-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* Slightly larger inline code in tables, easier scanning. */
+.md-typeset table:not([class]) code {
+  font-size: 0.85em;
+}
