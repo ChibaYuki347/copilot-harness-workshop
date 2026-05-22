@@ -2,6 +2,9 @@
 
 **規約を一度伝えれば、どこでも適用できます。**
 
+!!! abstract "対応ホスト"
+    🟢 **Copilot CLI** · 🟢 **VS Code**（Copilot 拡張） — 同じ `.github/copilot-instructions.md` ファイル。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+
 カスタムインストラクションは、もっともシンプルで効果の高いカスタマイズです。Copilot が
 システムプロンプトに読み込む、ただの Markdown ファイルです。スクリプトも JSON も DSL も
 不要です。
@@ -49,7 +52,7 @@ Copilot CLI は、`cwd` から git ルートまでの各ディレクトリ階層
 このファイルはリポジトリにコミットされるため、コントリビューター全員の Copilot
 セッションで同じ基準が共有されます。
 
-## 最小例 — パス別
+## 最小例 — パス別 { #path-specific }
 
 `.github/instructions/python.instructions.md`:
 

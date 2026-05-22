@@ -2,6 +2,9 @@
 
 **Plug your own tools into the agent via the Model Context Protocol.**
 
+!!! abstract "Where it works"
+    🟢 **Copilot CLI** (`.mcp.json` at repo root) · 🟢 **VS Code** (different config: `.vscode/mcp.json` or `settings.json`). The CLI **no longer reads** `.vscode/mcp.json` — mixed teams should ship **both** files. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+
 MCP — Model Context Protocol — is the open standard that lets a model talk to external
 tools. Copilot CLI ships with **GitHub's MCP server enabled by default** (so the agent
 can list issues, comment on PRs, etc.) and supports adding your own.

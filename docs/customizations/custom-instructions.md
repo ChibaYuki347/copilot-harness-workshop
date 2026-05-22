@@ -2,6 +2,9 @@
 
 **Teach Copilot your conventions once, apply them everywhere.**
 
+!!! abstract "Where it works"
+    🟢 **Copilot CLI** · 🟢 **VS Code** (Copilot extension) — same `.github/copilot-instructions.md` file. See [VS Code vs CLI](../reference/vscode-vs-cli.md) for the full matrix.
+
 Custom instructions are the simplest and highest-leverage customization. They're plain
 Markdown files Copilot loads into its system prompt — no scripts, no JSON, no DSL.
 
@@ -48,7 +51,7 @@ the git root, plus your home directory.[^locations]
 That file is committed to the repo, so every contributor's Copilot session has the
 same baseline.
 
-## Minimal example — path-specific
+## Minimal example — path-specific { #path-specific }
 
 `.github/instructions/python.instructions.md`:
 

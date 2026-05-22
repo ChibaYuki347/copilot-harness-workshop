@@ -10,15 +10,39 @@ The exercises layer on top of each other. If you do them in order, the artifacts
 you build in one exercise can be reused in the next — and the **Capstone** combines
 four of them into a single working pipeline.
 
+The track is split into **two**, so you can stop at the right place for your tooling:
+
+### 🟪 Track A — Anyone with Copilot (VS Code *or* CLI)
+
+These exercises produce artifacts that work in **both** the VS Code Copilot
+extension and Copilot CLI. Same files, same configuration, both hosts pick them up.
+
 | # | Exercise | Layer | Difficulty | Time |
 |---|---|---|---|---|
 | 1 | [Custom Instructions](01-custom-instructions.md) | Always-on context | 🟢 Beginner | ~20 min |
 | 2 | [Prompt Files](02-prompt-files.md) | Reusable prompt | 🟢 Beginner | ~25 min |
-| 3 | [Skills](03-skills.md) | Reusable workflow + scripts | 🟡 Intermediate | ~45 min |
-| 4 | [MCP](04-mcp.md) | External tools | 🟡 Intermediate | ~30 min |
-| 5 | [Custom Agents](05-agents.md) | Delegated specialist | 🟡 Intermediate | ~30 min |
-| 6 | [Hooks](06-hooks.md) | Lifecycle automation | 🟡 Intermediate | ~30 min |
-| ✨ | [Capstone — release-notes pipeline](capstone.md) | All of the above | 🟡 Intermediate | ~45 min |
+| 4 | [MCP Servers](04-mcp.md) | External tools | 🟡 Intermediate | ~30 min |
+
+!!! tip "MCP setup differs between hosts"
+    The MCP exercise targets the **CLI's `.mcp.json`** as the canonical
+    config, but Step 2.5 of that exercise shows the equivalent VS Code config
+    (`.vscode/mcp.json`) so VS Code users can do it too.
+
+### 🟩 Track B — Copilot CLI required
+
+These exercises lean on capabilities that are CLI-primary or CLI-only. If your
+team is on the CLI, do these too. If you're VS Code only, skip to the
+[customizations overview](../customizations/index.md) instead.
+
+| # | Exercise | Layer | Difficulty | Time | Why CLI? |
+|---|---|---|---|---|---|
+| 3 | [Skills](03-skills.md) | Reusable workflow + scripts | 🟡 Intermediate | ~45 min | Repo-scoped `.github/skills/` is CLI-primary |
+| 5 | [Custom Agents](05-agents.md) | Delegated specialist | 🟡 Intermediate | ~30 min | `/agent` picker is CLI; VS Code needs `target: vscode` |
+| 6 | [Hooks](06-hooks.md) | Lifecycle automation | 🟡 Intermediate | ~30 min | CLI-only feature |
+| ✨ | [Capstone — release-notes pipeline](capstone.md) | Composes all | 🟡 Intermediate | ~45 min | Composes Track B layers |
+
+→ See [VS Code vs Copilot CLI](../reference/vscode-vs-cli.md) for the full
+support matrix before you start.
 
 ## Before you start
 

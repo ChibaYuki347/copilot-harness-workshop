@@ -2,6 +2,9 @@
 
 **Model Context Protocol 経由で、独自のツールをエージェントに接続します。**
 
+!!! abstract "対応ホスト"
+    🟢 **Copilot CLI**（リポジトリルートの `.mcp.json`） · 🟢 **VS Code**（別の設定: `.vscode/mcp.json` または `settings.json`）。CLI は **もう `.vscode/mcp.json` を読みません**。混在チームでは **両方** のファイルを配布してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+
 MCP（Model Context Protocol）は、モデルが外部ツールとやり取りするためのオープン標準です。
 Copilot CLI では **GitHub の MCP サーバーが既定で有効** になっており（Issue の一覧取得や
 PR へのコメントなどが可能）、独自サーバーの追加にも対応しています。

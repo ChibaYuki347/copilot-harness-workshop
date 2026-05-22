@@ -2,6 +2,8 @@
 
 🟡 **Intermediate · ~45 min**
 
+🟩 **Track B — Copilot CLI required** (composes Skills + Hooks, both CLI-primary · [why?](../reference/vscode-vs-cli.md))
+
 ## Learning objectives
 
 By the end of this exercise you can:

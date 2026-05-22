@@ -2,6 +2,8 @@
 
 🟡 **中級 · 約45分**
 
+🟩 **トラック B — Copilot CLI が必要**（リポジトリの `.github/skills/` は CLI 主体 · [詳細](../reference/vscode-vs-cli.md)）
+
 ## 学習目標
 
 この演習を終えると、次のことができるようになります:

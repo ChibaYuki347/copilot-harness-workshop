@@ -2,6 +2,8 @@
 
 🟡 **中級 · 約30分**
 
+🟩 **トラック B — Copilot CLI が必要**（`/agent` ピッカーは CLI のみ。VS Code は `target: vscode` が必要 · [詳細](../reference/vscode-vs-cli.md)）
+
 ## 学習目標
 
 この演習を終えると、次のことができるようになります:
@@ -15,6 +17,9 @@
 
 - `main` に少なくとも 1 コミットあり、feature ブランチに 1 つ変更がある、スクラッチ用の git リポジトリ（エージェントにレビューさせる diff が必要です）。
 - 約30分。
+
+!!! warning "組織のカスタムエージェントポリシーを確認してください"
+    Copilot Enterprise / Business の管理者はカスタムエージェントを無効化できます。手順 3 の後に `/agent` を実行して、ピッカーが空、または *"custom agents are not enabled for this enterprise"* と表示される場合は、[Copilot ポリシー設定](https://docs.github.com/copilot/managing-copilot/managing-policies-and-features-for-your-enterprise/managing-policies-for-github-copilot-in-your-enterprise) を確認してから先に進んでください。
 
 ## チェックポイントコミット
 

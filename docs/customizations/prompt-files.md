@@ -2,6 +2,9 @@
 
 **Turn a repeated prompt into a one-shot, parameterized command.**
 
+!!! abstract "Where it works"
+    🟢 **Copilot CLI** · 🟢 **VS Code** (Copilot extension) — same `.github/prompts/*.prompt.md` files. Both surfaces type `/<name>` to invoke. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+
 Custom instructions are *always-on*. Prompt files (a.k.a. custom slash commands) are
 *on-demand* — you invoke them by typing `/command-name`.
 

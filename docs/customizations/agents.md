@@ -2,6 +2,9 @@
 
 **Delegate specialized work to focused sub-agents that the main agent can call.**
 
+!!! abstract "Where it works"
+    🟢 **Copilot CLI** (default) · 🟡 **VS Code** (add `target: vscode` to the agent's frontmatter). Same `.github/agents/<name>.agent.md` file format; the `target` field switches the host. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+
 Copilot CLI ships with a powerful built-in `task` tool that spawns *sub-agents* — each
 running in its own context window with its own prompt, tools, and (optionally) model.
 You can also define **custom agents** that surface as named, pickable workers.

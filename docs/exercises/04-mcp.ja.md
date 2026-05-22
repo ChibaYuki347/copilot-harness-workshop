@@ -2,6 +2,8 @@
 
 🟡 **中級 · 約30分**
 
+🟪 **トラック A — VS Code でも Copilot CLI でも動作します**（設定ファイルが異なります — ステップ 2.5 参照 · [詳細](../reference/vscode-vs-cli.md)）
+
 ## 学習目標
 
 この演習を終えると、次のことができるようになります:
@@ -19,6 +21,9 @@
 
 !!! tip "この演習では GitHub 認証は不要です"
     `@modelcontextprotocol/server-filesystem` の **filesystem** リファレンスサーバーを使います。これは npm で公開されており、API トークンは不要です。指定したディレクトリにスコープされた read / write ツールを公開するだけなので、サンドボックス用途にぴったりです。
+
+!!! warning "組織の MCP ポリシーを確認してください"
+    Copilot Enterprise / Business のテナントによっては、読み込める MCP サーバーが制限されています。手順 3 で `/mcp show` が `notes-fs` を **blocked by policy** と表示した場合は、管理者に確認するか [GitHub Copilot ポリシー ドキュメント](https://docs.github.com/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/managing-copilot-policies-as-an-individual-subscriber) を参照してください。filesystem サーバーは通常許可されていますが、このレイヤーを土台にする前に確認しておくとよいでしょう。
 
 ## チェックポイントコミット
 
@@ -57,6 +62,36 @@ echo "# Meeting Wed" > notes/2026-05-13.md
 ```
 
 **確認できる結果**: `cat .mcp.json | jq .mcpServers.notes-fs.type` で `"stdio"` が表示されます。
+
+### 2.5. （VS Code ユーザーのみ）`.vscode/mcp.json` にも同じ設定を書く
+
+🟦 **Copilot CLI を使っている方は、このステップは飛ばしてください。**
+
+CLI は **もう `.vscode/mcp.json` を読みません**。リポジトリルートの `.mcp.json` のみを読みます。一方、VS Code Copilot 拡張は `.vscode/mcp.json` を読みます。両方のホストで同じサーバーを動かしたい場合は、両方のファイルに同じサーバー定義を書きます:
+
+```bash
+mkdir -p .vscode
+cat > .vscode/mcp.json <<'EOF'
+{
+  "servers": {
+    "notes-fs": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}/notes"]
+    }
+  }
+}
+EOF
+```
+
+違いに注意:
+
+| | CLI (`.mcp.json`) | VS Code (`.vscode/mcp.json`) |
+|---|---|---|
+| 最上位キー | `mcpServers` | `servers` |
+| パス変数 | `${PWD}` | `${workspaceFolder}` |
+
+VS Code 側では Chat ビュー → MCP サーバーパネルを開くと `notes-fs` が接続済みと表示されるはずです。VS Code 内での確認は、CLI の `/mcp show` に相当します。
 
 ### 3. セッションを開始して接続を確認する
 

@@ -151,6 +151,7 @@ plugins:
             CLI commands: CLI コマンド
             Hook events: フックイベント
             File layout: ファイル配置
+            "VS Code vs Copilot CLI": "VS Code と Copilot CLI"
             Glossary: 用語集
             Exercises: 演習
             How to use this track: このトラックの使い方
@@ -192,6 +193,7 @@ nav:
       - reference/cli-commands.md
       - reference/hook-events.md
       - reference/file-layout.md
+      - "VS Code vs Copilot CLI": reference/vscode-vs-cli.md
       - reference/glossary.md
   - Exercises:
       - "How to use this track": exercises/index.md

@@ -2,6 +2,8 @@
 
 🟡 **Intermediate · ~30 min**
 
+🟩 **Track B — Copilot CLI only** (hooks are CLI-only · [why?](../reference/vscode-vs-cli.md))
+
 ## Learning objectives
 
 By the end of this exercise you can:

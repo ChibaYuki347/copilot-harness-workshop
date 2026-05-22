@@ -2,6 +2,9 @@
 
 **繰り返し使うプロンプトを、引数付きの 1 回呼び出しコマンドにします。**
 
+!!! abstract "対応ホスト"
+    🟢 **Copilot CLI** · 🟢 **VS Code**（Copilot 拡張） — 同じ `.github/prompts/*.prompt.md` ファイル。どちらでも `/<name>` で呼び出せます。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+
 カスタムインストラクションは *常時適用* です。プロンプトファイル（別名: カスタム
 スラッシュコマンド）は *必要なときだけ* 使います。`/command-name` と入力して
 呼び出します。

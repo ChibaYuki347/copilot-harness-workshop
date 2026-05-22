@@ -2,6 +2,9 @@
 
 **Run a script (or call an HTTP endpoint) when the agent crosses a lifecycle event.**
 
+!!! abstract "Where it works"
+    🟢 **Copilot CLI** · ❌ **VS Code** — **CLI-only**. If you need a session-end audit log for VS Code users, do it outside Copilot (Git post-commit, IDE task runner, wrapper script). See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+
 Hooks are the *automation* layer. They let you observe and *gate* what the agent does
 without changing how you prompt it.
 

@@ -2,6 +2,8 @@
 
 🟡 **Intermediate · ~30 min**
 
+🟩 **Track B — Copilot CLI required** (`/agent` picker is CLI; VS Code needs `target: vscode` · [why?](../reference/vscode-vs-cli.md))
+
 ## Learning objectives
 
 By the end of this exercise you can:
@@ -16,6 +18,13 @@ By the end of this exercise you can:
 - A scratch git repo with at least one commit on `main` and one change on a
   feature branch (we need a diff for the agent to review).
 - ~30 minutes.
+
+!!! warning "Check your organization's custom-agents policy"
+    Copilot Enterprise / Business administrators can disable custom agents.
+    Run `/agent` after Step 3 — if the picker is empty or you see *"custom
+    agents are not enabled for this enterprise"*, check the admin
+    [Copilot policy settings](https://docs.github.com/copilot/managing-copilot/managing-policies-and-features-for-your-enterprise/managing-policies-for-github-copilot-in-your-enterprise)
+    before continuing.
 
 ## Checkpoint commit
 

@@ -2,6 +2,9 @@
 
 **メインエージェントから呼び出せる、専用のサブエージェントに専門作業を委譲します。**
 
+!!! abstract "対応ホスト"
+    🟢 **Copilot CLI**（既定） · 🟡 **VS Code**（エージェントの frontmatter に `target: vscode` を追加）。ファイル形式は `.github/agents/<name>.agent.md` で共通。`target` フィールドでホストを切り替えます。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+
 Copilot CLI には、*サブエージェント* を起動する強力な組み込み `task` ツールがあります。
 各サブエージェントは、独自のプロンプト・ツール・（必要に応じて）モデルを持つ専用
 コンテキストで動作します。さらに、名前付きで選択できる **カスタムエージェント** も

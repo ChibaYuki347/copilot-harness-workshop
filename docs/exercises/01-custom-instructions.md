@@ -2,6 +2,8 @@
 
 🟢 **Beginner · ~20 min**
 
+🟪 **Track A — works in VS Code and Copilot CLI** ([why?](../reference/vscode-vs-cli.md))
+
 ## Learning objectives
 
 By the end of this exercise you can:

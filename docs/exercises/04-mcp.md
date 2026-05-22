@@ -2,6 +2,8 @@
 
 🟡 **Intermediate · ~30 min**
 
+🟪 **Track A — works in VS Code and Copilot CLI** (config files differ — see Step 2.5 · [why?](../reference/vscode-vs-cli.md))
+
 ## Learning objectives
 
 By the end of this exercise you can:
@@ -23,6 +25,13 @@ By the end of this exercise you can:
     `@modelcontextprotocol/server-filesystem`, which is npm-published and needs
     no API token. It just exposes read/write tools scoped to a directory you
     pick. Perfect for a sandbox.
+
+!!! warning "Check your organization's MCP policy"
+    Some Copilot Enterprise / Business tenants restrict which MCP servers may
+    be loaded. If `/mcp show` reports `notes-fs` as **blocked by policy** at
+    Step 3, check with your admin or the [GitHub Copilot policy docs](https://docs.github.com/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/managing-copilot-policies-as-an-individual-subscriber). The filesystem
+    server is typically allowed but it's worth confirming before you build
+    further on this layer.
 
 ## Checkpoint commit
 
@@ -65,6 +74,41 @@ At the repo root, create `.mcp.json`:
 
 **Verifiable outcome**: `cat .mcp.json | jq .mcpServers.notes-fs.type` prints
 `"stdio"`.
+
+### 2.5. (VS Code users only) Mirror the config to `.vscode/mcp.json`
+
+🟦 **Skip this step if you're using Copilot CLI.**
+
+The CLI **no longer reads** `.vscode/mcp.json` — only `.mcp.json` at the repo
+root. But the VS Code Copilot extension reads `.vscode/mcp.json`. If you want
+this server to work in both surfaces, write the same server definition to both
+files:
+
+```bash
+mkdir -p .vscode
+cat > .vscode/mcp.json <<'EOF'
+{
+  "servers": {
+    "notes-fs": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}/notes"]
+    }
+  }
+}
+EOF
+```
+
+Note the differences:
+
+| | CLI (`.mcp.json`) | VS Code (`.vscode/mcp.json`) |
+|---|---|---|
+| Top-level key | `mcpServers` | `servers` |
+| Path variable | `${PWD}` | `${workspaceFolder}` |
+
+In VS Code, open the Chat view → MCP servers panel and you should see
+`notes-fs` connected. Verifying inside VS Code is the equivalent of
+`/mcp show` in the CLI.
 
 ### 3. Start a session and check the connection
 
