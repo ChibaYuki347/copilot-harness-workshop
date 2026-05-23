@@ -3,7 +3,7 @@
 **Run a script (or call an HTTP endpoint) when the agent crosses a lifecycle event.**
 
 !!! abstract "Where it works"
-    🟢 **Copilot CLI** · ❌ **VS Code** — **CLI-only**. If you need a session-end audit log for VS Code users, do it outside Copilot (Git post-commit, IDE task runner, wrapper script). See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+    🟢 **Copilot CLI** · 🟢 **VS Code (Preview)** — same `.github/hooks/*.json` JSON format (Claude Code-compatible) is read by both hosts. VS Code support is Preview as of 2026-05; see the [official VS Code Hooks docs](https://code.visualstudio.com/docs/copilot/customization/hooks). User-scope locations differ: CLI uses `~/.copilot/hooks/`; VS Code uses `~/.copilot/hooks` or `~/.claude/settings.json`. Your **organization's enterprise policy** may disable hooks in VS Code — check before relying on them. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
 Hooks are the *automation* layer. They let you observe and *gate* what the agent does
 without changing how you prompt it.
@@ -195,12 +195,66 @@ brand-new clone without your explicit consent.
       `sessionStart` hook — the agent has already been running for a moment by the time
       it fires on a fresh repo.
 
+## VS Code variant (Preview) { #vs-code-variant }
+
+VS Code Copilot Chat reads the same `.github/hooks/*.json` format. As of 2026-05,
+hooks in VS Code are in **Preview**.
+
+### Locations VS Code searches
+
+| Scope | Default file location |
+|---|---|
+| Workspace | `.github/hooks/*.json` |
+| Workspace (Claude format) | `.claude/settings.json`, `.claude/settings.local.json` |
+| User | `~/.copilot/hooks`, `~/.claude/settings.json` |
+| Per-agent | `hooks:` field inside a custom agent's `.agent.md` frontmatter (set `chat.useCustomAgentHooks: true`) |
+| Plugin | `hooks.json` or `hooks/hooks.json` in the plugin (same as CLI) |
+
+Workspace hooks take precedence over user hooks for the same event. Customize what
+gets loaded via `chat.hookFilesLocations` in `settings.json`:
+
+```jsonc
+{
+  "chat.hookFilesLocations": {
+    ".github/hooks": true,
+    ".claude/settings.local.json": true,
+    ".claude/settings.json": true,
+    "~/.claude/settings.json": true
+  }
+}
+```
+
+### Event-name casing differences
+
+The site's examples use camelCase (`sessionStart`, `preToolUse`, …) — that's what
+`awesome-copilot` uses and what the CLI accepts. The **official VS Code Hooks
+docs** use **PascalCase** (`SessionStart`, `PreToolUse`, `Stop`, …) and don't list
+a `sessionEnd` event — VS Code calls session end **`Stop`**. The CLI accepts both
+casings (PascalCase aliases via `vsCodePreToolUseInputMapper`), so you can usually
+write camelCase and have both hosts pick it up — but if you author for VS Code
+first, prefer PascalCase + `Stop` over `sessionEnd`. See the
+[official VS Code Hooks reference](https://code.visualstudio.com/docs/copilot/customization/hooks)
+for the canonical event list.
+
+### Verifying VS Code hooks fired
+
+Open **View → Output** in VS Code and select the **GitHub Copilot Chat Hooks**
+channel. Each hook execution logs its stdout/stderr there.
+
+!!! warning "Enterprise policy gate"
+    Organizations can disable VS Code hooks entirely. The official VS Code docs
+    say: *"Your organization might have disabled the use of hooks in VS Code."*
+    Confirm with your admin before relying on them for security-critical
+    automation.
+
 ## Verification
 
 ```text
 /env                # shows count of loaded hooks
 copilot --verbose   # surfaces hook stdout/stderr inline
 ```
+
+(VS Code users: see the *GitHub Copilot Chat Hooks* output channel.)
 
 ## Next
 

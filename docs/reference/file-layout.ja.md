@@ -51,15 +51,19 @@ Copilot CLI が参照する場所を 1 ページにまとめたものです。�
 
 ## MCP
 
-| パス | スコープ |
-|---|---|
-| `.mcp.json`（git root） | repo |
-| `~/.copilot/mcp-config.json` | personal（`$COPILOT_HOME` が設定されていればその場所に従います） |
+| パス | スコープ | 読み込むツール |
+|---|---|---|
+| `.mcp.json`（git root） | リポジトリ | Copilot CLI |
+| `.github/mcp.json`（git root） | リポジトリ（代替） | Copilot CLI |
+| `.vscode/mcp.json` | ワークスペース | **VS Code のみ**（`"servers"` キー） |
+| `~/.copilot/mcp-config.json` | パーソナル（`$COPILOT_HOME` が設定されていればその場所） | Copilot CLI |
+| VS Code 設定 `mcp.servers` | パーソナル | **VS Code のみ** |
+| `$GITHUB_COPILOT_MCP_JSON` 環境変数 | セッション上書き | Copilot CLI |
 
-現行の Copilot CLI では、`.vscode/mcp.json` と `.devcontainer/devcontainer.json` は
-MCP 設定ソースとして **もう読み込まれません**[^vscode]。ワークスペースの MCP サーバーは
-git root の `.mcp.json`、ユーザーレベルの MCP サーバーは
-`~/.copilot/mcp-config.json`（`mcp.json` ではありません）に置きます。
+CLI は `.vscode/mcp.json` と `.devcontainer/devcontainer.json` を MCP 設定ソースとして
+**もう読み込みません**[^vscode]。**VS Code は引き続き `.vscode/mcp.json` を使う** ため、
+形式の違い（`mcpServers` vs `servers`、`${VAR}` vs `${env:VAR}`）は
+[MCP カスタマイズページ](../customizations/mcp.md#vs-code-equivalent) を参照。
 
 [^vscode]: CLI の changelog より: *「`.vscode/mcp.json` と
     `.devcontainer/devcontainer.json` を MCP サーバー設定ソースから削除し、CLI は

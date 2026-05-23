@@ -2,7 +2,7 @@
 
 🟡 **Intermediate · ~30 min**
 
-🟩 **Track B — Copilot CLI only** (hooks are CLI-only · [why?](../reference/vscode-vs-cli.md))
+🟩 **Track B — CLI-primary** (also runs in **VS Code Preview** with the same `.github/hooks/*.json` — check enterprise policy · [details](../reference/vscode-vs-cli.md))
 
 ## Learning objectives
 

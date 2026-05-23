@@ -3,7 +3,7 @@
 **Plug your own tools into the agent via the Model Context Protocol.**
 
 !!! abstract "Where it works"
-    🟢 **Copilot CLI** (`.mcp.json` at repo root) · 🟢 **VS Code** (different config: `.vscode/mcp.json` or `settings.json`). The CLI **no longer reads** `.vscode/mcp.json` — mixed teams should ship **both** files. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+    🟢 **Copilot CLI** (project: `.github/mcp.json` or `.mcp.json`; user: `~/.copilot/mcp-config.json`) · 🟢 **VS Code** (Preview — `.vscode/mcp.json` workspace + `settings.json` `mcp.servers` user scope). **Same MCP protocol**, but the file location and top-level JSON key differ — CLI uses `"mcpServers"`, VS Code uses `"servers"`. Ship both files for mixed teams. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
 MCP — Model Context Protocol — is the open standard that lets a model talk to external
 tools. Copilot CLI ships with **GitHub's MCP server enabled by default** (so the agent
@@ -20,18 +20,59 @@ can list issues, comment on PRs, etc.) and supports adding your own.
 
 | Scope | File |
 |---|---|
-| **Repo** | `.mcp.json` at the **git root**. Committed. |
+| **Repo (preferred)** | `.mcp.json` at the **git root**. Committed. |
+| **Repo (alt)** | `.github/mcp.json` — the CLI also accepts this path; useful if you keep all bot config under `.github/`. |
 | **Personal** | `~/.copilot/mcp-config.json` (managed via `/mcp add` or by editing the file directly). The location follows `$COPILOT_HOME` if set. |
+| **Env var** | `GITHUB_COPILOT_MCP_JSON` — pass a JSON string directly. Highest precedence. Useful for CI / one-off overrides. |
 
-!!! warning "Migration note"
+!!! warning "Migration note (CLI)"
     `.vscode/mcp.json` and `.devcontainer/devcontainer.json` are **no longer read** as
-    MCP server config sources by the CLI. Only `.mcp.json` at the git root. The CLI
-    surfaces a migration hint if it finds `.vscode/mcp.json` without `.mcp.json`.[^migration]
+    MCP server config sources by the CLI. The CLI now only reads `.mcp.json` or
+    `.github/mcp.json` at the git root (plus user-scope `~/.copilot/mcp-config.json`).
+    The CLI surfaces a migration hint if it finds `.vscode/mcp.json` without one of
+    those files.[^migration] **VS Code still uses `.vscode/mcp.json`** — mixed teams
+    should ship both, see the [VS Code variant section](#vs-code-equivalent) below.
 
 [^migration]: From the `github/copilot-cli` changelog: *"Remove `.vscode/mcp.json` and
     `.devcontainer/devcontainer.json` as MCP server config sources; CLI now only reads
     `.mcp.json`. A migration hint appears when `.vscode/mcp.json` is detected without
     `.mcp.json`."*
+
+## VS Code equivalent { #vs-code-equivalent }
+
+VS Code Copilot Chat also speaks MCP (Preview as of 2026-05). It reads a
+different file with a slightly different shape — same servers, different
+top-level key and env-var syntax.
+
+| Aspect | Copilot CLI | VS Code |
+|---|---|---|
+| Workspace config | `.mcp.json` *or* `.github/mcp.json` | `.vscode/mcp.json` |
+| User config | `~/.copilot/mcp-config.json` | VS Code Settings → `mcp.servers` |
+| Top-level JSON key | `"mcpServers"` | `"servers"` |
+| Env-var reference | `${VAR}` | `${env:VAR}` |
+| Server lifecycle | CLI spawns / IPC | VS Code Workbench manages via `vscode.lm.startMcpGateway()` |
+| Tool naming | `mcp__<server>__<tool>` | `<server>/<tool>` (after virtual grouping) |
+| Auth storage | OS keychain via `keytar`, file fallback at `~/.copilot/config/mcp-oauth-config/` | VS Code Secret Storage / Authentication API |
+
+The **same MCP server binary works in both hosts** — only the config file changes.
+
+```jsonc
+// .vscode/mcp.json (VS Code) — mirrors the .mcp.json above
+{
+  "servers": {
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": { "LINEAR_API_KEY": "${env:LINEAR_API_KEY}" }
+    }
+  }
+}
+```
+
+For mixed teams, **commit both** `.mcp.json` and `.vscode/mcp.json` with the same
+server list during the rollout window. A small `npm run sync-mcp` script that
+generates one from the other keeps them in lockstep. Official VS Code docs:
+[Use MCP servers in VS Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
 
 ## Minimal example — `.mcp.json`
 

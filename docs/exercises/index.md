@@ -28,18 +28,20 @@ extension and Copilot CLI. Same files, same configuration, both hosts pick them 
     config, but Step 2.5 of that exercise shows the equivalent VS Code config
     (`.vscode/mcp.json`) so VS Code users can do it too.
 
-### 🟩 Track B — Copilot CLI required
+### 🟩 Track B — CLI-primary (also works in VS Code, with caveats)
 
-These exercises lean on capabilities that are CLI-primary or CLI-only. If your
-team is on the CLI, do these too. If you're VS Code only, skip to the
-[customizations overview](../customizations/index.md) instead.
+These exercises use **the same file formats** as Track A — but the lab steps lean
+on the **CLI's slash-command UX** (`/agent`, `/skills`, hook logging) and on
+features that are GA on CLI but **Preview in VS Code** (hooks). VS Code users can
+follow along by translating commands to the Agent Customizations editor and the
+GitHub Copilot Chat output channels.
 
-| # | Exercise | Layer | Difficulty | Time | Why CLI? |
+| # | Exercise | Layer | Difficulty | Time | VS Code note |
 |---|---|---|---|---|---|
-| 3 | [Skills](03-skills.md) | Reusable workflow + scripts | 🟡 Intermediate | ~45 min | Repo-scoped `.github/skills/` is CLI-primary |
-| 5 | [Custom Agents](05-agents.md) | Delegated specialist | 🟡 Intermediate | ~30 min | `/agent` picker is CLI; VS Code needs `target: vscode` |
-| 6 | [Hooks](06-hooks.md) | Lifecycle automation | 🟡 Intermediate | ~30 min | CLI-only feature |
-| ✨ | [Capstone — release-notes pipeline](capstone.md) | Composes all | 🟡 Intermediate | ~45 min | Composes Track B layers |
+| 3 | [Skills](03-skills.md) | Reusable workflow + scripts | 🟡 Intermediate | ~45 min | Workspace `.github/skills/` works in VS Code too — the lab uses CLI conventions for testing |
+| 5 | [Custom Agents](05-agents.md) | Delegated specialist | 🟡 Intermediate | ~30 min | Same `.agent.md` works in both; `/agent` picker is CLI, VS Code uses the agent picker |
+| 6 | [Hooks](06-hooks.md) | Lifecycle automation | 🟡 Intermediate | ~30 min | VS Code support is **Preview** + can be disabled by org policy — check before running |
+| ✨ | [Capstone — release-notes pipeline](capstone.md) | Composes all | 🟡 Intermediate | ~45 min | Composes Track B layers; the slash-command steps are CLI-flavored |
 
 → See [VS Code vs Copilot CLI](../reference/vscode-vs-cli.md) for the full
 support matrix before you start.

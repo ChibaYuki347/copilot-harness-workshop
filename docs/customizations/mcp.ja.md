@@ -3,7 +3,7 @@
 **Model Context Protocol 経由で、独自のツールをエージェントに接続します。**
 
 !!! abstract "対応ホスト"
-    🟢 **Copilot CLI**（リポジトリルートの `.mcp.json`） · 🟢 **VS Code**（別の設定: `.vscode/mcp.json` または `settings.json`）。CLI は **もう `.vscode/mcp.json` を読みません**。混在チームでは **両方** のファイルを配布してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+    🟢 **Copilot CLI**（プロジェクト: `.github/mcp.json` または `.mcp.json`、ユーザー: `~/.copilot/mcp-config.json`） · 🟢 **VS Code**（Preview — `.vscode/mcp.json` ワークスペース + `settings.json` の `mcp.servers` ユーザースコープ）。**MCP プロトコルは同じ** ですが、ファイルの場所とトップレベル JSON キーが異なります — CLI は `"mcpServers"`、VS Code は `"servers"`。混在チームでは両方を配布してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
 
 MCP（Model Context Protocol）は、モデルが外部ツールとやり取りするためのオープン標準です。
 Copilot CLI では **GitHub の MCP サーバーが既定で有効** になっており（Issue の一覧取得や
@@ -20,19 +20,58 @@ PR へのコメントなどが可能）、独自サーバーの追加にも対�
 
 | スコープ | ファイル |
 |---|---|
-| **リポジトリ** | git ルートの `.mcp.json`。コミットされます。 |
+| **リポジトリ（推奨）** | git ルートの `.mcp.json`。コミットされます。 |
+| **リポジトリ（代替）** | `.github/mcp.json` — CLI はこのパスも受け付けます。bot 設定をすべて `.github/` 配下に集約したいときに便利。 |
 | **個人** | `~/.copilot/mcp-config.json`（`/mcp add` または直接編集で管理）。`$COPILOT_HOME` が設定されていれば、その場所に従います。 |
+| **環境変数** | `GITHUB_COPILOT_MCP_JSON` — JSON 文字列を直接渡せます。最優先。CI / 一時的な上書き用途に便利。 |
 
-!!! warning "移行に関する注意"
+!!! warning "移行に関する注意（CLI）"
     `.vscode/mcp.json` と `.devcontainer/devcontainer.json` は、CLI では MCP サーバー設定の
-    読み込み元として **もう参照されません**。対象は git ルートの `.mcp.json` のみです。
-    `.vscode/mcp.json` が見つかり、`.mcp.json` がない場合は、CLI が移行ヒントを
-    表示します。[^migration]
+    読み込み元として **もう参照されません**。CLI は git ルートの `.mcp.json` または
+    `.github/mcp.json`（+ ユーザースコープの `~/.copilot/mcp-config.json`）のみを読みます。
+    `.vscode/mcp.json` が見つかってこれらがない場合は、CLI が移行ヒントを表示します。[^migration]
+    **VS Code 側は `.vscode/mcp.json` を引き続き使う** ため、混在チームは両方を配布してください。
+    下記の [VS Code 版セクション](#vs-code-equivalent) を参照。
 
 [^migration]: `github/copilot-cli` changelog より: *「MCP サーバー設定の読み込み元から
     `.vscode/mcp.json` と `.devcontainer/devcontainer.json` を削除し、CLI は `.mcp.json`
     のみを読むようになりました。`.vscode/mcp.json` が検出され、`.mcp.json` がない場合は、
     移行ヒントが表示されます。」*
+
+## VS Code 版 { #vs-code-equivalent }
+
+VS Code Copilot Chat も MCP を話します（2026-05 時点で Preview）。CLI とは
+別のファイル・若干違うスキーマを読みますが、**同じサーバー定義** が動きます。
+
+| 項目 | Copilot CLI | VS Code |
+|---|---|---|
+| ワークスペース設定 | `.mcp.json` または `.github/mcp.json` | `.vscode/mcp.json` |
+| ユーザー設定 | `~/.copilot/mcp-config.json` | VS Code 設定 → `mcp.servers` |
+| JSON トップキー | `"mcpServers"` | `"servers"` |
+| 環境変数参照 | `${VAR}` | `${env:VAR}` |
+| サーバーのライフサイクル | CLI が spawn / IPC | VS Code Workbench が `vscode.lm.startMcpGateway()` で管理 |
+| ツール命名 | `mcp__<server>__<tool>` | `<server>/<tool>`（仮想グルーピング後） |
+| 認証保管 | OS keychain（`keytar`）+ `~/.copilot/config/mcp-oauth-config/` フォールバック | VS Code Secret Storage / Authentication API |
+
+**同じ MCP サーバーバイナリが両ホストで動きます** — 違うのは設定ファイルだけ。
+
+```jsonc
+// .vscode/mcp.json (VS Code) — 上の .mcp.json と等価
+{
+  "servers": {
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": { "LINEAR_API_KEY": "${env:LINEAR_API_KEY}" }
+    }
+  }
+}
+```
+
+混在チームは、移行期間中 `.mcp.json` と `.vscode/mcp.json` の **両方をコミット** し、
+同じサーバーリストを保ってください。小さな `npm run sync-mcp` で片方からもう片方を
+生成すると同期が楽です。公式 VS Code ドキュメント:
+[Use MCP servers in VS Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)。
 
 ## 最小例 — `.mcp.json`
 

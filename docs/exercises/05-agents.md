@@ -2,7 +2,7 @@
 
 🟡 **Intermediate · ~30 min**
 
-🟩 **Track B — Copilot CLI required** (`/agent` picker is CLI; VS Code needs `target: vscode` · [why?](../reference/vscode-vs-cli.md))
+🟩 **Track B — CLI-primary** (same `.agent.md` works in VS Code, but the lab uses `/agent` slash commands · [details](../reference/vscode-vs-cli.md))
 
 ## Learning objectives
 

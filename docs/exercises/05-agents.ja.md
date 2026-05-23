@@ -2,7 +2,7 @@
 
 🟡 **中級 · 約30分**
 
-🟩 **トラック B — Copilot CLI が必要**（`/agent` ピッカーは CLI のみ。VS Code は `target: vscode` が必要 · [詳細](../reference/vscode-vs-cli.md)）
+🟩 **トラック B — CLI 主体**（同じ `.agent.md` が VS Code でも動くが、ラボは `/agent` スラッシュコマンドを使う · [詳細](../reference/vscode-vs-cli.md)）
 
 ## 学習目標
 

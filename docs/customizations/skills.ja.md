@@ -8,7 +8,7 @@
 必要な補助スクリプト・参照ドキュメント・出力テンプレートを含むフォルダー** です。
 
 !!! abstract "対応ホスト"
-    🟢 **Copilot CLI**（完全対応: リポジトリ `.github/skills/` + 個人 `~/.agents/skills/`） · 🟡 **VS Code**（個人スコープのみ — `~/.agents/skills/`）。本サイトで教えるリポジトリスコープのパターンは CLI が主役です。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+    🟢 **Copilot CLI** · 🟢 **VS Code** — `.github/skills/<name>/SKILL.md` のワークスペーススキルは **両ホスト** が読み込みます（上流 `vscode-copilot-chat` 設計より）。両ホストが受け付ける追加のワークスペース置き場所: `.agents/skills/`、`.claude/skills/`。ユーザースコープ: `~/.copilot/skills/`、`~/.agents/skills/`、`~/.claude/skills/`。本サイトのラボは CLI の慣習に沿っていますが、同じ `SKILL.md` は無編集で VS Code でも読み込めます。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
 
 ## スキルを使う場面（プロンプトファイルとの違い）
 

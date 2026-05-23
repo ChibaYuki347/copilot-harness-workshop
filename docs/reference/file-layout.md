@@ -51,15 +51,19 @@ A single `hooks.json` can declare multiple events; multiple hooks folders compos
 
 ## MCP
 
-| Path | Scope |
-|---|---|
-| `.mcp.json` (at git root) | repo |
-| `~/.copilot/mcp-config.json` | personal (location follows `$COPILOT_HOME` if set) |
+| Path | Scope | Read by |
+|---|---|---|
+| `.mcp.json` (at git root) | repo | Copilot CLI |
+| `.github/mcp.json` (at git root) | repo (alternative) | Copilot CLI |
+| `.vscode/mcp.json` | workspace | **VS Code only** (uses `"servers"` key) |
+| `~/.copilot/mcp-config.json` | personal (location follows `$COPILOT_HOME` if set) | Copilot CLI |
+| VS Code Settings `mcp.servers` | personal | **VS Code only** |
+| `$GITHUB_COPILOT_MCP_JSON` env var | session override | Copilot CLI |
 
-`.vscode/mcp.json` and `.devcontainer/devcontainer.json` are **no longer** read as
-MCP config sources by current Copilot CLI versions[^vscode]. Workspace MCP servers
-live in `.mcp.json` at the git root; user-level MCP servers live in
-`~/.copilot/mcp-config.json` (not `mcp.json`).
+The CLI **no longer reads** `.vscode/mcp.json` or `.devcontainer/devcontainer.json`
+as MCP config sources[^vscode]. **VS Code still uses `.vscode/mcp.json`** — see the
+[MCP customization page](../customizations/mcp.md#vs-code-equivalent) for the
+shape difference (`mcpServers` vs `servers`, `${VAR}` vs `${env:VAR}`).
 
 [^vscode]: From the CLI changelog: *"Remove `.vscode/mcp.json` and
     `.devcontainer/devcontainer.json` as MCP server config sources; CLI now only

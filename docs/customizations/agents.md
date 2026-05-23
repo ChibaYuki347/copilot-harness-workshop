@@ -3,7 +3,7 @@
 **Delegate specialized work to focused sub-agents that the main agent can call.**
 
 !!! abstract "Where it works"
-    🟢 **Copilot CLI** (default) · 🟡 **VS Code** (add `target: vscode` to the agent's frontmatter). Same `.github/agents/<name>.agent.md` file format; the `target` field switches the host. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+    🟢 **Copilot CLI** · 🟢 **VS Code** — same `.github/agents/<name>.agent.md` file format works in both hosts. The `.agent.md` schema (frontmatter + body) is interoperable across CLI and VS Code per upstream `microsoft/vscode-copilot-chat` design notes. Differences are at the UX level: CLI uses `/agent`; VS Code uses the agent picker in Chat. *Tool reference names* differ slightly (CLI exposes `task`; VS Code uses `agent` and an aliased toolset). See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
 Copilot CLI ships with a powerful built-in `task` tool that spawns *sub-agents* — each
 running in its own context window with its own prompt, tools, and (optionally) model.
@@ -118,10 +118,15 @@ legacy / VS Code-style files). The agent identifier is the filename minus the su
 | `model` | Override the default model for this agent. |
 | `skills` | List of skill names to load eagerly into this agent's context.[^skills-field] |
 | `mcp-servers` | Restrict the agent to a subset of configured MCP servers. |
-| `target` | `vscode` or `github-copilot`. Filters which tool the agent activates in. |
+| `target` | **Optional** filter — `vscode` or `github-copilot` (or omitted for both). Omitting it lets the agent surface in both hosts; setting it restricts the agent to one. Same file format works in both hosts by default.[^target-field] |
 
 [^skills-field]: From the changelog: *"Custom agents can now declare a `skills` field to
     eagerly load skill content into agent context at startup."*
+
+[^target-field]: `target` is an **optional filter**, not a host switch. The
+    `.agent.md` schema is interoperable between Copilot CLI and VS Code Chat per
+    upstream `microsoft/vscode-copilot-chat` design notes — set `target` only
+    when you want to *hide* the agent from one host.
 
 ## Invoking a custom agent
 

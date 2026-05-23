@@ -2,7 +2,7 @@
 
 🟡 **中級 · 約30分**
 
-🟩 **トラック B — Copilot CLI 専用**（フックは CLI 専用機能 · [詳細](../reference/vscode-vs-cli.md)）
+🟩 **トラック B — CLI 主体**（同じ `.github/hooks/*.json` が **VS Code（Preview）** でも動く — エンタープライズポリシーを要確認 · [詳細](../reference/vscode-vs-cli.md)）
 
 ## 学習目標
 

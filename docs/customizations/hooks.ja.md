@@ -4,7 +4,7 @@
 エンドポイント呼び出しを行います。**
 
 !!! abstract "対応ホスト"
-    🟢 **Copilot CLI** · ❌ **VS Code** — **CLI 専用**。VS Code ユーザー向けにセッション終了監査ログが必要なら、Copilot の外（Git post-commit、IDE のタスクランナー、ラッパースクリプト等）で実現してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+    🟢 **Copilot CLI** · 🟢 **VS Code（Preview）** — `.github/hooks/*.json` の JSON フォーマット（Claude Code 互換）を両ホストとも読み込みます。VS Code 対応は 2026-05 時点で Preview。詳細は [公式 VS Code Hooks ドキュメント](https://code.visualstudio.com/docs/copilot/customization/hooks)。ユーザースコープの置き場所は異なります（CLI は `~/.copilot/hooks/`、VS Code は `~/.copilot/hooks` または `~/.claude/settings.json`）。組織の **エンタープライズポリシー** で VS Code のフックが無効化されていることもあるため、依存する前に確認してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
 
 フックは自動化レイヤーです。プロンプトの書き方を変えなくても、エージェントの動きを
 観察し、制御できます。
@@ -199,12 +199,65 @@
       左右する処理を `sessionStart` フックに入れても遅すぎます。発火する時点では、
       エージェントはすでに少し動いています。
 
+## VS Code 版（Preview） { #vs-code-variant }
+
+VS Code Copilot Chat も同じ `.github/hooks/*.json` 形式を読み込みます。2026-05
+時点では **Preview** です。
+
+### VS Code が探す場所
+
+| スコープ | 既定のファイル位置 |
+|---|---|
+| ワークスペース | `.github/hooks/*.json` |
+| ワークスペース（Claude 形式） | `.claude/settings.json`、`.claude/settings.local.json` |
+| ユーザー | `~/.copilot/hooks`、`~/.claude/settings.json` |
+| エージェント固有 | カスタムエージェントの `.agent.md` frontmatter の `hooks:` フィールド（`chat.useCustomAgentHooks: true` を設定） |
+| プラグイン | プラグイン内の `hooks.json` または `hooks/hooks.json`（CLI と同じ） |
+
+同じイベントについてはワークスペースのフックがユーザーのフックを上書きします。
+読み込み対象は `settings.json` の `chat.hookFilesLocations` でカスタマイズできます:
+
+```jsonc
+{
+  "chat.hookFilesLocations": {
+    ".github/hooks": true,
+    ".claude/settings.local.json": true,
+    ".claude/settings.json": true,
+    "~/.claude/settings.json": true
+  }
+}
+```
+
+### イベント名の大文字小文字の違い
+
+本サイトの例は camelCase（`sessionStart`、`preToolUse` …）を使っています — これは
+`awesome-copilot` のリファレンス実装と CLI が受け付ける形式です。**公式 VS Code Hooks
+ドキュメント** は **PascalCase**（`SessionStart`、`PreToolUse`、`Stop` …）を使い、
+`sessionEnd` イベントは存在しません — VS Code ではセッション終了は **`Stop`** と呼ばれます。
+CLI は両方の表記を受け付ける（`vsCodePreToolUseInputMapper` 経由で PascalCase エイリアスをサポート）
+ので、camelCase で書いておけば両ホストとも認識します。ただし VS Code を先に対象とするなら、
+`sessionEnd` ではなく PascalCase + `Stop` を推奨。正規のイベント一覧は
+[公式 VS Code Hooks リファレンス](https://code.visualstudio.com/docs/copilot/customization/hooks)
+を参照。
+
+### VS Code でフックが発火したか確認する
+
+VS Code の **表示 → 出力** を開き、**GitHub Copilot Chat Hooks** チャンネルを選択。
+各フックの stdout / stderr がそこに出力されます。
+
+!!! warning "エンタープライズポリシーで無効化される可能性"
+    組織側で VS Code のフックを完全に無効化できます。公式ドキュメント:
+    *「Your organization might have disabled the use of hooks in VS Code.」*
+    セキュリティ重要な自動化に使う前に、必ず管理者に確認してください。
+
 ## 確認方法
 
 ```text
 /env                # shows count of loaded hooks
 copilot --verbose   # surfaces hook stdout/stderr inline
 ```
+
+（VS Code ユーザー: *GitHub Copilot Chat Hooks* 出力チャンネルを参照。）
 
 ## 次へ
 

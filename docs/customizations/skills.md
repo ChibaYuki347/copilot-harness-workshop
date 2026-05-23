@@ -8,7 +8,7 @@ Where a prompt file is "a parameterized prompt", a Skill is **a folder containin
 `SKILL.md` plus any helper scripts, reference docs, and output templates it needs**.
 
 !!! abstract "Where it works"
-    🟢 **Copilot CLI** (full: repo `.github/skills/` + personal `~/.agents/skills/`) · 🟡 **VS Code** (personal scope only — `~/.agents/skills/`). The CLI is the primary surface for the repo-scoped patterns this site teaches. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+    🟢 **Copilot CLI** · 🟢 **VS Code** — workspace skills at `.github/skills/<name>/SKILL.md` are picked up by **both** hosts (per upstream `vscode-copilot-chat` design). Additional workspace locations both hosts accept: `.agents/skills/`, `.claude/skills/`. User-scope: `~/.copilot/skills/`, `~/.agents/skills/`, `~/.claude/skills/`. The lab in this site uses CLI conventions, but the same `SKILL.md` is loadable in VS Code with no edits. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
 ## When to use a Skill (vs. a prompt file)
 

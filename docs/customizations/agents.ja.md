@@ -3,7 +3,7 @@
 **メインエージェントから呼び出せる、専用のサブエージェントに専門作業を委譲します。**
 
 !!! abstract "対応ホスト"
-    🟢 **Copilot CLI**（既定） · 🟡 **VS Code**（エージェントの frontmatter に `target: vscode` を追加）。ファイル形式は `.github/agents/<name>.agent.md` で共通。`target` フィールドでホストを切り替えます。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+    🟢 **Copilot CLI** · 🟢 **VS Code** — `.github/agents/<name>.agent.md` のファイル形式が両ホストで共通。上流 `microsoft/vscode-copilot-chat` の設計ノートによれば `.agent.md` スキーマ（frontmatter + body）は CLI と VS Code で相互運用可能です。違うのは UX 層（CLI は `/agent`、VS Code は Chat のエージェントピッカー）と、*ツール参照名* がわずかに異なる点（CLI は `task` を公開、VS Code は `agent` エイリアスとエイリアス済みツールセット）。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
 
 Copilot CLI には、*サブエージェント* を起動する強力な組み込み `task` ツールがあります。
 各サブエージェントは、独自のプロンプト・ツール・（必要に応じて）モデルを持つ専用
@@ -121,10 +121,15 @@ If you find no issues, say so explicitly. Do not pad.
 | `model` | このエージェントの既定モデルを上書きします。 |
 | `skills` | 起動時にこのエージェントのコンテキストへ先行読み込みするスキル名の一覧。[^skills-field] |
 | `mcp-servers` | エージェントが使える MCP サーバーを、設定済みの一部に制限します。 |
-| `target` | `vscode` または `github-copilot`。どのツールで有効化するかを絞り込みます。 |
+| `target` | **省略可** のフィルター — `vscode` または `github-copilot`（省略時は両方）。省略すると両ホストで表示され、指定すると片方に限定されます。同じファイル形式が既定で両ホストで動きます。[^target-field] |
 
 [^skills-field]: changelog より: *「カスタムエージェントは `skills` フィールドを宣言して、
     起動時にスキル内容をエージェントのコンテキストへ先行読み込みできるようになりました。」*
+
+[^target-field]: `target` は **省略可のフィルター** であり、ホスト切替フラグでは
+    ありません。上流 `microsoft/vscode-copilot-chat` の設計ノートによれば
+    `.agent.md` スキーマは Copilot CLI と VS Code Chat で相互運用可能で、
+    片方のホストから *隠したい* ときだけ `target` を指定してください。
 
 ## カスタムエージェントの呼び出し
 
