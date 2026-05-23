@@ -1,5 +1,23 @@
 # Recipe: Multi-agent workflow
 
+!!! info "Works on: 🟦 Copilot CLI only"
+    **This recipe relies on CLI-only features:**
+
+    - **`/fleet` slash command** for parallel agent orchestration — there is no
+      equivalent in VS Code Copilot Chat as of this writing.
+    - **Sub-agent fan-out via the `task` tool** — the CLI's main agent can spawn
+      sub-agents (rubber-duck, code-review, your custom `security-reviewer`) in
+      their own context windows. VS Code Chat's mode/agent system runs one agent
+      at a time and doesn't expose a `task`-style delegation tool to user agents.
+    - **`rubber-duck`, `code-review` built-in agents** — these are CLI built-ins
+      (`agents/customAgents/builtinAgents.ts`). VS Code has analogous chat modes
+      but they aren't invocable as `task(...)` from another agent.
+
+    The **custom agent file itself** (`security-reviewer.agent.md`) is portable —
+    if you later want to use it in VS Code, the schema works there too (drop the
+    `target` field or set `target: github-copilot`). But the parallel-review
+    workflow described below is CLI-specific.
+
 **Run rubber-duck, code-review, and security-reviewer in parallel and reconcile their
 findings before merging.**
 

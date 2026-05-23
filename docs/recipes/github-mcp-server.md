@@ -1,5 +1,16 @@
 # Recipe: GitHub MCP server
 
+!!! info "Works on: 🟦 Copilot CLI primary"
+    The **GitHub MCP server is bundled by default with Copilot CLI** — no setup
+    needed. The CLI-specific flags below (`--enable-all-github-mcp-tools`,
+    `--add-github-mcp-toolset`, etc.) and slash commands (`/mcp show`, `/mcp reload`,
+    `/mcp auth`, `/mcp disable`) are **CLI-only**. VS Code Copilot Chat supports MCP
+    via the **same protocol**, but you must add servers manually to `.vscode/mcp.json`
+    (key: `"servers"`, env-var syntax: `${env:VAR}`) and manage them from the *MCP
+    servers* panel in the Chat view rather than slash commands. See the
+    [MCP customization page](../customizations/mcp.md#vs-code-equivalent) for the
+    schema differences.
+
 **Use the default GitHub MCP server, then add a private one.**
 
 ## Problem

@@ -1,5 +1,19 @@
 # Recipe: Session-end secret scan
 
+!!! info "Works on: 🟢 Copilot CLI + VS Code Copilot Chat (Preview)"
+    The `.github/hooks/<name>/hooks.json` file is read by both hosts. **Event name
+    differs by host**:
+
+    - Copilot CLI: `sessionEnd` (camelCase) — also accepts PascalCase `SessionStart` /
+      `Stop` for cross-tool compatibility.
+    - VS Code Copilot Chat (Preview): `Stop` is the canonical session-end event
+      (PascalCase). The CLI's `sessionEnd` is mapped automatically when imported.
+
+    The `bash`/`command`/`timeoutSec` schema and env-var injection work identically.
+    See the [Hooks customization page](../customizations/hooks.md#vs-code-variant)
+    for the VS Code-specific setup (`chat.hookFilesLocations` setting + enterprise
+    policy considerations).
+
 **Catch leaked secrets the moment a Copilot session ends — before you push.**
 
 ## Problem

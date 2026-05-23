@@ -1,5 +1,14 @@
 # Recipe: PR Review Skill
 
+!!! info "Works on: 🟢 Copilot CLI + VS Code Copilot Chat"
+    The underlying **Skill** + **Custom Agent** files are cross-host. In Copilot CLI you
+    invoke this as the slash command `/pr-review` (because the SKILL.md filename becomes
+    the slash command). In VS Code Copilot Chat the same `SKILL.md` is auto-discovered
+    from `.github/skills/pr-review/`; you trigger it by asking for a PR review in
+    natural language (Chat's Skills surface doesn't expose user-defined slash commands
+    the same way the CLI does). The optional `postToolUse` hook also works in both
+    hosts (VS Code Preview).
+
 **A reusable, multi-phase PR review you can invoke with one slash command.**
 
 ## Problem

@@ -1,5 +1,23 @@
 # Recipe: Path-specific instructions
 
+!!! info "Works on: 🟪 VS Code Copilot Chat primary"
+    **`applyTo` glob targeting is a VS Code-specific feature.** The
+    `.github/instructions/*.instructions.md` files with `applyTo: "frontend/**"`
+    frontmatter only filter by path **inside VS Code Copilot Chat** — VS Code's
+    `CustomInstructionsService` matches each open / edited file against the glob and
+    injects only the matching instruction files.
+
+    **In Copilot CLI**, the same files *are* discovered (via the VS Code interop
+    reader), but the CLI **does not honor `applyTo` globs** — it merges every
+    matching instruction file flatly into the system prompt regardless of which file
+    you're working on. So the path-specific behavior described below is VS
+    Code-only.
+
+    **CLI-native equivalent: nested `AGENTS.md` files.** The CLI walks subdirectories
+    looking for `AGENTS.md` — placing `frontend/AGENTS.md` and `backend/AGENTS.md`
+    gives you the same "different rules in different directories" outcome without
+    needing globs. See the *CLI equivalent* section at the end of this recipe.
+
 **Tell Copilot one set of rules for the frontend and a different set for the backend
 without duplicating the rest.**
 
@@ -68,7 +86,7 @@ applyTo: "backend/**"
 - Run `ruff check --fix && pytest -q` before claiming done.
 ```
 
-## How it composes
+## How it composes (in VS Code Copilot Chat)
 
 When you ask Copilot to change `frontend/src/components/Button.tsx`:
 
@@ -81,16 +99,65 @@ When the change touches both halves, **both** path-specific instructions apply
 
 [^combined]: From the GitHub docs: *"If the path you specify matches a file that
     Copilot is working on, and a repository-wide custom instructions file also exists,
-    then the instructions from both files are used."*
+    then the instructions from both files are used."* This composition is performed
+    by VS Code's `CustomInstructionsService`; the Copilot CLI does **not** perform
+    glob-based filtering on `.instructions.md` files — see the *CLI equivalent*
+    section below.
 
-## Verifying
+## Verifying (VS Code)
 
-```text
-/instructions   # see each instruction file and toggle them
-/env            # confirms what's loaded for the current context
+In VS Code Copilot Chat, open the **Instructions** picker (or `Add Context → Instructions`)
+to confirm which files are attached for the current context. The `applyTo` matches are
+re-evaluated whenever the active file changes.
+
+## CLI equivalent — nested `AGENTS.md` { #cli-equivalent }
+
+The Copilot CLI **reads** `.github/instructions/*.instructions.md` (via its VS Code
+interop reader), but it merges all matching files flatly into the system prompt
+without honoring `applyTo` globs — every instruction is always in scope. To get
+"different rules in different directories" in the CLI, use **nested `AGENTS.md`**
+files instead:
+
+```
+.
+├── AGENTS.md                # team-wide baseline (top-level)
+├── frontend/
+│   └── AGENTS.md            # frontend rules
+└── backend/
+    └── AGENTS.md            # backend rules
 ```
 
-When you mention a file, the picker will tell you which path-specific rules attach.
+When you start a CLI session inside `frontend/` (or `cd` into it during a session),
+the CLI walks up the tree, picks up the nearest `AGENTS.md` files, and merges them
+into the prompt. The top-level `AGENTS.md` is always included; the subdirectory one
+joins it.[^nested-agents]
+
+[^nested-agents]: Per the Copilot CLI spec, `readNestedAgentsInstructions` discovers
+    `AGENTS.md` files in subdirectories (excluding the repo root, which is read by a
+    separate path). This is the CLI-native mechanism for path-specific instructions.
+
+| Want | VS Code | Copilot CLI |
+|---|---|---|
+| Baseline rules for the whole repo | `.github/copilot-instructions.md` | `.github/copilot-instructions.md` **or** root `AGENTS.md` |
+| Different rules for `frontend/` | `.github/instructions/frontend.instructions.md` with `applyTo: "frontend/**"` | `frontend/AGENTS.md` |
+| Different rules for `backend/` | `.github/instructions/backend.instructions.md` with `applyTo: "backend/**"` | `backend/AGENTS.md` |
+| Personal overlay | User profile `.instructions.md` | `~/.copilot/copilot-instructions.md` |
+
+If you want **one set of files that works in both hosts**, you can ship the
+`.instructions.md` files (VS Code will use `applyTo`) *and* nested `AGENTS.md`
+(CLI will use proximity). The duplication is the cost of cross-host parity until
+the CLI honors `applyTo` natively.
+
+### Verifying in the CLI
+
+You can still confirm which instruction sources the CLI loaded:
+
+```text
+/env             # prints the merged list of instruction sources
+```
+
+The `.instructions.md` files will appear in the list — just remember the CLI
+**doesn't** narrow them by `applyTo` glob.
 
 ## Variations
 

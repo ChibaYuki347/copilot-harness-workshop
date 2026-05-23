@@ -1,5 +1,18 @@
 # レシピ: セッション終了時のシークレットスキャン
 
+!!! info "対応ホスト: 🟢 Copilot CLI + VS Code Copilot Chat（Preview）"
+    `.github/hooks/<name>/hooks.json` は両ホストが読みます。**イベント名はホストで異なります**:
+
+    - Copilot CLI: `sessionEnd`（camelCase）。クロスツール互換のため PascalCase
+      `SessionStart` / `Stop` も受け付けます。
+    - VS Code Copilot Chat（Preview）: `Stop` が公式のセッション終了イベント
+      （PascalCase）。CLI の `sessionEnd` は取り込み時に自動マッピングされます。
+
+    `bash`/`command`/`timeoutSec` のスキーマや環境変数注入は同じです。
+    VS Code 側のセットアップ（`chat.hookFilesLocations` 設定 + エンタープライズポリシー
+    の留意点）は [フックのカスタマイズページ](../customizations/hooks.md#vs-code-variant)
+    を参照。
+
 **Copilot セッションが終わった瞬間に、漏えいしたシークレットを検出します — push する前に。**
 
 ## 課題

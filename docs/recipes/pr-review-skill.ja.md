@@ -1,5 +1,13 @@
 # レシピ: PR Review スキル
 
+!!! info "対応ホスト: 🟢 Copilot CLI + VS Code Copilot Chat"
+    ベースの **スキル** + **カスタムエージェント** ファイルは両ホスト互換です。
+    Copilot CLI ではスラッシュコマンド `/pr-review` で呼び出します（SKILL.md の
+    ファイル名がそのままスラッシュコマンドになります）。VS Code Copilot Chat では同じ
+    `SKILL.md` が `.github/skills/pr-review/` から自動検出され、自然言語で PR レビューを
+    依頼すれば発火します（Chat 側ではユーザー定義スラッシュコマンドが CLI と同じ形では
+    露出しません）。オプションの `postToolUse` フックも両ホストで動きます（VS Code は Preview）。
+
 **1 つのスラッシュコマンドで呼び出せる、再利用可能な複数フェーズの PR レビューです。**
 
 ## 課題

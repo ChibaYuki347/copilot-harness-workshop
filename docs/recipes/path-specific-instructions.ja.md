@@ -1,5 +1,22 @@
 # レシピ: パス別インストラクション
 
+!!! info "対応ホスト: 🟪 VS Code Copilot Chat 主体"
+    **`applyTo` glob によるパスフィルタリングは VS Code 固有の機能です。**
+    `.github/instructions/*.instructions.md` に `applyTo: "frontend/**"` を
+    指定すると、それが効くのは **VS Code Copilot Chat の中だけ** です — VS Code の
+    `CustomInstructionsService` が、開いている／編集対象のファイルを glob と
+    照合し、マッチした指示ファイルだけを注入します。
+
+    **Copilot CLI でも** 同じファイルは（VS Code 連携リーダー経由で）読み込まれますが、
+    CLI は **`applyTo` glob を尊重しません** — マッチング処理を行わず、すべての
+    インストラクションファイルを system prompt にフラットに結合します。よって以下で
+    説明する path-specific 挙動は **VS Code 固有** です。
+
+    **CLI ネイティブな等価機能: 入れ子の `AGENTS.md`。** CLI はサブディレクトリを
+    巡回して `AGENTS.md` を拾います。`frontend/AGENTS.md` と `backend/AGENTS.md` を
+    配置することで「ディレクトリごとに違うルール」を glob なしで実現できます。
+    後述の *CLI 等価構成* セクションを参照。
+
 **残りの内容を重複させることなく、フロントエンドには 1 組のルール、バックエンドには別の
 ルールを Copilot に伝えます。**
 
@@ -68,7 +85,7 @@ applyTo: "backend/**"
 - Run `ruff check --fix && pytest -q` before claiming done.
 ```
 
-## どう組み合わさるか
+## どう組み合わさるか（VS Code Copilot Chat の場合）
 
 Copilot に `frontend/src/components/Button.tsx` の変更を依頼すると、
 
@@ -81,16 +98,62 @@ Copilot に `frontend/src/components/Button.tsx` の変更を依頼すると、
 
 [^combined]: GitHub Docs には次のようにあります: *「指定したパスが
     Copilot の作業対象ファイルに一致し、リポジトリ全体向けのカスタムインストラクションファイルも存在する場合、
-    両方のファイルのインストラクションが使用されます。」*
+    両方のファイルのインストラクションが使用されます。」* この合成は VS Code の
+    `CustomInstructionsService` が行います。Copilot CLI は `.instructions.md` に対する
+    glob フィルタリングを **行いません** — 下記の *CLI 等価構成* セクションを参照。
 
-## 確認方法
+## 確認方法（VS Code）
 
-```text
-/instructions   # see each instruction file and toggle them
-/env            # confirms what's loaded for the current context
+VS Code Copilot Chat では **Instructions ピッカー**（または `Add Context → Instructions`）
+で、現在のコンテキストにアタッチされているファイルを確認できます。`applyTo` のマッチングは
+アクティブファイルが変わるたびに再評価されます。
+
+## CLI 等価構成 — 入れ子の `AGENTS.md` { #cli-equivalent }
+
+Copilot CLI は `.github/instructions/*.instructions.md` を（VS Code 連携リーダー
+経由で）**読み込みます** が、`applyTo` glob を尊重せずすべてフラットに system prompt
+へ結合します — どのインストラクションも常時スコープ内です。CLI で
+「ディレクトリごとに違うルール」を実現するには、代わりに **入れ子の `AGENTS.md`**
+を使います:
+
+```
+.
+├── AGENTS.md                # チーム共通のベースライン（トップレベル）
+├── frontend/
+│   └── AGENTS.md            # フロントエンド用ルール
+└── backend/
+    └── AGENTS.md            # バックエンド用ルール
 ```
 
-ファイルに言及すると、どのパス別ルールが紐づくかをピッカーが表示します。
+`frontend/` の中で CLI セッションを開始（または途中で `cd`）すると、CLI はディレクトリ
+ツリーを遡り、近くにある `AGENTS.md` をすべて拾って prompt に結合します。トップレベルの
+`AGENTS.md` は常に含まれ、サブディレクトリの `AGENTS.md` はそれに加わります。[^nested-agents]
+
+[^nested-agents]: Copilot CLI 仕様によると、`readNestedAgentsInstructions` が
+    サブディレクトリの `AGENTS.md` を検出します（リポジトリルートは別経路で読まれます）。
+    これが CLI ネイティブのパス別インストラクション機構です。
+
+| 目的 | VS Code | Copilot CLI |
+|---|---|---|
+| リポジトリ全体のベースライン | `.github/copilot-instructions.md` | `.github/copilot-instructions.md` または ルートの `AGENTS.md` |
+| `frontend/` 用ルール | `.github/instructions/frontend.instructions.md`（`applyTo: "frontend/**"`） | `frontend/AGENTS.md` |
+| `backend/` 用ルール | `.github/instructions/backend.instructions.md`（`applyTo: "backend/**"`） | `backend/AGENTS.md` |
+| 個人オーバーレイ | ユーザープロファイル `.instructions.md` | `~/.copilot/copilot-instructions.md` |
+
+**両ホストで動く 1 セット** にしたい場合は、`.instructions.md` ファイル（VS Code 用、
+`applyTo` で絞る）と、入れ子 `AGENTS.md`（CLI 用、近接で絞る）の **両方** を配置します。
+CLI が `applyTo` をネイティブ対応するまで、この二重定義がクロスホスト両立のコストです。
+
+### CLI 側の確認
+
+CLI 側でも、どのインストラクションソースが読まれたかは確認できます:
+
+```text
+/env             # 結合された全インストラクションソースを表示
+```
+
+`.instructions.md` ファイルも一覧に出てきますが、CLI はそれらを `applyTo` glob で
+**絞りこまない** ことだけ忘れずに。
 
 ## バリエーション
 

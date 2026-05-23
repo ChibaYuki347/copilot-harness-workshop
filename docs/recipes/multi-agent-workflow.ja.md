@@ -1,5 +1,24 @@
 # レシピ: マルチエージェントワークフロー
 
+!!! info "対応ホスト: 🟦 Copilot CLI 専用"
+    **このレシピは CLI 固有機能に依存します:**
+
+    - **`/fleet` スラッシュコマンド** によるエージェント並列実行 — 執筆時点で
+      VS Code Copilot Chat に同等機能はありません。
+    - **`task` ツール経由のサブエージェント fan-out** — CLI のメインエージェントは
+      サブエージェント（rubber-duck、code-review、自作の `security-reviewer` 等）を
+      それぞれの独立コンテキストで起動できます。VS Code Chat のモード／エージェント
+      機構は同時に 1 つのエージェントしか動かさず、ユーザー定義エージェントから
+      呼び出せる `task` 風の委譲ツールはありません。
+    - **`rubber-duck` / `code-review` 組み込みエージェント** — これらは CLI 組み込み
+      （`agents/customAgents/builtinAgents.ts`）です。VS Code には類似する Chat モードは
+      ありますが、別のエージェントから `task(...)` で呼び出すことはできません。
+
+    **カスタムエージェントファイル自体**（`security-reviewer.agent.md`）は
+    ポータブルです。VS Code でも使いたければスキーマはそのまま動きます（`target`
+    フィールドを省略するか `target: github-copilot` を設定）。ただし、下記の並列
+    レビューワークフロー全体は CLI 固有の構成です。
+
 **ラバーダック、code-review、security-reviewer を並列実行し、その
 結果をマージ前に突き合わせます。**
 

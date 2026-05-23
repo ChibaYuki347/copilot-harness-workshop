@@ -1,5 +1,15 @@
 # レシピ: GitHub MCP サーバー
 
+!!! info "対応ホスト: 🟦 Copilot CLI 主体"
+    **GitHub MCP サーバーは Copilot CLI に既定でバンドルされており**、追加設定なしで
+    使えます。以下に出てくる CLI 固有フラグ（`--enable-all-github-mcp-tools`、
+    `--add-github-mcp-toolset` 等）やスラッシュコマンド（`/mcp show`、`/mcp reload`、
+    `/mcp auth`、`/mcp disable`）は **CLI 専用** です。VS Code Copilot Chat も
+    **同じ MCP プロトコル** に対応していますが、サーバーを手動で `.vscode/mcp.json`
+    （キー: `"servers"`、環境変数: `${env:VAR}`）に追加し、Chat ビューの *MCP servers*
+    パネルから管理する形になります。スキーマの違いは
+    [MCP カスタマイズページ](../customizations/mcp.md#vs-code-equivalent) を参照してください。
+
 **まず既定の GitHub MCP サーバーを使い、その後にプライベートなものを追加します。**
 
 ## 課題
