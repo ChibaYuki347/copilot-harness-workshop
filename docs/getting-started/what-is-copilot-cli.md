@@ -4,6 +4,15 @@ GitHub Copilot CLI is an **agentic command-line interface** that brings Copilot 
 the same one you know from GitHub.com and your IDE — into your terminal. It runs the
 same harness as the GitHub Copilot coding agent that creates pull requests on the web.
 
+!!! note "Using VS Code Copilot Chat instead? Keep reading."
+    This page introduces the **CLI surface** specifically, but the harness this site
+    teaches (Custom Instructions, Skills, Hooks, MCP, Custom Agents) **also applies
+    to VS Code Copilot Chat in agent mode**. Almost every customization file you'll
+    write under `.github/` works in both. The
+    [VS Code vs CLI matrix](../reference/vscode-vs-cli.md) is the canonical "which
+    feature works where" reference; the per-feature pages mark host-specific bits
+    with 🟦 (CLI-only / -primary), 🟪 (VS Code-only / -primary), or 🟢 (both).
+
 ```
 $ copilot
 ```
@@ -24,17 +33,24 @@ edits code, talks to GitHub.com, and iterates until the task you described is do
 | Plan before coding | `Shift+Tab` to enter **plan mode** |
 | Background work | `/delegate` hands the task to Copilot in the cloud |
 
-## How it relates to Copilot in your IDE
+## How it relates to VS Code Copilot Chat
 
-| | IDE Copilot | Copilot CLI |
+Both surfaces are now agentic and share most of the harness vocabulary. The
+differences are about *where* you invoke Copilot and *which* slash commands /
+orchestration features each host exposes.
+
+| | VS Code Copilot Chat (agent mode) | Copilot CLI |
 |---|---|---|
-| Surface | Editor, completions, Chat | Terminal, agentic loop |
-| Tool use | Limited to editor APIs | Shell, MCP, Skills, Hooks |
-| Authentication | IDE plugin login | Same GitHub account / PAT |
-| Customization | `.github/copilot-instructions.md` | Same + Skills + Hooks + MCP |
+| Surface | Editor side panel + inline chat | Terminal, agentic REPL |
+| Tool use | Editor APIs + Shell + MCP + Skills + Hooks + Custom Agents | Shell + MCP + Skills + Hooks + Custom Agents |
+| Authentication | VS Code Copilot extension login | Same GitHub account / PAT, via `gh auth` |
+| Customization files | `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md` (with `applyTo` glob), `.github/prompts/*.prompt.md`, `.github/skills/`, `.github/agents/`, `.github/hooks/` (Preview), `.vscode/mcp.json` | `.github/copilot-instructions.md` + `AGENTS.md` (incl. nested), `.github/prompts/`, `.github/skills/`, `.github/agents/`, `.github/hooks/`, `.mcp.json` or `.github/mcp.json` |
+| Orchestration unique to this host | Inline edits, applied to active editor; Chat modes / Plan mode | `/fleet` parallel sub-agents, `/delegate` to cloud agent, headless `copilot -p '…'` |
 
-**All the customization files you put under `.github/` work for both**, which is part
-of what makes the harness valuable: customize once, benefit everywhere.
+**Most files under `.github/` work in both** — that's part of what makes the harness
+valuable: customize once, benefit everywhere. The few exceptions (e.g. `applyTo`
+globs are a VS Code-only filter, `/fleet` is a CLI-only orchestrator) are flagged
+on each page with a 🟦 / 🟪 / 🟢 host badge.
 
 ## Key concepts you'll see throughout this site
 

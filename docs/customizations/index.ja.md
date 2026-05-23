@@ -1,6 +1,9 @@
 # カスタマイズ — 概要
 
 Copilot ハーネスの 6 つのレイヤーを、おおよそ **導入を進める順番** に沿って紹介します。
+同じファイル群が **Copilot CLI** と **VS Code Copilot Chat** の両方に適用できます。
+各レイヤーのページで、ホスト固有の差分があれば明示します（バッジの凡例は
+[サポートマトリクス](../reference/vscode-vs-cli.md) を参照）。
 
 ```mermaid
 flowchart LR

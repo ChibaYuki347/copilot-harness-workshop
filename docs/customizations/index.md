@@ -1,6 +1,9 @@
 # Customizations — Overview
 
 The six layers of the Copilot harness, in roughly **the order you should adopt them**.
+The same files apply to both **Copilot CLI** and **VS Code Copilot Chat** — each
+layer's page calls out any host-specific differences (badge legend on the
+[support matrix](../reference/vscode-vs-cli.md)).
 
 ```mermaid
 flowchart LR

@@ -1,8 +1,9 @@
 site_name: Copilot Harness Workshop
 site_url: https://chibayuki347.github.io/copilot-harness-workshop/
 site_description: >-
-  A practical guide to customizing GitHub Copilot CLI with Custom Instructions,
-  Prompt Files, Skills, Hooks, MCP servers, and Custom Agents.
+  A practical guide to customizing GitHub Copilot — both the Copilot CLI and
+  VS Code Copilot Chat — with Custom Instructions, Prompt Files, Skills, Hooks,
+  MCP servers, and Custom Agents.
 site_author: Yuki Chiba
 repo_name: ChibaYuki347/copilot-harness-workshop
 repo_url: https://github.com/ChibaYuki347/copilot-harness-workshop

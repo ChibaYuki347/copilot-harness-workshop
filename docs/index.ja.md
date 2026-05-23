@@ -6,23 +6,37 @@ hide:
 
 # Copilot Harness Workshop
 
-> **GitHub Copilot CLI を自分仕様にする。** Custom Instructions・Prompt Files・Skills・
-> Hooks・MCP・Custom Agents を使って Copilot エージェントをチームと現場に最適化するための
-> 実践ガイドです。
+> **GitHub Copilot を自分仕様にする — ターミナルでも、エディタでも。** Custom
+> Instructions・Prompt Files・Skills・Hooks・MCP・Custom Agents という同じ
+> ファイル群で、**Copilot CLI** と **VS Code Copilot Chat** の両方をカスタマイズ
+> するための実践ガイドです。
 
 [はじめる :material-rocket-launch:](getting-started/what-is-copilot-cli.md){ .md-button .md-button--primary }
 [カスタマイズ一覧 :material-cog:](customizations/index.md){ .md-button }
+[CLI vs VS Code マトリクス :material-table:](reference/vscode-vs-cli.md){ .md-button }
+
+!!! tip "2 つのサーフェス、1 つのハーネス"
+    本サイトの大前提は「**ハーネスを構成するファイルはホスト間で持ち運べる**」という
+    考え方です。ほとんどのファイル（`.github/copilot-instructions.md`、`*.prompt.md`、
+    `SKILL.md`、`.agent.md`、`.github/hooks/*.json`、MCP 設定など）は、Copilot CLI と
+    VS Code Copilot Chat の両方で同じ構文のまま動きます。実際に違いがある所 — たとえば
+    `applyTo` glob は VS Code 専用フィルタ、`/fleet` は CLI 専用オーケストレーター
+    — は 🟦 / 🟪 / 🟢 のバッジで明示しています。全体像は
+    [VS Code vs CLI サポートマトリクス](reference/vscode-vs-cli.md) を参照してください。
 
 ---
 
 ## なぜ「Harness（ハーネス）」なのか
 
-GitHub Copilot CLI は素のままでも強力ですが、その真価は **コードベース・チーム・リスク
+GitHub Copilot は素のままでも強力ですが、その真価は **コードベース・チーム・リスク
 モデルに合わせて形を整えたとき** に発揮されます。エージェントの周りに置く設定ファイル群
-や運用慣習 — それが本サイトで言う「ハーネス」です。
+や運用慣習 — それが本サイトで言う「ハーネス」です。そしてこの「形」は、Copilot を
+ターミナル（Copilot CLI）から呼んでも、エディタ（VS Code Copilot Chat）から呼んでも、
+同じ形のままです。
 
-本サイトはオピニオン強めで、例ベース。すべての記述は [公式 Copilot ドキュメント](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)
-と [github/awesome-copilot](https://github.com/github/awesome-copilot) のパターンに準拠
+本サイトはオピニオン強めで、例ベース。すべての記述は [公式 Copilot ドキュメント](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)、
+[VS Code Copilot Chat カスタマイズドキュメント](https://code.visualstudio.com/docs/copilot/customization/overview)、
+[github/awesome-copilot](https://github.com/github/awesome-copilot) のパターンに準拠
 しています。
 
 ## Harness を構成する 6 つのレイヤー
@@ -54,8 +68,7 @@ Copilot にコーディング規約を一度だけ教えれば、どこでも従
 
 <div class="feature-card" markdown>
 ### 🪝 Hooks
-`sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd` などのライフサイクル
-イベントに自動処理を仕込みます。
+エージェントのライフサイクルイベントに自動処理を仕込みます（CLI では `sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd`、VS Code Preview では `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop`）。
 
 [詳しく見る →](customizations/hooks.md)
 </div>
@@ -82,16 +95,18 @@ Copilot にコーディング規約を一度だけ教えれば、どこでも従
 
 | あなたの状況 | おすすめスタート地点 |
 |---|---|
-| Copilot CLI 初心者 | [Copilot CLI とは](getting-started/what-is-copilot-cli.md) |
+| Copilot（CLI / VS Code）初心者 | [Copilot CLI とは](getting-started/what-is-copilot-cli.md) |
+| どの機能がどちらで使えるか整理したい | [VS Code vs CLI マトリクス](reference/vscode-vs-cli.md) |
 | カスタマイズに着手したい | [カスタマイズ概要](customizations/index.md) |
 | コピペできる例が欲しい | [レシピ集](recipes/index.md) |
 | チーム導入を計画中 | [ケーススタディ: チーム導入](case-studies/team-rollout.md) |
 | 設定キーをピンポイントで調べたい | [リファレンス](reference/cli-commands.md) |
-| 手を動かして練習したい | [演習](exercises/index.md) — 段階的に進む 6 つのラボ＋キャップストーン |
+| 手を動かして練習したい | [演習](exercises/index.md) — 段階的に進む 6 つのラボ＋キャップストーン（CLI / VS Code 両トラック） |
 
 ## 正確性について
 
-Copilot CLI のアップデートは速いです。本サイトの各ページでは、設定フォーマットの記述に
-[`github/copilot-cli`](https://github.com/github/copilot-cli) の changelog エントリや
-[公式ドキュメント](https://docs.github.com/copilot) を引用します。ずれを見つけたら
-ぜひ Issue / PR をお願いします（リンクは各ページ上部）。
+Copilot CLI も VS Code Copilot Chat も、アップデートは速いです。本サイトの各ページ
+では、設定フォーマットの記述に [`github/copilot-cli`](https://github.com/github/copilot-cli) の
+changelog エントリ、[公式 CLI ドキュメント](https://docs.github.com/copilot)、
+[VS Code Copilot Chat ドキュメント](https://code.visualstudio.com/docs/copilot) を
+引用します。ずれを見つけたらぜひ Issue / PR をお願いします（リンクは各ページ上部）。
