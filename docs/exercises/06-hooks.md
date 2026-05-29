@@ -157,8 +157,8 @@ cat .copilot-logs/sessions.log
 You should see two lines for the session you just ran:
 
 ```text
-[2026-05-15T12:34:56Z] START session=abc-123 branch=main head=44bec3d dirty_files=0
-[2026-05-15T12:35:42Z] END   session=abc-123 branch=main head=44bec3d dirty_files=0
+[2024-09-14T12:34:56Z] START session=abc-123 branch=main head=44bec3d dirty_files=0
+[2024-09-14T12:35:42Z] END   session=abc-123 branch=main head=44bec3d dirty_files=0
 ```
 
 ## Definition of done { #definition-of-done }
