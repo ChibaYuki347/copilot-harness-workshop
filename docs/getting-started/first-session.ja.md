@@ -140,6 +140,32 @@ Revert your changes; let's redo the implementation differently.
 | コンテキストウィンドウの容量を節約する | `/compact` |
 | コンテキストに読み込まれている内容を表示する | `/env` |
 
+## VS Code Copilot Chat — 同じループ、別 UI { #vscode-agent-mode }
+
+上の 6 ステップは **Copilot CLI** をターミナルで使う前提で書いています。**VS Code
+Copilot Chat** でこのツアーをやる場合、*概念* は完全に同じです — instructions が
+ロードされ、Plan モードが計画し、承認プロンプトが出て、diff が描画され、hook が
+発火する — がサーフェスが異なります。VS Code で同じループをたどる方法:
+
+| ツアーのステップ | VS Code でどうやるか |
+|---|---|
+| **セッションを開く** | ワークスペースを開き、**View → Chat**（または `Ctrl/Cmd+Alt+I`） |
+| **Agent モードに切り替える** | Chat ヘッダのモードドロップダウンを **Ask**（既定）→ **Agent** に切り替える。初回は「Agent モードでは Copilot がファイルを編集してコマンドを実行できる」という一回限りの通知が出る — 読む |
+| **ステップ 2（リポを理解してもらう）** | 同じプロンプトを Chat に入力。ファイル参照は `@src/server.ts` ではなく **`#file:src/server.ts`** |
+| **ステップ 3（プランモード）** | `Shift+Tab` ではなくモードドロップダウンを **Plan** に切り替える。考え方は同じ: モデルはコードを書かず計画を提案 |
+| **ステップ 4（ツール承認）** | 承認プロンプトは番号付きリストではなく Chat パネル内の **インラインボタン**（Allow once / Allow always / Deny）として描画。選択肢は同じ、クリッカブル |
+| **ステップ 5（diff 確認）** | VS Code はエージェントが編集した全ファイルに対して **diff エディタを自動で開く**。ハンク単位で個別に承認/拒否できる |
+| **ステップ 6（コミット）** | **Source Control** パネル（Ctrl/Cmd+Shift+G）を使う — Copilot は **✨ Generate Commit Message** ボタンでコミットメッセージを作成可 |
+| **`/undo`** | 編集された各ファイルで標準の **VS Code Undo**（Ctrl/Cmd+Z）。複数ファイルを跨ぐトランザクション巻き戻しはなし。diff エディタが保存前にハンク拒否を許す |
+
+!!! tip "変わること、変わらないこと"
+    **メンタルモデルは同じ** です — Custom Instructions は依然として起動時にロード、
+    hook は依然として全ツール呼び出しで発火、承認は依然としてリスクのあるコマンドを
+    gate します。違うのは UI の形と、CLI 専用機能（`/fleet`、`/sidekicks`、gist への
+    `/share`）に今のところ VS Code 対応がない、という 2 点です。CLI ↔ VS Code の
+    完全マッピングは [スラッシュコマンドページ](slash-commands.md#vscode-equivalents)
+    にあります。
+
 → [スラッシュコマンド入門](slash-commands.md)
 → あるいは [カスタマイズ](../customizations/index.md) に進み、ハーネスを形に
 していきます。

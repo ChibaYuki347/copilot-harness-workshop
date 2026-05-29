@@ -141,6 +141,33 @@ Revert your changes; let's redo the implementation differently.
 | Save context window space | `/compact` |
 | Show what's loaded into context | `/env` |
 
+## VS Code Copilot Chat — same loop, different UI { #vscode-agent-mode }
+
+The 6 steps above are written for **Copilot CLI** in a terminal. If you're
+doing this tour in **VS Code Copilot Chat** instead, the *concept* is
+identical — instructions load, plan mode plans, approval prompts appear,
+diffs render, hooks fire — but the surface is different. Here's how to
+follow the same loop in VS Code:
+
+| Tour step | What to do in VS Code |
+|---|---|
+| **Open a session** | Open the workspace, then **View → Chat** (or `Ctrl/Cmd+Alt+I`). |
+| **Switch to Agent mode** | In the Chat header, switch the mode dropdown from **Ask** (default) → **Agent**. The first time you do this, VS Code shows a one-time "Agent mode lets Copilot edit files and run commands" notice — read it. |
+| **Step 2 (ground itself)** | Same prompt — type it into Chat. Use **`#file:src/server.ts`** instead of `@src/server.ts`. |
+| **Step 3 (Plan mode)** | Switch the mode dropdown to **Plan** instead of pressing `Shift+Tab`. Same idea: model proposes a plan without writing code. |
+| **Step 4 (approve tools)** | Approval prompts render as **inline buttons** in the Chat panel (Allow once / Allow always / Deny) rather than as a numbered list. Same options, just clickable. |
+| **Step 5 (verify diff)** | VS Code opens **a diff editor automatically** for every file the agent edits. You can keep or reject hunks individually. |
+| **Step 6 (commit)** | Use the **Source Control** panel (Ctrl/Cmd+Shift+G) — Copilot can author the commit message via the **✨ Generate Commit Message** button. |
+| **`/undo`** | Use standard **VS Code Undo** (Ctrl/Cmd+Z) in each modified file. There's no transactional rewind across files; the diff editor lets you reject hunks before they're saved. |
+
+!!! tip "What's different and what isn't"
+    The **mental model** is identical — Custom Instructions still load at
+    startup, hooks still fire on every tool call, approval still gates risky
+    commands. The shape of the UI is different, and a few CLI-only features
+    (`/fleet`, `/sidekicks`, `/share` to gist) don't have direct VS Code
+    equivalents yet. The [slash commands page](slash-commands.md#vscode-equivalents)
+    has the full CLI ↔ VS Code mapping.
+
 → [Slash commands tour](slash-commands.md)
 → Or skip ahead to [Customizations](../customizations/index.md) and start shaping
 the harness.
