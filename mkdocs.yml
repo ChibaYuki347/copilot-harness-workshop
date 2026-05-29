@@ -129,6 +129,8 @@ plugins:
             Getting Started: はじめに
             What is Copilot CLI?: Copilot CLI とは
             Installation: インストール
+            Workshop prep: Workshop 事前準備
+            Ask mode vs Agent mode: Ask モードと Agent モード
             Your first session: 最初のセッション
             Slash commands tour: スラッシュコマンド入門
             Customizations: カスタマイズ
@@ -139,6 +141,13 @@ plugins:
             Hooks: フック
             MCP Servers: MCP サーバー
             Custom Agents: カスタムエージェント
+            Safety & Governance: 安全性とガバナンス
+            "Governance overview": ガバナンス概要
+            Risk mental model: リスクの mental model
+            Approval cheat sheet: Approval cheat sheet
+            Blast-radius limiting: Blast-radius を絞る
+            Auditing: 事後の監査
+            MCP vetting: MCP サーバーの vetting
             Recipes: レシピ
             "Recipe: PR Review Skill": レシピ — PR レビュースキル
             "Recipe: GitHub MCP server": レシピ — GitHub MCP サーバー
@@ -156,6 +165,7 @@ plugins:
             Glossary: 用語集
             Exercises: 演習
             How to use this track: このトラックの使い方
+            "0 · 60-minute live tour": "0 · 60 分ライブツアー"
             "1 · Custom Instructions": "1 · カスタムインストラクション"
             "2 · Prompt Files": "2 · プロンプトファイル"
             "3 · Skills": "3 · スキル"
@@ -169,6 +179,8 @@ nav:
   - Getting Started:
       - getting-started/what-is-copilot-cli.md
       - getting-started/installation.md
+      - "Workshop prep": getting-started/workshop-prep.md
+      - "Ask mode vs Agent mode": getting-started/ask-vs-agent.md
       - getting-started/first-session.md
       - getting-started/slash-commands.md
   - Customizations:
@@ -179,6 +191,13 @@ nav:
       - customizations/hooks.md
       - customizations/mcp.md
       - customizations/agents.md
+  - Safety & Governance:
+      - "Governance overview": governance/index.md
+      - "Risk mental model": governance/risk-mental-model.md
+      - "Approval cheat sheet": governance/approval-cheatsheet.md
+      - "Blast-radius limiting": governance/blast-radius.md
+      - "Auditing": governance/auditing.md
+      - "MCP vetting": governance/mcp-vetting.md
   - Recipes:
       - recipes/index.md
       - recipes/pr-review-skill.md
@@ -198,6 +217,7 @@ nav:
       - reference/glossary.md
   - Exercises:
       - "How to use this track": exercises/index.md
+      - "0 · 60-minute live tour": exercises/00-live-tour.md
       - "1 · Custom Instructions": exercises/01-custom-instructions.md
       - "2 · Prompt Files": exercises/02-prompt-files.md
       - "3 · Skills": exercises/03-skills.md
