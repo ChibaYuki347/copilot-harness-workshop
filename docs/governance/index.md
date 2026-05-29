@@ -37,6 +37,12 @@ If you only do three things this week:
    "always ask for `rm`, `sudo`, anything that writes to `main`" is a sensible
    starting point.
 
+!!! tip "The fourth hook to install"
+    Once the three above are in place, the next governance hook to add is the
+    **session-end secret scan** — it runs `gitleaks` (or your scanner of choice)
+    at `stop` so leaked credentials get caught before you walk away from the
+    terminal. See [Recipe: session-end secret scan](../recipes/session-end-secret-scan.md).
+
 ## A note on hosts
 
 Everything here applies to both **Copilot CLI** and **VS Code Copilot Chat
@@ -47,7 +53,8 @@ schema but the risk model is identical.
 
 ## Why now
 
-Many teams already use Copilot Chat in **Ask mode** every day but have
-**never invoked agent mode**. The single most common reason for that is
-risk uncertainty — "what if it does something I can't undo?". This
-section is the answer.
+This site was originally written for users who already wanted to push Copilot
+further. The audience this section targets is the opposite: most readers use
+Copilot Chat in **Ask mode** every day but have **never invoked agent mode**.
+The single most common reason for that is risk uncertainty — "what if it does
+something I can't undo?". This section is the answer.
