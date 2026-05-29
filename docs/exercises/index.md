@@ -66,6 +66,29 @@ GitHub Copilot Chat output channels.
 → See [VS Code vs Copilot CLI](../reference/vscode-vs-cli.md) for the full
 support matrix before you start.
 
+## Live workshop vs. homework — when to do each { #live-vs-homework }
+
+If you're attending the **6/2 live lecture**, time will only stretch to a
+handful of exercises together. Use this as the recommended split — do the
+"live" ones with the group and treat the others as take-home work.
+
+| Exercise | Where to do it | Why |
+|---|---|---|
+| **00 · Live tour** | 🔴 **Live (60 min)** | The whole tour is designed for the lecture slot — sets up the mental model for everything else. |
+| **01 · Custom Instructions** | 🔴 **Live (last 15 min)** | Smallest layer, fastest payoff, sets you up to do the rest at home. |
+| **02 · Prompt Files** | 🟠 **Homework — short** | Self-paced; you'll want to iterate on your own repo. |
+| **03 · Skills** | 🟠 **Homework — long** | 45 minutes; benefits from focused thinking time. |
+| **04 · MCP Servers** | 🟠 **Homework — short** | Needs your own GitHub token + a quiet moment to read the prompts. |
+| **05 · Custom Agents** | 🟠 **Homework — long** | The interesting part is *designing* the agent; rushing it produces a generic one. |
+| **06 · Hooks** | 🟠 **Homework — short** | Pair this with the [governance section](../governance/index.md) for context. |
+| **✨ Capstone** | 🟢 **Homework — deep dive** | Composes 4 layers; allow ~45 min of uninterrupted time. |
+
+!!! tip "If you can only do *one* exercise after the workshop"
+    Do **01 · Custom Instructions** on a real repo you actually work in. It
+    is the highest-leverage 20 minutes you can spend with the harness, and
+    everything else builds on the muscle of "thinking about Copilot's
+    standing context."
+
 ## Before you start
 
 !!! warning "Work in a scratch repo"
