@@ -9,6 +9,24 @@ MCP — Model Context Protocol — is the open standard that lets a model talk t
 tools. Copilot CLI ships with **GitHub's MCP server enabled by default** (so the agent
 can list issues, comment on PRs, etc.) and supports adding your own.
 
+## Why this exists
+
+The agent is locked to a fixed tool set (bash, view, edit, …). MCP is how you
+**extend that set** with anything that has an API: ticket systems, internal
+search, vendor SaaS, Azure Foundry, a private knowledge base. Instead of the
+agent guessing `curl` invocations, it gets typed tools with schemas and a
+single permission category to approve.
+
+## Alternatives — when *not* to reach for MCP
+
+- The action is **a one-off shell command** → just let the agent call `bash`.
+  MCP is overkill for "run my linter once."
+- The action is **a procedure with multiple shell steps** → write a [Skill](skills.md)
+  whose body is the procedure; cheaper than running an MCP server.
+- The action is **internal-only and never reused by other tools** → consider an
+  in-repo script the agent runs via `bash`. MCP shines when the same tool is
+  also useful from Cursor / Claude Desktop / your own agent.
+
 ## When to use MCP
 
 - The agent needs to read or write to a system that isn't a shell command — e.g. your
@@ -16,7 +34,7 @@ can list issues, comment on PRs, etc.) and supports adding your own.
 - You want to expose a *typed* API (with schemas) rather than freeform CLI arguments.
 - You want to share the tool with other MCP-capable hosts (Claude Desktop, Cursor, etc.).
 
-## Where MCP configuration lives
+## Where MCP configuration lives { #config-locations }
 
 | Scope | File |
 |---|---|

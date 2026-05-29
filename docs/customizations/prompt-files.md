@@ -8,6 +8,22 @@
 Custom instructions are *always-on*. Prompt files (a.k.a. custom slash commands) are
 *on-demand* — you invoke them by typing `/command-name`.
 
+## Why this exists
+
+Some prompts are too **niche** for instructions (they don't apply to every turn)
+but too **structured** to retype each time. A prompt file is the middle layer:
+a versioned, parameterized template the team can share and the agent treats as
+a first-class command.
+
+## Alternatives — when *not* to reach for a prompt file
+
+- The prompt has **steps with validation, output files, or scripts** → a
+  [Skill](skills.md) is the right shape. Prompt files are flat Markdown bodies.
+- The prompt is **invoked on a lifecycle event**, not by a human → a
+  [hook](hooks.md) fires automatically; prompt files require typing `/foo`.
+- The prompt is the same for **everyone, every turn** → that's an
+  [instruction](custom-instructions.md), not a prompt file.
+
 ## When to use them
 
 - You have a 6-line prompt you paste at least once a week.
