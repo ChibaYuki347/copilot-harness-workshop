@@ -112,8 +112,8 @@ tail -F ~/.copilot/audit.log | jq -c 'select(.phase=="pre") | {ts, tool: .payloa
   `promtail` 等の別プロセスが `~/.copilot/audit.log` を tail して shipping。
   分離が綺麗、組織展開ではこちら推奨
 
-組織展開なら Microsoft Foundry Tools の PII マスキング (recipe は後続 PR で
-追加予定) をかませて、ラップトップを出る前にユーザー識別子やコード片を消すと安全。
+組織展開なら [Microsoft Foundry Tools](../recipes/foundry-tools-mcp.md) の PII
+マスキングをかませて、ラップトップを出る前にユーザー識別子やコード片を消すと安全。
 
 ## `/delegate` のトレースも見失わない
 
