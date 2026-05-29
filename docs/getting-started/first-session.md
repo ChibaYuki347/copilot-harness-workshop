@@ -2,6 +2,38 @@
 
 A 10-minute tour of the agentic loop, ending with you having actually changed a file.
 
+!!! abstract "Choose your track"
+    === "🟦 Already use Ask mode — fast lane"
+
+        You already use **Copilot Ask mode** (chat sidebar). You want to feel
+        the difference when Copilot is allowed to **edit files and run commands
+        on its own**. Do these in order:
+
+        1. Read the first 2 sections below — **Pick a project** + **Ask Copilot
+           to ground itself** — they're the same in both tracks.
+        2. **Skip "Step 3 — Plan a change (Plan Mode)" details** and just press
+           `Shift+Tab` once to feel what plan mode does, then exit back.
+        3. Focus on **Step 4 — Approve the right tools** and **Step 5 — Inspect
+           the diff before committing**. This is the actual mental model shift
+           from Ask mode.
+        4. Then jump to [Ask vs Agent mode](ask-vs-agent.md) for the side-by-side
+           reference, and [Governance → Approval cheat sheet](../governance/approval-cheatsheet.md)
+           for what to allow vs deny in real work.
+
+    === "🟢 Full newcomer — guided tour"
+
+        New to Copilot agents entirely (or only used Ask mode briefly). Just go
+        through every step below in order. Plan on 15–20 minutes. Don't worry
+        about getting "the perfect first prompt" — the goal is just to feel the
+        agentic loop once: prompt → tool call → approval → result.
+
+        - If anything feels confusing, the [Ask vs Agent mode](ask-vs-agent.md)
+          primer gives the mental model in 5 minutes — read it then come back.
+        - After this page, the [customizations overview](../customizations/index.md)
+          shows how to start shaping Copilot to your team.
+
+---
+
 ## Step 1 — Pick a project
 
 Use any repo you don't mind experimenting on. For this tour we'll assume a small
@@ -108,6 +140,33 @@ Revert your changes; let's redo the implementation differently.
 | Rewind the previous turn | `/undo` |
 | Save context window space | `/compact` |
 | Show what's loaded into context | `/env` |
+
+## VS Code Copilot Chat — same loop, different UI { #vscode-agent-mode }
+
+The 6 steps above are written for **Copilot CLI** in a terminal. If you're
+doing this tour in **VS Code Copilot Chat** instead, the *concept* is
+identical — instructions load, plan mode plans, approval prompts appear,
+diffs render, hooks fire — but the surface is different. Here's how to
+follow the same loop in VS Code:
+
+| Tour step | What to do in VS Code |
+|---|---|
+| **Open a session** | Open the workspace, then **View → Chat** (or `Ctrl/Cmd+Alt+I`). |
+| **Switch to Agent mode** | In the Chat header, switch the mode dropdown from **Ask** (default) → **Agent**. The first time you do this, VS Code shows a one-time "Agent mode lets Copilot edit files and run commands" notice — read it. |
+| **Step 2 (ground itself)** | Same prompt — type it into Chat. Use **`#file:src/server.ts`** instead of `@src/server.ts`. |
+| **Step 3 (Plan mode)** | Switch the mode dropdown to **Plan** instead of pressing `Shift+Tab`. Same idea: model proposes a plan without writing code. |
+| **Step 4 (approve tools)** | Approval prompts render as **inline buttons** in the Chat panel (Allow once / Allow always / Deny) rather than as a numbered list. Same options, just clickable. |
+| **Step 5 (verify diff)** | VS Code opens **a diff editor automatically** for every file the agent edits. You can keep or reject hunks individually. |
+| **Step 6 (commit)** | Use the **Source Control** panel (Ctrl/Cmd+Shift+G) — Copilot can author the commit message via the **✨ Generate Commit Message** button. |
+| **`/undo`** | Use standard **VS Code Undo** (Ctrl/Cmd+Z) in each modified file. There's no transactional rewind across files; the diff editor lets you reject hunks before they're saved. |
+
+!!! tip "What's different and what isn't"
+    The **mental model** is identical — Custom Instructions still load at
+    startup, hooks still fire on every tool call, approval still gates risky
+    commands. The shape of the UI is different, and a few CLI-only features
+    (`/fleet`, `/sidekicks`, `/share` to gist) don't have direct VS Code
+    equivalents yet. The [slash commands page](slash-commands.md#vscode-equivalents)
+    has the full CLI ↔ VS Code mapping.
 
 → [Slash commands tour](slash-commands.md)
 → Or skip ahead to [Customizations](../customizations/index.md) and start shaping
