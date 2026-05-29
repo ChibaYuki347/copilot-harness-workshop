@@ -4,6 +4,26 @@
 site.** Each exercise is small, self-contained, and ends with an *objective* signal
 that tells you it worked — not "looks about right".
 
+!!! info "Doing the live workshop on 2026-06-02?"
+    Use the [60-minute live tour](00-live-tour.md) during the session — it
+    compresses exercises 01 / 03 / 06 into one guided hour. Come back to the
+    numbered exercises below for deeper practice afterward.
+
+## Your experience matrix — where to start
+
+Not everyone arrives at the same place. Pick the row that describes you and
+jump in there.
+
+| You've used… | Start here | Then |
+|---|---|---|
+| Only **Ask mode** (chat side-panel, copy-paste suggestions) | [00 · Live tour](00-live-tour.md) → [01 · Custom Instructions](01-custom-instructions.md) | 02, then 04 |
+| **Agent mode** a few times (approved tool calls, edited files) | [01 · Custom Instructions](01-custom-instructions.md) → [03 · Skills](03-skills.md) | 04, 05, 06 |
+| **Hooks or Skills** in production already | [04 · MCP Servers](04-mcp.md) → [05 · Custom Agents](05-agents.md) → [Capstone](capstone.md) | Foundry Tools MCP recipe, multi-agent recipe |
+| **Other agentic CLIs** (Claude Code, Cursor, etc.) | [01 · Custom Instructions](01-custom-instructions.md) skim → [Reference → VS Code vs CLI](../reference/vscode-vs-cli.md) | Pick the gaps |
+
+Read [Ask mode vs Agent mode](../getting-started/ask-vs-agent.md) first if you're
+in row 1 — the live tour assumes you've seen that comparison.
+
 ## How this track is structured
 
 The exercises layer on top of each other. If you do them in order, the artifacts
