@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/audit-all-tool-calls/log.sh pre",
+        "cwd": ".",
+        "env": {
+          "AUDIT_LOG": "${HOME}/.copilot/audit.log"
+        },
+        "timeoutSec": 5
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/audit-all-tool-calls/log.sh post",
+        "cwd": ".",
+        "env": {
+          "AUDIT_LOG": "${HOME}/.copilot/audit.log"
+        },
+        "timeoutSec": 5
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/audit-all-tool-calls/log.sh fail",
+        "cwd": ".",
+        "env": {
+          "AUDIT_LOG": "${HOME}/.copilot/audit.log"
+        },
+        "timeoutSec": 5
+      }
+    ]
+  }
+}
