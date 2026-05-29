@@ -151,6 +151,7 @@ plugins:
             Recipes: レシピ
             "Recipe: PR Review Skill": レシピ — PR レビュースキル
             "Recipe: GitHub MCP server": レシピ — GitHub MCP サーバー
+            "Recipe: Microsoft Foundry Tools MCP": レシピ — Microsoft Foundry Tools MCP
             "Recipe: session-end secret scan": レシピ — セッション終了時のシークレットスキャン
             "Recipe: path-specific instructions": レシピ — パス指定インストラクション
             "Recipe: multi-agent workflow": レシピ — マルチエージェントワークフロー
@@ -202,6 +203,7 @@ nav:
       - recipes/index.md
       - recipes/pr-review-skill.md
       - recipes/github-mcp-server.md
+      - recipes/foundry-tools-mcp.md
       - recipes/session-end-secret-scan.md
       - recipes/path-specific-instructions.md
       - recipes/multi-agent-workflow.md
