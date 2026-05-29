@@ -141,6 +141,7 @@ plugins:
             Hooks: フック
             MCP Servers: MCP サーバー
             Custom Agents: カスタムエージェント
+            "Mental model": メンタルモデル
             Safety & Governance: 安全性とガバナンス
             "Governance overview": ガバナンス概要
             Risk mental model: リスクの mental model
@@ -192,6 +193,7 @@ nav:
       - customizations/hooks.md
       - customizations/mcp.md
       - customizations/agents.md
+      - "Mental model": customizations/mental-model.md
   - Safety & Governance:
       - "Governance overview": governance/index.md
       - "Risk mental model": governance/risk-mental-model.md
