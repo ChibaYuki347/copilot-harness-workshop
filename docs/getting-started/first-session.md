@@ -2,6 +2,38 @@
 
 A 10-minute tour of the agentic loop, ending with you having actually changed a file.
 
+!!! abstract "Choose your track"
+    === "🟦 Already use Ask mode — fast lane"
+
+        You already use **Copilot Ask mode** (chat sidebar). You want to feel
+        the difference when Copilot is allowed to **edit files and run commands
+        on its own**. Do these in order:
+
+        1. Read the first 2 sections below — **Pick a project** + **Ask Copilot
+           to ground itself** — they're the same in both tracks.
+        2. **Skip "Step 3 — Plan a change (Plan Mode)" details** and just press
+           `Shift+Tab` once to feel what plan mode does, then exit back.
+        3. Focus on **Step 4 — Approve the right tools** and **Step 5 — Inspect
+           the diff before committing**. This is the actual mental model shift
+           from Ask mode.
+        4. Then jump to [Ask vs Agent mode](ask-vs-agent.md) for the side-by-side
+           reference, and [Governance → Approval cheat sheet](../governance/approval-cheatsheet.md)
+           for what to allow vs deny in real work.
+
+    === "🟢 Full newcomer — guided tour"
+
+        New to Copilot agents entirely (or only used Ask mode briefly). Just go
+        through every step below in order. Plan on 15–20 minutes. Don't worry
+        about getting "the perfect first prompt" — the goal is just to feel the
+        agentic loop once: prompt → tool call → approval → result.
+
+        - If anything feels confusing, the [Ask vs Agent mode](ask-vs-agent.md)
+          primer gives the mental model in 5 minutes — read it then come back.
+        - After this page, the [customizations overview](../customizations/index.md)
+          shows how to start shaping Copilot to your team.
+
+---
+
 ## Step 1 — Pick a project
 
 Use any repo you don't mind experimenting on. For this tour we'll assume a small

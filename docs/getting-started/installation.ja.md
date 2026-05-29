@@ -3,6 +3,12 @@
 このページでは **GitHub Copilot CLI**（`copilot`）のインストール方法を説明します。すべての選択肢と
 プラットフォーム別の詳細は、[公式インストールガイド](https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli) を参照してください。
 
+!!! info "VS Code で Ask モードはすでに使っている方"
+    6/2 ワークショップ向けに **VS Code Copilot Chat と Copilot CLI を両方** を
+    まとめてインストールしたい場合は、統合版の [ワークショップ準備](workshop-prep.md)
+    ページが最短です — 両方のインストーラと、それぞれのスモークテスト手順を 1 つの
+    フローにまとめています。
+
 ## 前提条件
 
 - **有効な GitHub Copilot サブスクリプション**（individual、Business、Enterprise のいずれか）。
