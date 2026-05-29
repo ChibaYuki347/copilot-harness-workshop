@@ -10,6 +10,23 @@ Where a prompt file is "a parameterized prompt", a Skill is **a folder containin
 !!! abstract "Where it works"
     🟢 **Copilot CLI** · 🟢 **VS Code** — workspace skills at `.github/skills/<name>/SKILL.md` are picked up by **both** hosts (per upstream `vscode-copilot-chat` design). Additional workspace locations both hosts accept: `.agents/skills/`, `.claude/skills/`. User-scope: `~/.copilot/skills/`, `~/.agents/skills/`, `~/.claude/skills/`. The lab in this site uses CLI conventions, but the same `SKILL.md` is loadable in VS Code with no edits. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
+## Why this exists
+
+Some work is a **procedure**: phases, helper scripts, output templates, a
+rubric to compare against. Instructions and prompt files can describe a
+procedure in prose, but they can't *bundle* the supporting files. A Skill is
+a folder that ships the procedure **with** its scripts, so the agent doesn't
+have to re-invent them every time.
+
+## Alternatives — when *not* to reach for a Skill
+
+- The procedure is **one Markdown body, no helpers** → a [prompt file](prompt-files.md)
+  is lighter weight and surfaces as a slash command.
+- The procedure is **a tool the model should call directly with typed args** →
+  expose it as an [MCP tool](mcp.md) instead.
+- The procedure must run **without the user typing anything** → a [hook](hooks.md)
+  fires automatically; skills require the agent to choose to use them.
+
 ## When to use a Skill (vs. a prompt file)
 
 | Pick a **prompt file** when… | Pick a **Skill** when… |
