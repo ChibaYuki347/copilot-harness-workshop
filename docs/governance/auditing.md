@@ -115,9 +115,9 @@ Two patterns:
   process (`vector`, `fluent-bit`, `promtail`) that tails `~/.copilot/audit.log`
   and ships. Cleaner separation, recommended for org-wide rollout.
 
-For org rollout, the Microsoft Foundry Tools PII-masking endpoint (covered as
-a recipe in a forthcoming PR) can scrub user identifiers and code snippets
-before the log leaves the laptop.
+For org rollout, the [Microsoft Foundry Tools](../recipes/foundry-tools-mcp.md)
+PII-masking endpoint can scrub user identifiers and code snippets before the
+log leaves the laptop.
 
 ## Don't lose `/delegate` traces
 

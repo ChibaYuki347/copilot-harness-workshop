@@ -136,5 +136,5 @@ A red-flag server typically has any of:
 - [Customizations → MCP](../customizations/mcp.md)
 - [Risk mental model](./risk-mental-model.md)
 - [Approval cheat sheet](./approval-cheatsheet.md)
-- Recipe → Foundry Tools MCP (coming in a forthcoming PR)
+- [Recipe → Foundry Tools MCP](../recipes/foundry-tools-mcp.md)
 - [Recipe → GitHub MCP server](../recipes/github-mcp-server.md)

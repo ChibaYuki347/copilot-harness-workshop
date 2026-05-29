@@ -120,5 +120,5 @@ VS Code 側は `chat.tools.autoApprove` と MCP サーバー自体の設定パ�
 - [Customizations → MCP](../customizations/mcp.md)
 - [リスクの mental model](./risk-mental-model.md)
 - [Approval cheat sheet](./approval-cheatsheet.md)
-- Recipe → Foundry Tools MCP (後続 PR で追加予定)
+- [Recipe → Foundry Tools MCP](../recipes/foundry-tools-mcp.md)
 - [Recipe → GitHub MCP server](../recipes/github-mcp-server.md)
