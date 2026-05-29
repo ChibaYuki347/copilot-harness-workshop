@@ -34,7 +34,7 @@ single permission category to approve.
 - You want to expose a *typed* API (with schemas) rather than freeform CLI arguments.
 - You want to share the tool with other MCP-capable hosts (Claude Desktop, Cursor, etc.).
 
-## Where MCP configuration lives
+## Where MCP configuration lives { #config-locations }
 
 | Scope | File |
 |---|---|

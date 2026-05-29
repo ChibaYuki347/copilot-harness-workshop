@@ -83,6 +83,45 @@ you've allowed it for the session. The approval prompt shows:
 
 Treat `/allow-all` like `sudo`: only use it when you're confident in the blast radius.
 
+## VS Code Copilot Chat — equivalents { #vscode-equivalents }
+
+The tables above are **Copilot CLI** commands. VS Code Copilot Chat exposes the same
+capabilities but through different surfaces: some are settings in `settings.json`,
+some are buttons in the Chat panel, some are dedicated VS Code commands (run via
+**Command Palette → `Chat: ...`**).
+
+| CLI slash command | VS Code equivalent | Notes |
+|---|---|---|
+| `/help` | **Chat: View Help** command, or `?` button in Chat header | |
+| `/env` | **Chat: Show Configuration** + the Chat **"View tools"** dropdown | Shows which instructions / agents / MCP servers / tools are loaded for the current session. |
+| `/context` | Token usage badge on the Chat input | Hover for breakdown. |
+| `/compact` | **Chat: Start New Chat** (with carry-over disabled) | VS Code doesn't summarize history in-place; you start a fresh chat. |
+| `/init` | **GitHub Copilot: Generate Instructions** command | Creates `.github/copilot-instructions.md`. |
+| `/instructions` | Settings → `github.copilot.chat.codeGeneration.useInstructionFiles` (toggle) + the **"Instructions"** picker in the Chat input | Per-file enable/disable lives in the picker. |
+| `/skills` | **Chat: Manage Skills** command | Skills loaded from `.github/skills/` show automatically; this command lets you enable/disable. |
+| `/mcp` | `.vscode/mcp.json` (project) + Settings → `mcp.servers` (user) + **MCP: List Servers** command | VS Code uses different config files; the runtime behavior is the same. See [MCP](../customizations/mcp.md#config-locations). |
+| `/agent` | The **agent picker** in the Chat header (dropdown next to mode) | Custom agents from `.github/agents/*.agent.md` appear automatically. |
+| `/plan` (Plan mode) | **Plan mode** toggle in Chat header (next to "Ask" / "Edit" / "Agent") | Same concept, different UI. See [Ask vs Agent](./ask-vs-agent.md). |
+| `/diff` | The **diff view** that opens automatically when Agent mode edits files | No explicit command needed; every edit opens a diff. |
+| `/review` | **GitHub Copilot: Review Selection / Review Changes** command | Powered by the same code-review agent. |
+| `/pr` | The **GitHub Pull Requests** extension's panel (separate extension) | Not a Copilot Chat command; Copilot Chat *uses* the extension's commands. |
+| `/undo` / `/rewind` | Standard **VS Code Undo** (Ctrl/Cmd+Z) in each affected file | Chat doesn't have a transactional rewind; you undo per file. |
+| `/fleet`, `/tasks`, `/sidekicks` | **No direct equivalent in VS Code yet** | Parallel sub-agent fan-out is CLI-only as of now. |
+| `/resume` | **Chat: Open Chat...** picker (recent chats) | |
+| `/share` | **Chat: Export...** command (Markdown / clipboard) | |
+| `/allow-all` | Settings → `chat.tools.autoApprove` (boolean) | Same risk profile; same advice — pair with deny-list hooks. |
+| `/add-dir` | Workspace trust dialog (one-time per folder) | VS Code's workspace-trust prompt covers this. |
+| `/reset-allowed-tools` | **Chat: Reset Trusted Tools** command | |
+| `@path` | **`#file:path/to/file`** in the Chat input | Different prefix character; same effect. |
+| `#123` | **`#issue:123`** or **`#pr:123`** in Chat | Disambiguated by prefix. |
+| `!cmd` | Not directly supported in Chat input | Use Agent mode and let it run the command. |
+
+!!! tip "When in doubt — Command Palette"
+    Almost every Copilot Chat capability is a Command Palette entry under
+    **Chat: ...**, **GitHub Copilot: ...**, or **MCP: ...**. If a CLI slash
+    command isn't listed above, search the palette for keywords — most have
+    an equivalent that's just discoverable by a different name.
+
 ## Programmatic mode
 
 For CI or scripting, use the **headless mode**:
