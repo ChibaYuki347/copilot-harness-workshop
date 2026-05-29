@@ -36,6 +36,12 @@ MCP ツールを呼び出すので、ガードレールの設計責任が一気�
    → [Approval cheat sheet](./approval-cheatsheet.md#team-defaults)
    「`rm` / `sudo` / `main` への書き込みは常に手動承認」が無難なスタートライン。
 
+!!! tip "4 つ目に入れるべき hook"
+    上記 3 つが入ったら、次のガバナンス hook は **session-end のシークレットスキャン**
+    です — `stop` イベントで `gitleaks`（または好みのスキャナ）を走らせ、ターミナルを
+    離れる前に漏れた認証情報を捕まえます。
+    → [レシピ: セッション終了時のシークレットスキャン](../recipes/session-end-secret-scan.md)
+
 ## ホストについて
 
 ここで扱う内容は **Copilot CLI** と **VS Code Copilot Chat の Agent モード**

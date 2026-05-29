@@ -37,6 +37,12 @@ If you only do three things this week:
    "always ask for `rm`, `sudo`, anything that writes to `main`" is a sensible
    starting point.
 
+!!! tip "The fourth hook to install"
+    Once the three above are in place, the next governance hook to add is the
+    **session-end secret scan** — it runs `gitleaks` (or your scanner of choice)
+    at `stop` so leaked credentials get caught before you walk away from the
+    terminal. See [Recipe: session-end secret scan](../recipes/session-end-secret-scan.md).
+
 ## A note on hosts
 
 Everything here applies to both **Copilot CLI** and **VS Code Copilot Chat
