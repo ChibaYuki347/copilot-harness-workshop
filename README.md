@@ -4,6 +4,8 @@
 
 📖 **Live site:** <https://chibayuki347.github.io/copilot-harness-workshop/>
 
+🚀 **Try it in one click:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ChibaYuki347/copilot-harness-workshop) — opens a fully-provisioned devcontainer with MkDocs, Node, `gh`, `jq`, and the Copilot CLI preinstalled. See [`.devcontainer/README.md`](./.devcontainer/README.md).
+
 🇯🇵 **日本語版は同じサイト内の言語スイッチャーから切り替えられます。**
 
 ---
@@ -30,6 +32,7 @@ This repo plays two roles at once:
 | `.github/hooks/audit-demo/` | **Live demo** — safe-by-default `postToolUse` hook that appends a JSONL line per tool call to `~/.copilot/copilot-harness-audit.log`. |
 | `.github/agents/docs-reviewer.agent.md` | **Live demo** — a docs-PR reviewer sub-agent. |
 | `.mcp.json` | **Live demo** — MCP config template (zero servers by default, no side effects). |
+| `.devcontainer/` | Reproducible workspace: Python 3.12 + Node LTS + `gh` + `jq` + MkDocs + Copilot CLI preinstalled. Open in [GitHub Codespaces](https://codespaces.new/ChibaYuki347/copilot-harness-workshop) or with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers). |
 
 → See [Try this repo as a live demo](https://chibayuki347.github.io/copilot-harness-workshop/getting-started/try-this-repo/)
 for the 5-minute walkthrough and the opt-out switches for every layer above.

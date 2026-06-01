@@ -43,6 +43,21 @@
     npm install -g @github/copilot
     ```
 
+=== "Devcontainer / Codespaces"
+
+    **このレポ** (`copilot-harness-workshop`) を clone した場合や、再現性のある
+    開発環境がほしい場合は、同梱の [devcontainer](https://github.com/ChibaYuki347/copilot-harness-workshop/tree/main/.devcontainer)
+    を使うと Python 3.12 + Node LTS + `gh` + `jq` + MkDocs + Copilot CLI 本体
+    までを 1 ステップでセットアップできます。
+
+    - **GitHub Codespaces:** レポページから **Code → Codespaces → Create codespace on `main`**
+    - **ローカルの Dev Containers:** [Dev Containers VS Code 拡張](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) と Docker を入れた上で、clone したレポを開き **Reopen in Container**
+
+    postCreate スクリプトが `✅ ... devcontainer ready.` と出力したら
+    `gh auth login` → `copilot` で起動。レイヤーごとの確認手順は
+    [devcontainer README](https://github.com/ChibaYuki347/copilot-harness-workshop/blob/main/.devcontainer/README.md)
+    を参照してください。
+
 === "Windows（winget）"
 
     ```powershell
