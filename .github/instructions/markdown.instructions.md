@@ -1,7 +1,5 @@
 ---
-applyTo:
-  - "docs/**/*.md"
-  - "examples/**/README.md"
+applyTo: "docs/**/*.md|examples/**/README.md"
 ---
 
 # Markdown conventions for this site
