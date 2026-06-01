@@ -94,7 +94,7 @@ Copilot CLI に同梱されているサブエージェントです。特に有�
 
 Copilot があなたの代わりに **アクションを取る** モード: ファイル読み取り、編集、
 `bash` 実行、MCP ツール呼び出し、失敗時のリトライ。Copilot CLI の既定、VS Code
-Copilot Chat はモードドロップダウンからオプトイン (Preview)。事前許可されていない
+Copilot Chat はモードドロップダウンからオプトイン。事前許可されていない
 限り全アクションは承認プロンプトを通る。
 
 ## Plan モード
@@ -118,8 +118,8 @@ VS Code の `chat.tools.autoApprove`)、または `permissionDecision: "allow"` 
 
 ## MCP client（MCP クライアント）
 
-MCP ツールを **呼び出す** 側 — 本ドキュメントの文脈では Copilot 自体。CLI には
-組み込み MCP クライアントが入っており、VS Code Chat には Preview として入っている。
+MCP ツールを **呼び出す** 側 — 本ドキュメントの文脈では Copilot 自体。CLI と
+VS Code Copilot Chat の両方に組み込み MCP クライアントが入っている。
 
 ## MCP server（MCP サーバー）
 

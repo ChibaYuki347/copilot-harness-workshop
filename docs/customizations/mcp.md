@@ -3,7 +3,7 @@
 **Plug your own tools into the agent via the Model Context Protocol.**
 
 !!! abstract "Where it works"
-    🟢 **Copilot CLI** (project: `.github/mcp.json` or `.mcp.json`; user: `~/.copilot/mcp-config.json`) · 🟢 **VS Code** (Preview — `.vscode/mcp.json` workspace + `settings.json` `mcp.servers` user scope). **Same MCP protocol**, but the file location and top-level JSON key differ — CLI uses `"mcpServers"`, VS Code uses `"servers"`. Ship both files for mixed teams. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+    🟢 **Copilot CLI** (project: `.github/mcp.json` or `.mcp.json`; user: `~/.copilot/mcp-config.json`) · 🟢 **VS Code** (`.vscode/mcp.json` workspace + `settings.json` `mcp.servers` user scope). **Same MCP protocol**, but the file location and top-level JSON key differ — CLI uses `"mcpServers"`, VS Code uses `"servers"`. Ship both files for mixed teams. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
 MCP — Model Context Protocol — is the open standard that lets a model talk to external
 tools. Copilot CLI ships with **GitHub's MCP server enabled by default** (so the agent
@@ -58,7 +58,7 @@ single permission category to approve.
 
 ## VS Code equivalent { #vs-code-equivalent }
 
-VS Code Copilot Chat also speaks MCP (Preview as of 2026-05). It reads a
+VS Code Copilot Chat also speaks MCP. It reads a
 different file with a slightly different shape — same servers, different
 top-level key and env-var syntax.
 
@@ -90,7 +90,7 @@ The **same MCP server binary works in both hosts** — only the config file chan
 For mixed teams, **commit both** `.mcp.json` and `.vscode/mcp.json` with the same
 server list during the rollout window. A small `npm run sync-mcp` script that
 generates one from the other keeps them in lockstep. Official VS Code docs:
-[Use MCP servers in VS Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
+[Use MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
 
 ## Minimal example — `.mcp.json`
 

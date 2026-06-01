@@ -3,7 +3,7 @@
 **Run a script (or call an HTTP endpoint) when the agent crosses a lifecycle event.**
 
 !!! abstract "Where it works"
-    🟢 **Copilot CLI** · 🟢 **VS Code (Preview)** — same `.github/hooks/*.json` JSON format (Claude Code-compatible) is read by both hosts. VS Code support is Preview as of 2026-05; see the [official VS Code Hooks docs](https://code.visualstudio.com/docs/copilot/customization/hooks). User-scope locations differ: CLI uses `~/.copilot/hooks/`; VS Code uses `~/.copilot/hooks` or `~/.claude/settings.json`. Your **organization's enterprise policy** may disable hooks in VS Code — check before relying on them. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+    🟢 **Copilot CLI** · 🟢 **VS Code (Preview)** — same `.github/hooks/*.json` JSON format (Claude Code-compatible) is read by both hosts. VS Code support is still Preview; see the [official VS Code Hooks docs](https://code.visualstudio.com/docs/copilot/customization/hooks). User-scope locations differ: CLI uses `~/.copilot/hooks/`; VS Code uses `~/.copilot/hooks` or `~/.claude/settings.json`. Your **organization's enterprise policy** may disable hooks in VS Code — check before relying on them. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
 Hooks are the *automation* layer. They let you observe and *gate* what the agent does
 without changing how you prompt it.

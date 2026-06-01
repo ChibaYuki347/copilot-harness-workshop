@@ -13,14 +13,14 @@
 | [パス指定インストラクション (`applyTo`)](../customizations/custom-instructions.md#path-specific) | 🟢 対応 | 🟢 対応 | ✅ 同じ `.github/instructions/*.instructions.md` |
 | [プロンプトファイル](../customizations/prompt-files.md) | 🟢 対応 | 🟢 対応 | ✅ 同じ `.github/prompts/*.prompt.md` |
 | [スキル](../customizations/skills.md) | 🟢 対応 | 🟢 対応 | ✅ 同じ `.github/skills/<name>/SKILL.md`（`.agents/skills/` / `.claude/skills/` も可） |
-| [MCP サーバー](../customizations/mcp.md) | 🟢 対応（Preview） | 🟢 対応 | ⚠️ ファイルは別、**プロトコルは同じ** — 移行期間は両方配布 |
+| [MCP サーバー](../customizations/mcp.md) | 🟢 対応 | 🟢 対応 | ⚠️ ファイルは別、**プロトコルは同じ** — 移行期間は両方配布 |
 | [カスタムエージェント](../customizations/agents.md) | 🟢 対応 | 🟢 対応 | ✅ 同じ `.github/agents/<name>.agent.md` — スキーマは相互運用可能[^agent-compat] |
 | [フック](../customizations/hooks.md) | 🟢 対応（Preview）[^hooks-preview] | 🟢 対応 | ✅ 同じ `.github/hooks/*.json` 形式（Claude Code 互換） |
 
 凡例: 🟢 完全対応 · 🟡 制約付き対応 · ❌ 非対応。
 
 [^agent-compat]: 上流の `microsoft/vscode-copilot-chat` 設計ノートによれば、CLI 向けに書いた `.agent.md` は VS Code で開いても **だいたいそのまま動く**。違うのは *ツール参照名* くらい（CLI は組み込みの `task` ツール、VS Code は `agent` エイリアスとピッカー経由のサブエージェント解決）。
-[^hooks-preview]: 公式ドキュメント [VS Code Hooks](https://code.visualstudio.com/docs/copilot/customization/hooks) の通り、2026-05 時点では Preview。CLI と同じ JSON スキーマ・同じイベント名を VS Code が読み込みます。組織のエンタープライズポリシーで VS Code のフックが無効化されている可能性もあるため、`chat.hookFilesLocations` 設定と管理者の Copilot ポリシーを確認してから本番運用してください。
+[^hooks-preview]: 公式ドキュメント [VS Code Hooks](https://code.visualstudio.com/docs/copilot/customization/hooks) のとおり、VS Code 側のフックは引き続き Preview です。CLI と同じ JSON スキーマ・同じイベント名を VS Code が読み込みます。組織のエンタープライズポリシーで VS Code のフックが無効化されている可能性もあるため、`chat.hookFilesLocations` 設定と管理者の Copilot ポリシーを確認してから本番運用してください。
 
 ## 設定ファイルの場所を並べて比較
 

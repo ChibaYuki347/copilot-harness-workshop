@@ -78,7 +78,7 @@ Copilot にコーディング規約を一度だけ教えれば、どこでも従
 
 <div class="feature-card" markdown>
 ### 🪝 Hooks
-エージェントのライフサイクルイベントに自動処理を仕込みます（CLI では `sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd`、VS Code Preview では `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop`）。
+エージェントのライフサイクルイベントに自動処理を仕込みます（CLI では `sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd`、VS Code では `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop` — VS Code 側のフックは依然として Preview）。
 
 [詳しく見る →](customizations/hooks.md)
 </div>

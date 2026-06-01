@@ -3,7 +3,7 @@
 **Model Context Protocol 経由で、独自のツールをエージェントに接続します。**
 
 !!! abstract "対応ホスト"
-    🟢 **Copilot CLI**（プロジェクト: `.github/mcp.json` または `.mcp.json`、ユーザー: `~/.copilot/mcp-config.json`） · 🟢 **VS Code**（Preview — `.vscode/mcp.json` ワークスペース + `settings.json` の `mcp.servers` ユーザースコープ）。**MCP プロトコルは同じ** ですが、ファイルの場所とトップレベル JSON キーが異なります — CLI は `"mcpServers"`、VS Code は `"servers"`。混在チームでは両方を配布してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+    🟢 **Copilot CLI**（プロジェクト: `.github/mcp.json` または `.mcp.json`、ユーザー: `~/.copilot/mcp-config.json`） · 🟢 **VS Code**（`.vscode/mcp.json` ワークスペース + `settings.json` の `mcp.servers` ユーザースコープ）。**MCP プロトコルは同じ** ですが、ファイルの場所とトップレベル JSON キーが異なります — CLI は `"mcpServers"`、VS Code は `"servers"`。混在チームでは両方を配布してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
 
 MCP（Model Context Protocol）は、モデルが外部ツールとやり取りするためのオープン標準です。
 Copilot CLI では **GitHub の MCP サーバーが既定で有効** になっており（Issue の一覧取得や
@@ -57,7 +57,7 @@ API を持つもの何でも — チケットシステム、社内検索、ベ�
 
 ## VS Code 版 { #vs-code-equivalent }
 
-VS Code Copilot Chat も MCP を話します（2026-05 時点で Preview）。CLI とは
+VS Code Copilot Chat も MCP を話します。CLI とは
 別のファイル・若干違うスキーマを読みますが、**同じサーバー定義** が動きます。
 
 | 項目 | Copilot CLI | VS Code |
@@ -88,7 +88,7 @@ VS Code Copilot Chat も MCP を話します（2026-05 時点で Preview）。CL
 混在チームは、移行期間中 `.mcp.json` と `.vscode/mcp.json` の **両方をコミット** し、
 同じサーバーリストを保ってください。小さな `npm run sync-mcp` で片方からもう片方を
 生成すると同期が楽です。公式 VS Code ドキュメント:
-[Use MCP servers in VS Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)。
+[Use MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)。
 
 ## 最小例 — `.mcp.json`
 

@@ -4,7 +4,7 @@
 エンドポイント呼び出しを行います。**
 
 !!! abstract "対応ホスト"
-    🟢 **Copilot CLI** · 🟢 **VS Code（Preview）** — `.github/hooks/*.json` の JSON フォーマット（Claude Code 互換）を両ホストとも読み込みます。VS Code 対応は 2026-05 時点で Preview。詳細は [公式 VS Code Hooks ドキュメント](https://code.visualstudio.com/docs/copilot/customization/hooks)。ユーザースコープの置き場所は異なります（CLI は `~/.copilot/hooks/`、VS Code は `~/.copilot/hooks` または `~/.claude/settings.json`）。組織の **エンタープライズポリシー** で VS Code のフックが無効化されていることもあるため、依存する前に確認してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+    🟢 **Copilot CLI** · 🟢 **VS Code（Preview）** — `.github/hooks/*.json` の JSON フォーマット（Claude Code 互換）を両ホストとも読み込みます。VS Code 対応は引き続き Preview です。詳細は [公式 VS Code Hooks ドキュメント](https://code.visualstudio.com/docs/copilot/customization/hooks)。ユーザースコープの置き場所は異なります（CLI は `~/.copilot/hooks/`、VS Code は `~/.copilot/hooks` または `~/.claude/settings.json`）。組織の **エンタープライズポリシー** で VS Code のフックが無効化されていることもあるため、依存する前に確認してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
 
 フックは自動化レイヤーです。プロンプトの書き方を変えなくても、エージェントの動きを
 観察し、制御できます。

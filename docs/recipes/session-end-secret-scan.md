@@ -1,13 +1,14 @@
 # Recipe: Session-end secret scan
 
-!!! info "Works on: 🟢 Copilot CLI + VS Code Copilot Chat (Preview)"
+!!! info "Works on: 🟢 Copilot CLI + VS Code Copilot Chat (hooks in VS Code are Preview)"
     The `.github/hooks/<name>/hooks.json` file is read by both hosts. **Event name
     differs by host**:
 
     - Copilot CLI: `sessionEnd` (camelCase) — also accepts PascalCase `SessionStart` /
       `Stop` for cross-tool compatibility.
-    - VS Code Copilot Chat (Preview): `Stop` is the canonical session-end event
+    - VS Code Copilot Chat: `Stop` is the canonical session-end event
       (PascalCase). The CLI's `sessionEnd` is mapped automatically when imported.
+      VS Code hooks remain in Preview.
 
     The `bash`/`command`/`timeoutSec` schema and env-var injection work identically.
     See the [Hooks customization page](../customizations/hooks.md#vs-code-variant)

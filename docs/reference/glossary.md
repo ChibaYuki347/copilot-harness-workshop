@@ -89,7 +89,7 @@ GitHub.com, on mobile. The bridge between Ask and Agent is in
 
 The mode where Copilot **takes actions** on your behalf: reads files, edits
 files, runs `bash`, calls MCP tools, retries on failure. Default in Copilot CLI;
-opt-in via mode dropdown in VS Code Copilot Chat (Preview). Every action goes
+opt-in via mode dropdown in VS Code Copilot Chat. Every action goes
 through an approval prompt unless pre-allowed.
 
 ## Plan mode
@@ -114,8 +114,8 @@ a prompt even when the tool is on the allow-list.
 
 ## MCP client
 
-The side that **calls** the MCP tools — in our setting, Copilot itself. The CLI
-includes a built-in MCP client; VS Code Chat includes one in Preview.
+The side that **calls** the MCP tools — in our setting, Copilot itself. Both
+the CLI and VS Code Copilot Chat include a built-in MCP client.
 
 ## MCP server
 

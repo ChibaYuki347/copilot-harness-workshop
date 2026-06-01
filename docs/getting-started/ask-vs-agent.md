@@ -15,7 +15,7 @@ This page is the bridge.
 
 | | **Ask mode** | **Agent mode** |
 |---|---|---|
-| Where it lives | VS Code Chat panel (default), Copilot Chat web, GitHub.com mobile | Copilot CLI, VS Code Chat agent (Preview), GitHub.com Copilot Workspace |
+| Where it lives | VS Code Chat panel (default), Copilot Chat web, GitHub.com mobile | Copilot CLI, VS Code Chat agent mode, GitHub.com Copilot Workspace |
 | What it does | Answers, generates code, proposes diffs | Reads files, edits files, runs `bash`, calls MCP tools, retries on failure |
 | Who decides each step | You — you copy the suggestion or click "Apply" | Copilot, with you approving each tool call |
 | How many turns per task | Often many ("ask, copy, paste, ask again") | Often one ("here's the goal", agent loops until done) |
@@ -46,7 +46,7 @@ The default mode is agent-like — type a goal, and the agent will start
 reading files and proposing actions. You'll be asked to approve each tool call
 unless you've configured allow-lists.
 
-### VS Code Chat (Preview)
+### VS Code Chat
 
 1. Open the Chat view (View → Chat or `Ctrl/Cmd + Alt + I`).
 2. In the dropdown at the bottom, switch from **Ask** to **Agent**.

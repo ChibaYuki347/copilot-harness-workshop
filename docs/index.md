@@ -77,7 +77,7 @@ Package multi-step agent procedures — with scripts, templates, and rubrics —
 
 <div class="feature-card" markdown>
 ### 🪝 Hooks
-React to agent lifecycle events (`sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd` in the CLI, `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop` in VS Code Preview).
+React to agent lifecycle events (`sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd` in the CLI, `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop` in VS Code — hooks in VS Code are still Preview).
 
 [Learn more →](customizations/hooks.md)
 </div>
