@@ -196,3 +196,6 @@ modifies tracked files in `.github/` will show up in your `git status`.
   same layers in your own project, work through exercises 1 → 6.
 - [Reference → File layout](../reference/file-layout.md) — exactly where each
   customization file lives and what discovers it.
+- [Presenting the harness](../recipes/presenting-the-harness.md) — once you've
+  tried it yourself, the 5 / 15 / 45-minute presenter ladder for showing it
+  to your team.

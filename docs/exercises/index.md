@@ -9,6 +9,12 @@ that tells you it worked — not "looks about right".
     compresses exercises 01 / 03 / 06 into one guided hour. Come back to the
     numbered exercises below for deeper practice afterward.
 
+!!! tip "If you're the *presenter*, not an attendee"
+    See [Recipe: Presenting the harness](../recipes/presenting-the-harness.md)
+    for the 5 / 15 / 45-minute presenter ladder. The 60-minute live tour below
+    is for attendees who'll code along — running it from the presenter's
+    chair on top of the script is two jobs at once.
+
 ## Your experience matrix — where to start
 
 Not everyone arrives at the same place. Pick the row that describes you and
