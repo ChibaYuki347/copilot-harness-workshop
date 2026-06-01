@@ -44,6 +44,13 @@ cd ~/code/my-project
 copilot
 ```
 
+!!! tip "Want to follow along inside this very repo?"
+    `copilot-harness-workshop` itself ships every harness layer wired up —
+    Custom Instructions, Skills, Hooks, a Prompt File, an MCP config, and a
+    Custom Agent. If you cloned this repo to do the workshop, you can run
+    the same 6 steps below in **this** repo and see real wiring activate:
+    see [Try this repo as a live demo](try-this-repo.md).
+
 You'll see the splash, the trust prompt, and then an empty input box.
 
 ## Step 2 — Ask Copilot to ground itself

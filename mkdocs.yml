@@ -132,6 +132,7 @@ plugins:
             Workshop prep: Workshop 事前準備
             Ask mode vs Agent mode: Ask モードと Agent モード
             Your first session: 最初のセッション
+            "Try this repo as a live demo": "このレポを live demo として試す"
             Slash commands tour: スラッシュコマンド入門
             Customizations: カスタマイズ
             Overview: 概要
@@ -184,6 +185,7 @@ nav:
       - "Workshop prep": getting-started/workshop-prep.md
       - "Ask mode vs Agent mode": getting-started/ask-vs-agent.md
       - getting-started/first-session.md
+      - "Try this repo as a live demo": getting-started/try-this-repo.md
       - getting-started/slash-commands.md
   - Customizations:
       - Overview: customizations/index.md
