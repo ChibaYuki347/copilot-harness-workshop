@@ -83,6 +83,43 @@ Copilot は **シェルツールに対してデフォルト拒否（deny-by-defa
 
 `/allow-all` は `sudo` と同じ感覚で扱います。影響範囲を把握しているときだけ使います。
 
+## VS Code Copilot Chat — 対応する操作 { #vscode-equivalents }
+
+上のテーブルは **Copilot CLI** のコマンドです。VS Code Copilot Chat も同じ機能を
+提供しますが、サーフェスが異なります — `settings.json` の設定、Chat パネルのボタン、
+専用 VS Code コマンド（**Command Palette → `Chat: ...`**）のいずれかになります。
+
+| CLI スラッシュコマンド | VS Code 対応 | 補足 |
+|---|---|---|
+| `/help` | **Chat: View Help** コマンド、または Chat ヘッダの `?` ボタン | |
+| `/env` | **Chat: Show Configuration** + Chat の **「View tools」** ドロップダウン | 現セッションでロードされた instructions / agents / MCP servers / tools を表示 |
+| `/context` | Chat 入力欄のトークン使用量バッジ | ホバーで内訳 |
+| `/compact` | **Chat: Start New Chat**（持ち越し無効化） | VS Code は履歴を in-place で要約しない。新しいチャットを始める |
+| `/init` | **GitHub Copilot: Generate Instructions** コマンド | `.github/copilot-instructions.md` を生成 |
+| `/instructions` | Settings → `github.copilot.chat.codeGeneration.useInstructionFiles`（トグル） + Chat 入力欄の **「Instructions」** ピッカー | ファイル毎の有効/無効はピッカーで |
+| `/skills` | **Chat: Manage Skills** コマンド | `.github/skills/` のスキルは自動ロード、このコマンドで有効/無効切り替え |
+| `/mcp` | `.vscode/mcp.json`（プロジェクト） + Settings → `mcp.servers`（ユーザー） + **MCP: List Servers** コマンド | VS Code は別の設定ファイルを使うが、ランタイムの振る舞いは同じ。[MCP](../customizations/mcp.md#config-locations) 参照 |
+| `/agent` | Chat ヘッダの **agent ピッカー**（モード横のドロップダウン） | `.github/agents/*.agent.md` のカスタムエージェントが自動表示 |
+| `/plan`（Plan mode） | Chat ヘッダの **Plan mode** トグル（「Ask」「Edit」「Agent」の隣） | 同じ概念、UI が違うだけ。[Ask vs Agent](./ask-vs-agent.md) 参照 |
+| `/diff` | Agent モードでファイル編集時に自動で開く **diff ビュー** | 明示コマンド不要、編集毎に diff が開く |
+| `/review` | **GitHub Copilot: Review Selection / Review Changes** コマンド | 同じ code-review agent を使う |
+| `/pr` | **GitHub Pull Requests** 拡張のパネル（別拡張） | Copilot Chat のコマンドではない、Copilot Chat がこの拡張のコマンドを *使う* |
+| `/undo` / `/rewind` | 影響を受けた各ファイルでの標準 **VS Code Undo**（Ctrl/Cmd+Z） | Chat はトランザクション巻き戻しがない、ファイル毎に undo |
+| `/fleet`、`/tasks`、`/sidekicks` | **VS Code には直接対応なし** | 並列サブエージェント fan-out は今のところ CLI 専用 |
+| `/resume` | **Chat: Open Chat...** ピッカー（最近のチャット） | |
+| `/share` | **Chat: Export...** コマンド（Markdown / クリップボード） | |
+| `/allow-all` | Settings → `chat.tools.autoApprove`（boolean） | 同じリスクプロファイル、同じアドバイス — deny-list hook とペアで使う |
+| `/add-dir` | Workspace trust ダイアログ（フォルダごとに 1 回） | VS Code の workspace-trust プロンプトがカバー |
+| `/reset-allowed-tools` | **Chat: Reset Trusted Tools** コマンド | |
+| `@path` | Chat 入力欄の **`#file:path/to/file`** | プレフィクス文字が違うだけ、効果は同じ |
+| `#123` | Chat 内の **`#issue:123`** または **`#pr:123`** | プレフィクスで明示 |
+| `!cmd` | Chat 入力欄では直接サポートなし | Agent モードでコマンドを実行させる |
+
+!!! tip "迷ったら Command Palette"
+    Copilot Chat の機能はほぼすべて、**Chat: ...**、**GitHub Copilot: ...**、または
+    **MCP: ...** のいずれかの Command Palette エントリです。上にない CLI スラッシュ
+    コマンドは、キーワードでパレット検索すれば大抵対応物が見つかります。
+
 ## プログラマティックモード
 
 CI やスクリプトでは、**ヘッドレスモード** を使います:
