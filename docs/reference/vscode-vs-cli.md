@@ -20,7 +20,7 @@ through, and which features are Preview vs GA.
 | [Path-specific instructions (`applyTo`)](../customizations/custom-instructions.md#path-specific) | 🟢 Yes | 🟢 Yes | ✅ Same `.github/instructions/*.instructions.md` |
 | [Prompt Files](../customizations/prompt-files.md) | 🟢 Yes | 🟢 Yes | ✅ Same `.github/prompts/*.prompt.md` |
 | [Skills](../customizations/skills.md) | 🟢 Yes | 🟢 Yes | ✅ Same `.github/skills/<name>/SKILL.md` (+ `.agents/skills/`, `.claude/skills/`) |
-| [MCP servers](../customizations/mcp.md) | 🟢 Yes (Preview) | 🟢 Yes | ⚠️ Different file, **same protocol** — ship both during migration |
+| [MCP servers](../customizations/mcp.md) | 🟢 Yes | 🟢 Yes | ⚠️ Different file, **same protocol** — ship both during migration |
 | [Custom Agents](../customizations/agents.md) | 🟢 Yes | 🟢 Yes | ✅ Same `.github/agents/<name>.agent.md` — schema is interoperable[^agent-compat] |
 | [Hooks](../customizations/hooks.md) | 🟢 Yes (Preview)[^hooks-preview] | 🟢 Yes | ✅ Same `.github/hooks/*.json` format (Claude Code-compatible) |
 
@@ -32,8 +32,8 @@ Legend: 🟢 fully supported · 🟡 supported with caveat · ❌ not supported.
     `task` tool; VS Code exposes `agent` as an alias and resolves named
     subagents through its picker).
 [^hooks-preview]: Per the official
-    [VS Code Hooks docs](https://code.visualstudio.com/docs/copilot/customization/hooks)
-    (Preview as of 2026-05). The same JSON schema and event names that CLI
+    [VS Code Hooks docs](https://code.visualstudio.com/docs/copilot/customization/hooks),
+    VS Code hooks remain in Preview. The same JSON schema and event names that CLI
     accepts are loaded by VS Code. Your organization may disable hooks via
     enterprise policy; check `chat.hookFilesLocations` settings and your admin's
     Copilot policy before relying on them.

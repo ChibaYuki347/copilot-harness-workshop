@@ -15,6 +15,16 @@ hide:
 [カスタマイズ一覧 :material-cog:](customizations/index.md){ .md-button }
 [CLI vs VS Code マトリクス :material-table:](reference/vscode-vs-cli.md){ .md-button }
 
+!!! info "Ask モードは既に使っている方はこちら"
+    ここに来る方の多くは、すでに **Ask モード**（チャットで質問に答えてくれるサイド
+    バー）は使っているが、**Agent モード**（Copilot がファイルを編集しコマンドを
+    自分で実行する）はまだ、というケースです。それなら最短ルートはこちら:
+
+    1. [Ask モード vs Agent モード](getting-started/ask-vs-agent.md) — 何が違うかの 5 分プライマー
+    2. [ワークショップ準備](getting-started/workshop-prep.md) — VS Code Copilot Chat と Copilot CLI を 5〜10 分で両方セットアップ
+    3. [ガバナンス → 承認チートシート](governance/approval-cheatsheet.md) — 何を許可・拒否するかの基準
+    4. [カスタマイズ概要](customizations/index.md) — 自分のワークフローに合わせて整え始める
+
 !!! tip "2 つのサーフェス、1 つのハーネス"
     本サイトの大前提は「**ハーネスを構成するファイルはホスト間で持ち運べる**」という
     考え方です。ほとんどのファイル（`.github/copilot-instructions.md`、`*.prompt.md`、
@@ -68,7 +78,7 @@ Copilot にコーディング規約を一度だけ教えれば、どこでも従
 
 <div class="feature-card" markdown>
 ### 🪝 Hooks
-エージェントのライフサイクルイベントに自動処理を仕込みます（CLI では `sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd`、VS Code Preview では `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop`）。
+エージェントのライフサイクルイベントに自動処理を仕込みます（CLI では `sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd`、VS Code では `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop` — VS Code 側のフックは依然として Preview）。
 
 [詳しく見る →](customizations/hooks.md)
 </div>

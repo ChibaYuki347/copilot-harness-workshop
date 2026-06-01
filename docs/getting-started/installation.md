@@ -3,6 +3,11 @@
 This page covers installing the **GitHub Copilot CLI** (`copilot`). For full options and
 platform-specific details, see the [official install guide](https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli).
 
+!!! info "Already using Copilot Ask mode in VS Code?"
+    If you only need to install **both** VS Code Copilot Chat and Copilot CLI quickly
+    in a single sitting, use the consolidated [Workshop prep](workshop-prep.md) page
+    — it has both installers in one flow plus a smoke-test step for each.
+
 ## Prerequisites
 
 - An **active GitHub Copilot subscription** (individual, Business, or Enterprise).

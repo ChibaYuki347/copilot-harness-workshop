@@ -141,6 +141,7 @@ plugins:
             Hooks: フック
             MCP Servers: MCP サーバー
             Custom Agents: カスタムエージェント
+            "Mental model": メンタルモデル
             Safety & Governance: 安全性とガバナンス
             "Governance overview": ガバナンス概要
             Risk mental model: リスクの mental model
@@ -151,6 +152,7 @@ plugins:
             Recipes: レシピ
             "Recipe: PR Review Skill": レシピ — PR レビュースキル
             "Recipe: GitHub MCP server": レシピ — GitHub MCP サーバー
+            "Recipe: Microsoft Foundry Tools MCP": レシピ — Microsoft Foundry Tools MCP
             "Recipe: session-end secret scan": レシピ — セッション終了時のシークレットスキャン
             "Recipe: path-specific instructions": レシピ — パス指定インストラクション
             "Recipe: multi-agent workflow": レシピ — マルチエージェントワークフロー
@@ -191,6 +193,7 @@ nav:
       - customizations/hooks.md
       - customizations/mcp.md
       - customizations/agents.md
+      - "Mental model": customizations/mental-model.md
   - Safety & Governance:
       - "Governance overview": governance/index.md
       - "Risk mental model": governance/risk-mental-model.md
@@ -202,6 +205,7 @@ nav:
       - recipes/index.md
       - recipes/pr-review-skill.md
       - recipes/github-mcp-server.md
+      - recipes/foundry-tools-mcp.md
       - recipes/session-end-secret-scan.md
       - recipes/path-specific-instructions.md
       - recipes/multi-agent-workflow.md

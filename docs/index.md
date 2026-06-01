@@ -15,6 +15,16 @@ hide:
 [Jump to customizations :material-cog:](customizations/index.md){ .md-button }
 [CLI vs VS Code matrix :material-table:](reference/vscode-vs-cli.md){ .md-button }
 
+!!! info "Already using Copilot Ask mode? Start here."
+    Most people who arrive here already use **Ask mode** (the chat sidebar that
+    answers questions) but haven't really used **Agent mode** (where Copilot
+    edits files and runs commands on its own). If that's you, the fast path is:
+
+    1. [Ask mode vs Agent mode](getting-started/ask-vs-agent.md) — 5-minute primer on what's different.
+    2. [Workshop prep](getting-started/workshop-prep.md) — install both VS Code Copilot Chat and Copilot CLI in 5–10 minutes.
+    3. [Governance → Approval cheat sheet](governance/approval-cheatsheet.md) — what to allow vs deny.
+    4. [Customizations overview](customizations/index.md) — start shaping Copilot to your workflow.
+
 !!! tip "Two surfaces, one harness"
     Everything on this site is built around the idea that **the harness files travel
     across hosts**. Most files (`.github/copilot-instructions.md`, `*.prompt.md`,
@@ -67,7 +77,7 @@ Package multi-step agent procedures — with scripts, templates, and rubrics —
 
 <div class="feature-card" markdown>
 ### 🪝 Hooks
-React to agent lifecycle events (`sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd` in the CLI, `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop` in VS Code Preview).
+React to agent lifecycle events (`sessionStart` / `preToolUse` / `postToolUse` / `sessionEnd` in the CLI, `SessionStart` / `PreToolUse` / `PostToolUse` / `Stop` in VS Code — hooks in VS Code are still Preview).
 
 [Learn more →](customizations/hooks.md)
 </div>

@@ -15,7 +15,7 @@ Agent モードは触っていないのと同じです。
 
 | | **Ask mode** | **Agent mode** |
 |---|---|---|
-| 起動場所 | VS Code Chat パネル (既定)、Copilot Chat web、GitHub.com モバイル | Copilot CLI、VS Code Chat agent (Preview)、GitHub.com Copilot Workspace |
+| 起動場所 | VS Code Chat パネル (既定)、Copilot Chat web、GitHub.com モバイル | Copilot CLI、VS Code Chat agent モード、GitHub.com Copilot Workspace |
 | 何をする | 回答、コード生成、diff 提案 | ファイル読み取り、編集、`bash` 実行、MCP ツール呼び出し、失敗時のリトライ |
 | 各ステップの決定者 | あなた — 提案をコピーするか「Apply」をクリック | Copilot。あなたは各ツール呼び出しを承認 |
 | 1 タスクあたりのターン数 | しばしば複数 (「聞く・コピペ・また聞く」) | しばしば 1 つ (「ゴールはこれ」とだけ伝えてループ) |
@@ -45,7 +45,7 @@ copilot
 デフォルトが agent 的な振る舞いです — ゴールを打てばエージェントがファイルを
 読み行動を提案。allow-list を設定していない限り、各ツール呼び出しに承認を求めます。
 
-### VS Code Chat (Preview)
+### VS Code Chat
 
 1. Chat ビューを開く (View → Chat、または `Ctrl/Cmd + Alt + I`)
 2. 下部のドロップダウンで **Ask** から **Agent** へ切替

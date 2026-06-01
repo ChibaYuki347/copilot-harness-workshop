@@ -3,11 +3,29 @@
 **Plug your own tools into the agent via the Model Context Protocol.**
 
 !!! abstract "Where it works"
-    🟢 **Copilot CLI** (project: `.github/mcp.json` or `.mcp.json`; user: `~/.copilot/mcp-config.json`) · 🟢 **VS Code** (Preview — `.vscode/mcp.json` workspace + `settings.json` `mcp.servers` user scope). **Same MCP protocol**, but the file location and top-level JSON key differ — CLI uses `"mcpServers"`, VS Code uses `"servers"`. Ship both files for mixed teams. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
+    🟢 **Copilot CLI** (project: `.github/mcp.json` or `.mcp.json`; user: `~/.copilot/mcp-config.json`) · 🟢 **VS Code** (`.vscode/mcp.json` workspace + `settings.json` `mcp.servers` user scope). **Same MCP protocol**, but the file location and top-level JSON key differ — CLI uses `"mcpServers"`, VS Code uses `"servers"`. Ship both files for mixed teams. See [VS Code vs CLI](../reference/vscode-vs-cli.md).
 
 MCP — Model Context Protocol — is the open standard that lets a model talk to external
 tools. Copilot CLI ships with **GitHub's MCP server enabled by default** (so the agent
 can list issues, comment on PRs, etc.) and supports adding your own.
+
+## Why this exists
+
+The agent is locked to a fixed tool set (bash, view, edit, …). MCP is how you
+**extend that set** with anything that has an API: ticket systems, internal
+search, vendor SaaS, Azure Foundry, a private knowledge base. Instead of the
+agent guessing `curl` invocations, it gets typed tools with schemas and a
+single permission category to approve.
+
+## Alternatives — when *not* to reach for MCP
+
+- The action is **a one-off shell command** → just let the agent call `bash`.
+  MCP is overkill for "run my linter once."
+- The action is **a procedure with multiple shell steps** → write a [Skill](skills.md)
+  whose body is the procedure; cheaper than running an MCP server.
+- The action is **internal-only and never reused by other tools** → consider an
+  in-repo script the agent runs via `bash`. MCP shines when the same tool is
+  also useful from Cursor / Claude Desktop / your own agent.
 
 ## When to use MCP
 
@@ -16,7 +34,7 @@ can list issues, comment on PRs, etc.) and supports adding your own.
 - You want to expose a *typed* API (with schemas) rather than freeform CLI arguments.
 - You want to share the tool with other MCP-capable hosts (Claude Desktop, Cursor, etc.).
 
-## Where MCP configuration lives
+## Where MCP configuration lives { #config-locations }
 
 | Scope | File |
 |---|---|
@@ -40,7 +58,7 @@ can list issues, comment on PRs, etc.) and supports adding your own.
 
 ## VS Code equivalent { #vs-code-equivalent }
 
-VS Code Copilot Chat also speaks MCP (Preview as of 2026-05). It reads a
+VS Code Copilot Chat also speaks MCP. It reads a
 different file with a slightly different shape — same servers, different
 top-level key and env-var syntax.
 
@@ -72,7 +90,7 @@ The **same MCP server binary works in both hosts** — only the config file chan
 For mixed teams, **commit both** `.mcp.json` and `.vscode/mcp.json` with the same
 server list during the rollout window. A small `npm run sync-mcp` script that
 generates one from the other keeps them in lockstep. Official VS Code docs:
-[Use MCP servers in VS Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
+[Use MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
 
 ## Minimal example — `.mcp.json`
 

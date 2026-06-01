@@ -78,6 +78,66 @@ hooks. Use `/allow-all` (alias `/yolo`) to skip all prompts in the current sessi
 (dangerous) and `/reset-allowed-tools` to undo. Hooks can short-circuit individual
 permission requests via the `permissionDecision` field.
 
+## Ask mode
+
+The chat-only host mode: you ask, the model answers and may propose diffs, but
+**takes no actions on its own**. Default in VS Code Copilot Chat sidebar, on
+GitHub.com, on mobile. The bridge between Ask and Agent is in
+[Ask mode vs Agent mode](../getting-started/ask-vs-agent.md).
+
+## Agent mode
+
+The mode where Copilot **takes actions** on your behalf: reads files, edits
+files, runs `bash`, calls MCP tools, retries on failure. Default in Copilot CLI;
+opt-in via mode dropdown in VS Code Copilot Chat. Every action goes
+through an approval prompt unless pre-allowed.
+
+## Plan mode
+
+A CLI sub-mode (`Shift+Tab` to cycle) where Copilot **doesn't take actions** —
+it asks clarifying questions and proposes a structured plan for you to
+approve. Useful before letting it loose on a multi-file change.
+
+## Edit mode
+
+A CLI sub-mode (`Shift+Tab` to cycle) optimized for **mechanical edits in a
+known set of files** — fewer "let me think about this" loops, more direct
+file writes. Less common day-to-day than Plan and the default.
+
+## Auto-approve
+
+The state where a tool's permission decision is granted in advance — either
+session-wide (`A`llways allow at the prompt, `--allow-tool '<tool>(<args>:*)'`
+at launch, `chat.tools.autoApprove` in VS Code) or by a hook returning
+`permissionDecision: "allow"`. The opposite is **always-ask**, which forces
+a prompt even when the tool is on the allow-list.
+
+## MCP client
+
+The side that **calls** the MCP tools — in our setting, Copilot itself. Both
+the CLI and VS Code Copilot Chat include a built-in MCP client.
+
+## MCP server
+
+The side that **provides** the MCP tools — a separate process (stdio) or
+endpoint (http) that exposes a typed tool list and handles each tool call. The
+GitHub MCP server ships bundled with Copilot CLI; custom servers go in
+`.mcp.json` (CLI) or `.vscode/mcp.json` (VS Code).
+
+## Tool vs Skill vs Agent vs Instruction
+
+A frequent point of confusion. Quick disambiguation:
+
+| Concept | What it is | When the agent uses it | Who writes it |
+|---|---|---|---|
+| **Instruction** | Always-loaded prose (`.github/copilot-instructions.md`) | Every session, every turn | Repo / personal |
+| **Skill** | On-demand documented procedure (`SKILL.md`) | When user intent matches `description` | Repo / personal |
+| **Tool** | Atomic capability the agent can invoke (`bash`, `view`, MCP-provided) | When the model decides | Built-in or MCP server |
+| **Agent** | A persona with its own system prompt + tool allowlist (`.agent.md`) | When delegated to via `task` or `/agent` | Repo / personal / built-in |
+
+→ Instructions and Skills don't compete with Tools or Agents — they shape *how*
+the agent uses them.
+
 ## Sidekick
 
 A long-running auxiliary agent that runs alongside your main session (`/sidekicks`

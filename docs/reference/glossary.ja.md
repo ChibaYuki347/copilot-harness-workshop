@@ -83,6 +83,64 @@ Copilot CLI に同梱されているサブエージェントです。特に有�
 （別名 `/yolo`）を使い、取り消すには `/reset-allowed-tools` を使います。フックは
 `permissionDecision` フィールドで個別のパーミッション要求を短絡できます。
 
+## Ask モード
+
+チャットだけのホストモード。あなたが聞き、モデルが答え、diff を提案することもあるが、
+**自律的なアクションはしない**。VS Code Copilot Chat サイドバー、GitHub.com、
+モバイルの既定。Ask と Agent の橋渡しは
+[Ask モードと Agent モード](../getting-started/ask-vs-agent.md)。
+
+## Agent モード
+
+Copilot があなたの代わりに **アクションを取る** モード: ファイル読み取り、編集、
+`bash` 実行、MCP ツール呼び出し、失敗時のリトライ。Copilot CLI の既定、VS Code
+Copilot Chat はモードドロップダウンからオプトイン。事前許可されていない
+限り全アクションは承認プロンプトを通る。
+
+## Plan モード
+
+CLI のサブモード (`Shift+Tab` で循環)。Copilot は **アクションを取らず**、
+明確化質問と構造化プランの提案だけを行う。複数ファイルにわたる変更を任せる前に
+有用。
+
+## Edit モード
+
+CLI のサブモード (`Shift+Tab` で循環)。**既知の一連のファイルに対する機械的な
+編集** に最適化 — 「考えさせて」ループを減らし、直接ファイルを書く。Plan や
+default ほど日常的ではない。
+
+## Auto-approve（自動承認）
+
+ツールのパーミッション判断が事前に与えられた状態 — セッション全体
+(プロンプトの `A`llways allow、起動時 `--allow-tool '<tool>(<args>:*)'`、
+VS Code の `chat.tools.autoApprove`)、または `permissionDecision: "allow"` を
+返す hook によって。反対は **always-ask** — allow-list 上でもプロンプトを強制。
+
+## MCP client（MCP クライアント）
+
+MCP ツールを **呼び出す** 側 — 本ドキュメントの文脈では Copilot 自体。CLI と
+VS Code Copilot Chat の両方に組み込み MCP クライアントが入っている。
+
+## MCP server（MCP サーバー）
+
+MCP ツールを **提供する** 側 — typed なツール一覧を公開し各コールを処理する別
+プロセス (stdio) またはエンドポイント (http)。GitHub MCP サーバーは Copilot CLI に
+バンドル。カスタムサーバーは `.mcp.json` (CLI) や `.vscode/mcp.json` (VS Code) に。
+
+## Tool / Skill / Agent / Instruction の違い
+
+よく混同される。クイック整理:
+
+| 概念 | 何か | エージェントが使う条件 | 誰が書く |
+|---|---|---|---|
+| **Instruction** | 常時ロードされる散文 (`.github/copilot-instructions.md`) | 毎セッション、毎ターン | リポ / 個人 |
+| **Skill** | 必要時にロードされる文書化された手順 (`SKILL.md`) | ユーザー意図が `description` にマッチしたとき | リポ / 個人 |
+| **Tool** | エージェントが呼べる原子的能力 (`bash`、`view`、MCP 提供) | モデルが判断したとき | 組み込み or MCP サーバー |
+| **Agent** | 専用 system prompt と tool allowlist を持つペルソナ (`.agent.md`) | `task` で委譲、または `/agent` で起動 | リポ / 個人 / 組み込み |
+
+→ Instructions と Skills は Tools や Agents と競合しない — エージェントが
+それらをどう使うかを形作る。
+
 ## Sidekick（サイドキック）
 
 メインセッションと並行して動く、長時間実行の補助エージェントです（確認は `/sidekicks`）。

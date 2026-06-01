@@ -8,6 +8,23 @@
 Custom instructions are the simplest and highest-leverage customization. They're plain
 Markdown files Copilot loads into its system prompt — no scripts, no JSON, no DSL.
 
+## Why this exists
+
+The agent only knows what's in its context window. Conventions, build commands,
+team rules — none of that is in the code itself, so the model can't infer it.
+Instructions are the **always-on prelude** that closes that gap once per session,
+so you don't re-explain in every turn.
+
+## Alternatives — when *not* to reach for instructions
+
+- The thing you want to say is **a procedure with steps** → reach for a
+  [Skill](skills.md) instead. Instructions degrade when they grow past ~200 lines.
+- The thing is **a one-off prompt you reuse** → reach for a
+  [prompt file](prompt-files.md). Instructions apply *every turn*, which is wasteful
+  for things you only sometimes need.
+- The thing is **a rule the agent must not violate** → an instruction is the
+  *first* line, but pair it with a [hook](hooks.md) for mechanical enforcement.
+
 ## When to use them
 
 - You catch yourself saying the same thing to Copilot every session.

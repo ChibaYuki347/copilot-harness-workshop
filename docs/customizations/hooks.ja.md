@@ -4,10 +4,27 @@
 エンドポイント呼び出しを行います。**
 
 !!! abstract "対応ホスト"
-    🟢 **Copilot CLI** · 🟢 **VS Code（Preview）** — `.github/hooks/*.json` の JSON フォーマット（Claude Code 互換）を両ホストとも読み込みます。VS Code 対応は 2026-05 時点で Preview。詳細は [公式 VS Code Hooks ドキュメント](https://code.visualstudio.com/docs/copilot/customization/hooks)。ユーザースコープの置き場所は異なります（CLI は `~/.copilot/hooks/`、VS Code は `~/.copilot/hooks` または `~/.claude/settings.json`）。組織の **エンタープライズポリシー** で VS Code のフックが無効化されていることもあるため、依存する前に確認してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
+    🟢 **Copilot CLI** · 🟢 **VS Code（Preview）** — `.github/hooks/*.json` の JSON フォーマット（Claude Code 互換）を両ホストとも読み込みます。VS Code 対応は引き続き Preview です。詳細は [公式 VS Code Hooks ドキュメント](https://code.visualstudio.com/docs/copilot/customization/hooks)。ユーザースコープの置き場所は異なります（CLI は `~/.copilot/hooks/`、VS Code は `~/.copilot/hooks` または `~/.claude/settings.json`）。組織の **エンタープライズポリシー** で VS Code のフックが無効化されていることもあるため、依存する前に確認してください。詳細は [VS Code と Copilot CLI](../reference/vscode-vs-cli.md) を参照。
 
 フックは自動化レイヤーです。プロンプトの書き方を変えなくても、エージェントの動きを
 観察し、制御できます。
+
+## なぜ存在するか
+
+インストラクション・プロンプトファイル・スキルはすべて **エージェントが正しい
+選択をする** ことに頼ります。Hook はそうではありません — モデルの判断とは無関係に、
+イベント毎に発火するあなたが書いたコードです。機械的に強制する必要があるルール
+(監査ログ、deny-list、必須の事前チェック) を置く唯一の場所がここです。
+
+## 代替手段 — hook を *使わない* 判断
+
+- 振る舞いが **ユーザー意図の理解** に依存 → hook は意図を読めません。[instruction](custom-instructions.md)
+  か [skill](skills.md) を
+- 振る舞いが **モデルが好きなときに呼べるツール** → [プロンプトファイル](prompt-files.md)
+  か [MCP ツール](mcp.md) として公開。Hook はライフサイクルイベントで発火、オンデマンドではない
+- 何かおかしいときに **エージェント全体を止めたい** → hook は 1 つのツール呼び出しを
+  拒否できるがセッション終了はできません。「hook に拒否されたら止まって尋ねる」と
+  指示する instruction と組み合わせる
 
 ## 使いどき
 
