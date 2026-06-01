@@ -12,6 +12,7 @@
 | [セッション終了時のシークレットスキャン](session-end-secret-scan.md) | 🟢 両ホスト | フック | セッションが終了するたびに実行される、自動シークレットスキャンです。 |
 | [パス別インストラクション](path-specific-instructions.md) | 🟪 VS Code 主体 | カスタムインストラクション（`applyTo` glob） | フロントエンド用とバックエンド用でルールを分けつつ、設定の重複を避ける方法です。 |
 | [マルチエージェントワークフロー](multi-agent-workflow.md) | 🟦 CLI 専用 | カスタムエージェント + フリートモード | 並列レビューの流れです: ラバーダック + code-review + security-reviewer。 |
+| [ハーネスを社内で紹介する](presenting-the-harness.md) | 🟢 両ホスト | live demo 全部 | 5 / 15 / 45 分の presenter ラダー — このハーネスをチームにどう紹介するか |
 
 [^host-legend]: **凡例** — 🟢 **両ホスト** = Copilot CLI と VS Code Copilot Chat の両方で、同じファイルがそのまま動きます。🟦 **CLI 主体 / 専用** = CLI 固有のスラッシュコマンド・フラグ・既定バンドル機能に依存します。VS Code には別の仕組みがあるか、相当機能がありません。🟪 **VS Code 主体** = VS Code 固有のスキーマ（例: `.instructions.md` の `applyTo` glob）に依存します。CLI もファイルは読みますが、ホスト固有のセマンティクスは尊重しません。詳細は [サポートマトリクス](../reference/vscode-vs-cli.md) を参照。
 

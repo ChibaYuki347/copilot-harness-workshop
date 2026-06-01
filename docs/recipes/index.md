@@ -12,6 +12,7 @@ a real "how do I…" question and links to runnable artifacts under [`examples/`
 | [Session-end secret scan](session-end-secret-scan.md) | 🟢 Both | Hook | Automatic secret scan whenever a session ends. |
 | [Path-specific instructions](path-specific-instructions.md) | 🟪 VS Code-primary | Custom instructions (`applyTo` glob) | Different rules for frontend vs. backend without two copies of everything. |
 | [Multi-agent workflow](multi-agent-workflow.md) | 🟦 CLI-only | Custom agents + fleet mode | Parallel review pass: rubber-duck + code-review + security-reviewer. |
+| [Presenting the harness](presenting-the-harness.md) | 🟢 Both | The whole live demo | 5 / 15 / 45-minute presenter ladder — how to show this harness to your team. |
 
 [^host-legend]: **Host legend** — 🟢 **Both** = works in Copilot CLI and VS Code Copilot Chat with the same files. 🟦 **CLI-primary / CLI-only** = relies on a CLI-specific slash command, flag, or bundled feature; VS Code may have a different mechanism or none. 🟪 **VS Code-primary** = relies on a VS Code-specific config schema (e.g. `applyTo` globs in `.instructions.md`); the CLI may read the files but won't honor host-specific semantics. See [the support matrix](../reference/vscode-vs-cli.md) for the full picture.
 

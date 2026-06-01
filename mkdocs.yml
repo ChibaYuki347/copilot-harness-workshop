@@ -157,6 +157,7 @@ plugins:
             "Recipe: session-end secret scan": レシピ — セッション終了時のシークレットスキャン
             "Recipe: path-specific instructions": レシピ — パス指定インストラクション
             "Recipe: multi-agent workflow": レシピ — マルチエージェントワークフロー
+            "Presenting the harness": "レシピ — ハーネスを社内で紹介する"
             Case Studies: ケーススタディ
             Solo developer: 個人開発者
             Team rollout: チーム導入
@@ -211,6 +212,7 @@ nav:
       - recipes/session-end-secret-scan.md
       - recipes/path-specific-instructions.md
       - recipes/multi-agent-workflow.md
+      - "Presenting the harness": recipes/presenting-the-harness.md
   - Case Studies:
       - case-studies/index.md
       - case-studies/solo-developer.md

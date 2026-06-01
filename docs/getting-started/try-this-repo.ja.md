@@ -195,3 +195,4 @@ conventions 違反、リンク切れ、strict-build 警告などを検出しま�
 - [カスタマイズ概要](../customizations/index.md) — wiring が示している各レイヤーの概念ページ
 - [Exercises トラック](../exercises/index.md) — 同じレイヤーを自分のプロジェクトで作れるようになったら 1 → 6 を順に
 - [リファレンス → ファイル配置](../reference/file-layout.md) — どの customization ファイルがどこに置かれ、何が discover するか
+- [レシピ — ハーネスを社内で紹介する](../recipes/presenting-the-harness.md) — 自分で試した後、5 / 15 / 45 分の presenter ラダーでチームに見せる
