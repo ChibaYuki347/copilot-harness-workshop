@@ -9,6 +9,24 @@ Copilot CLI ships with a powerful built-in `task` tool that spawns *sub-agents* 
 running in its own context window with its own prompt, tools, and (optionally) model.
 You can also define **custom agents** that surface as named, pickable workers.
 
+## Why this exists
+
+A single agent that has to do "everything" gets distracted. Splitting into a
+**main + specialists** gives each role a clean system prompt, a tighter tool
+allowlist, and its own context budget. You spend a turn delegating; the
+specialist returns a single summary; your main session stays focused.
+
+## Alternatives — when *not* to reach for a custom agent
+
+- The "specialist" is **stateless and reused as a single command** → that's a
+  [prompt file](prompt-files.md). Custom agents add overhead worth it only
+  when there's persona / tool / model differentiation.
+- The work is **always done inline by the main agent** → don't fragment the
+  conversation. Custom agents are about delegation, not reorganization.
+- You want a procedure with **shared scripts** but the same agent runs it →
+  reach for a [Skill](skills.md). Agents and skills compose well; skills are
+  cheaper if you don't need a separate identity.
+
 ## When to use a custom agent
 
 - You want a **specialist** the main agent can hand off to — a "security reviewer",

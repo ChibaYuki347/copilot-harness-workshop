@@ -8,6 +8,24 @@
 Hooks are the *automation* layer. They let you observe and *gate* what the agent does
 without changing how you prompt it.
 
+## Why this exists
+
+Instructions, prompt files, and skills all rely on the **agent choosing** to do
+the right thing. Hooks don't — they're code you run, that fires on every event,
+regardless of what the model decided. That's the only place to put rules you
+need to enforce mechanically (audit logs, deny-lists, mandatory pre-checks).
+
+## Alternatives — when *not* to reach for a hook
+
+- The behavior depends on **understanding the user's intent** → a hook can't
+  read intent. Use an [instruction](custom-instructions.md) or [skill](skills.md).
+- The behavior is **a tool the model should be able to call when it wants** →
+  expose it as a [prompt file](prompt-files.md) or [MCP tool](mcp.md). Hooks
+  fire on lifecycle events, not on demand.
+- You want the agent to **stop entirely** when something is wrong → a hook can
+  deny one tool call, but it can't end the session. Combine with an
+  instruction that tells the agent "if a hook denies you, stop and ask."
+
 ## When to use them
 
 - You want every session to **log** prompts and tool calls for audit.
