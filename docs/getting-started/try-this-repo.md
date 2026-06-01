@@ -41,6 +41,14 @@ Trust the workspace at the prompt. Copilot will read `.github/copilot-instructio
 on startup — you can see this in your first prompt response, which will know
 this is a MkDocs site.
 
+!!! tip "Zero-install fast path"
+    If you don't want to install Python / Node / `gh` / `jq` / the Copilot CLI
+    on your host, this repo ships a **devcontainer** that preinstalls all of
+    them. Click **Code → Codespaces → Create codespace** on the GitHub repo
+    page, or use **Dev Containers: Reopen in Container** locally. See
+    [the devcontainer README](https://github.com/ChibaYuki347/copilot-harness-workshop/blob/main/.devcontainer/README.md)
+    for details.
+
 ### 2. List every customization the agent picked up
 
 In the session, run these in turn:

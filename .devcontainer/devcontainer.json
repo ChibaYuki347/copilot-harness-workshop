@@ -1,0 +1,70 @@
+// .devcontainer/devcontainer.json
+// Reproducible workspace for `copilot-harness-workshop`. Brings up a container
+// with Python 3.12 (for `mkdocs serve --strict`), Node.js LTS (for the npm
+// install of Copilot CLI), the GitHub CLI, jq (for the audit hook), and the
+// VS Code Copilot Chat extension. See .devcontainer/README.md for details.
+{
+  "name": "copilot-harness-workshop",
+
+  // Python 3.12 on Debian Bookworm — small, well-maintained, includes git.
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+
+  "features": {
+    // Node.js LTS — used by `npm install -g @github/copilot` in postCreate.
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    // gh CLI — used for auth + scripted PR/issue flows from inside the container.
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  // Provision Python deps, jq, and Copilot CLI after the container is built.
+  // See .devcontainer/postCreate.sh for what runs.
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+
+  // `mkdocs serve` defaults to 127.0.0.1:8000 — forward so the host can preview.
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "MkDocs preview",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // The two Copilot extensions readers of this site care about.
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        // Python tooling for mkdocs editing.
+        "ms-python.python",
+        // Markdown authoring quality of life. Markdownlint intentionally
+        // omitted to avoid noisy diagnostics on existing pages that weren't
+        // authored against its default ruleset.
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.eol": "\n"
+      }
+    }
+  },
+
+  // Run as the non-root `vscode` user supplied by the base image. The audit
+  // hook writes to $HOME/.copilot/copilot-harness-audit.log — i.e., under
+  // /home/vscode/.copilot — and stays out of the repo working tree.
+  "remoteUser": "vscode",
+
+  "containerEnv": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PIP_DISABLE_PIP_VERSION_CHECK": "1"
+  },
+
+  // Make sure pip --user installs (mkdocs, etc.) are on PATH for every
+  // process inside the container, not just interactive bash shells.
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
+  }
+}

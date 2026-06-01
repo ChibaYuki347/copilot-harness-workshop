@@ -43,6 +43,15 @@ trust 確認に答えると、Copilot は起動時に `.github/copilot-instructi
 読みます — 最初の応答が「これは MkDocs サイトです」とすでに理解した上で
 返ってくることで確認できます。
 
+!!! tip "ゼロインストールで試したい場合"
+    Python / Node / `gh` / `jq` / Copilot CLI をホストに入れたくない場合、
+    本レポには Python 3.12 + Node LTS + 必要ツール一式を事前インストールした
+    **devcontainer** が同梱されています。GitHub レポページの
+    **Code → Codespaces → Create codespace** か、ローカルなら
+    **Dev Containers: Reopen in Container** で開けます。詳細は
+    [devcontainer README](https://github.com/ChibaYuki347/copilot-harness-workshop/blob/main/.devcontainer/README.md)
+    を参照。
+
 ### 2. ロードされた customization をすべて一覧する
 
 セッション内で次を順番に実行:

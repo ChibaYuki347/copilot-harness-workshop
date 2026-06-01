@@ -43,6 +43,21 @@ platform-specific details, see the [official install guide](https://docs.github.
     npm install -g @github/copilot
     ```
 
+=== "Devcontainer / Codespaces"
+
+    If you cloned **this repo** (`copilot-harness-workshop`) or want a
+    reproducible workspace, the included [devcontainer](https://github.com/ChibaYuki347/copilot-harness-workshop/tree/main/.devcontainer)
+    preinstalls Python 3.12 + Node LTS + `gh` + `jq` + MkDocs + the Copilot
+    CLI itself in one step.
+
+    - **GitHub Codespaces:** click **Code → Codespaces → Create codespace on `main`** on the repo page.
+    - **Local Dev Containers:** install the [Dev Containers VS Code extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) + Docker, open the cloned repo, then **Reopen in Container**.
+
+    After the postCreate hook prints `✅ ... devcontainer ready.`, run
+    `gh auth login` then `copilot`. See the
+    [devcontainer README](https://github.com/ChibaYuki347/copilot-harness-workshop/blob/main/.devcontainer/README.md)
+    for the full layer-by-layer verification matrix.
+
 === "Windows (winget)"
 
     ```powershell
