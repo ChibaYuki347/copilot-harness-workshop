@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/audit-demo/log.sh",
+        "cwd": ".",
+        "env": {
+          "AUDIT_LOG": "${HOME}/.copilot/copilot-harness-audit.log"
+        },
+        "timeoutSec": 5
+      }
+    ]
+  }
+}

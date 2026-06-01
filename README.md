@@ -10,13 +10,29 @@
 
 ## What's in this repo
 
+This repo plays two roles at once:
+
+1. It **publishes the docs site** that explains how to customize Copilot.
+2. It **is itself a live demo** of every customization layer the docs cover —
+   clone it, run `copilot`, and the Skills / Hooks / Prompt / Agent / MCP /
+   path-specific Instructions are all wired up.
+
 | Path | Purpose |
 |---|---|
 | `docs/` | MkDocs Material source for the GitHub Pages site (English + Japanese subset). |
-| `examples/` | Copy-pasteable sample artifacts — `SKILL.md`, `hooks.json`, `.mcp.json`, custom instructions, prompt files, and a custom agent. |
+| `examples/` | Copy-pasteable sample artifacts referenced from the docs — `SKILL.md`, `hooks.json`, `.mcp.json`, custom instructions, prompt files, and a custom agent. |
 | `mkdocs.yml` | Site configuration (theme, navigation, i18n, plugins). |
 | `.github/workflows/deploy-pages.yml` | CI that builds and deploys the site to GitHub Pages on every push to `main`. |
-| `.github/copilot-instructions.md` | The repo's own Copilot instructions — yes, it eats its own dog food. |
+| `.github/copilot-instructions.md` | Repo-wide Copilot instructions. |
+| `.github/instructions/markdown.instructions.md` | **Live demo** — path-specific instructions that activate when editing `docs/**/*.md`. |
+| `.github/prompts/new-recipe.prompt.md` | **Live demo** — adds a `/new-recipe` slash command. |
+| `.github/skills/{site-build-check,translate-page}/` | **Live demo** — two repo-relevant Skills. |
+| `.github/hooks/audit-demo/` | **Live demo** — safe-by-default `postToolUse` hook that appends a JSONL line per tool call to `~/.copilot/copilot-harness-audit.log`. |
+| `.github/agents/docs-reviewer.agent.md` | **Live demo** — a docs-PR reviewer sub-agent. |
+| `.mcp.json` | **Live demo** — MCP config template (zero servers by default, no side effects). |
+
+→ See [Try this repo as a live demo](https://chibayuki347.github.io/copilot-harness-workshop/getting-started/try-this-repo/)
+for the 5-minute walkthrough and the opt-out switches for every layer above.
 
 ## Why "harness"?
 

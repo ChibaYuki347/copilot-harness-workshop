@@ -43,6 +43,13 @@ cd ~/code/my-project
 copilot
 ```
 
+!!! tip "このレポ自体で同じツアーを試したい場合"
+    `copilot-harness-workshop` 自体が、Custom Instructions / Skills / Hooks /
+    Prompt File / MCP 設定 / Custom Agent をすべて wired-up した状態で配信
+    しています。Workshop 目的でこのレポを clone している場合は、下の汎用
+    6 ステップを **このレポで** そのまま試せます:
+    [このレポを live demo として試す](try-this-repo.md)。
+
 スプラッシュ画面、信頼確認のプロンプト、その後に空の入力欄が表示されます。
 
 ## ステップ 2 — Copilot にリポジトリを把握させる
