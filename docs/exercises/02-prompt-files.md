@@ -87,12 +87,34 @@ If `origin/main` doesn't exist, fall back to `HEAD~1`.
 
 ### 3. Start a session and confirm the command is registered
 
-```bash
-copilot
-```
+=== "Copilot CLI"
 
-Inside the session, type `/` and start typing `pr`. The autocomplete should show
-`/pr-description` with the description from the frontmatter.
+    ```bash
+    copilot
+    ```
+
+    Inside the session, type `/` and start typing `pr`. The autocomplete should
+    show `/pr-description` with the description from the frontmatter.
+
+=== "VS Code Copilot Chat"
+
+    Open the workspace in VS Code (`code .`) and open the Chat view
+    (`Ctrl+Alt+I`). **You usually need to reload the window after creating
+    a new prompt file** — VS Code scans `.github/prompts/` at window start.
+    Reload via Command Palette → **Developer: Reload Window**.
+
+    Then in the chat input, type `/` and start typing `pr`. Autocomplete
+    should show `/pr-description`.
+
+    If it doesn't appear, verify VS Code actually discovered the file:
+
+    ```text
+    /prompts
+    ```
+
+    That shortcut opens the **Configure Prompt Files** menu, which lists every
+    prompt file VS Code can see. If `pr-description` isn't there, jump to
+    [Troubleshooting](#troubleshooting).
 
 ### 4. Invoke the prompt
 
@@ -147,9 +169,27 @@ git restore README.md
 
 ## Troubleshooting
 
-- **`/pr-description` doesn't appear in autocomplete.** The filename must end in
-  `.prompt.md`. A filename like `pr-description.md` (no `.prompt`) will be
+- **`/pr-description` doesn't appear in autocomplete (CLI).** The filename must
+  end in `.prompt.md`. A filename like `pr-description.md` (no `.prompt`) will be
   ignored.
+- **`/pr-description` doesn't appear in autocomplete (VS Code).** Check in this
+  order:
+    1. **Reload Window** (Command Palette → **Developer: Reload Window**). VS
+       Code scans `.github/prompts/` at window start; new files created
+       mid-session may not be picked up until reload.
+    2. Run **`/prompts`** in the chat input — it opens **Configure Prompt
+       Files**, which lists every prompt file VS Code discovered. If yours
+       isn't listed, VS Code never picked it up — continue below.
+    3. Confirm the file path is exactly `.github/prompts/pr-description.prompt.md`
+       (extension is `.prompt.md`, *not* `.md`; folder is `prompts/` plural).
+    4. Open the file in VS Code and check the YAML frontmatter is valid (no
+       missing `---`, no tab characters). A broken frontmatter silently drops
+       the file from discovery.
+    5. Settings → search **`chat.promptFilesLocations`**. The default
+       `.github/prompts` entry must be `true`. If you've customized this
+       setting, make sure your folder is included.
+    6. In a monorepo where the prompt file lives in a parent repo, enable
+       **`chat.useCustomizationsInParentRepositories`**.
 - **The prompt runs but doesn't see any diff.** Make sure your branch isn't
   `main`/`master` itself — there's no diff against the base. Check out a feature
   branch first: `git checkout -b feature/test`.
