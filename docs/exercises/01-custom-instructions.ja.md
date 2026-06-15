@@ -76,15 +76,42 @@ applyTo: "**/*.py"
 
 ### 3. セッションを開始して読み込まれたものを確認する
 
-```bash
-copilot
-```
+=== "Copilot CLI"
 
-セッション内で次を実行します:
+    ```bash
+    copilot
+    ```
 
-```text
-/instructions
-```
+    セッション内で次を実行します:
+
+    ```text
+    /instructions
+    ```
+
+    CLI は両方のファイルをインライン表示し、2 つ目には `**/*.py` の
+    スコープが付きます。
+
+=== "VS Code Copilot Chat"
+
+    ワークスペースを VS Code で開き、Chat ビューを開きます (`Ctrl+Alt+I`)。
+
+    チャット入力で `/instructions` と打つと、**コマンドパレット経由で
+    「Configure Instructions and Rules」メニュー** が開きます — これが
+    正規仕様です。**そのメニューに表示されているリスト自体が**、VS Code が
+    検出した instructions の一覧です。CLI のようなインライン表示は VS Code
+    にはありません。
+
+    確認手段は他に 3 つあり、いずれか 1 つで足ります:
+
+    1. **コマンドパレット → "Chat: Open Customizations"** で Agent
+       Customizations エディタ (Preview) が開く。検出済みの instructions、
+       prompt files、skills、agents が 1 つのツリーで見える
+    2. **`.github/copilot-instructions.md` を直接開く** — ファイルがあれば
+       always-on instructions として読み込まれていることが確定
+    3. **Agent Logs ビュー** (コマンドパレット → "Chat: Show Agent Logs") に
+       各リクエストでの prompt file / instruction discovery が時系列で出る
+
+    両方のファイルが見え、2 つ目に `applyTo` glob が付いていれば OK。
 
 一覧に **両方のファイル** が表示され、2 つ目のファイルには `**/*.py` のスコープが付いているはずです。
 
@@ -140,6 +167,7 @@ rm -rf .github/copilot-instructions.md .github/instructions
 ## トラブルシューティング
 
 - **`/instructions` に自分のファイルが出ません。** ほとんどの場合はパスかファイル名のタイプミスです。リポジトリ全体向けファイルは必ず `.github/copilot-instructions.md`（単数形、ハイフン区切り）である必要があります。パス別ファイルは `.github/instructions/` 配下に置き、末尾を `.instructions.md` にしなければなりません。
+- **VS Code: `/instructions` を打つと画面上部の検索窓（コマンドパレット）にフォーカスされる。** これが正規の挙動です。VS Code Chat の `/instructions` は **「Configure Instructions and Rules」メニュー** を開くショートカットで、開いたコマンドパレットに表示されているもの自体が VS Code が検出した instructions の一覧です。検出できなかったというサインではありません。すべての customization をツリービューで見たい場合は **Chat: Open Customizations** を使ってください。
 - **Copilot がルールを無視します。** インストラクションは *強制* ではなく *ガイダンス* です。重要なルールなら、より強い制約として書き直してください（例: "**Never** use `print()` for logging"）。そのうえで `## What not to do` 見出しの下に置きます。
 
 ## やってはいけないこと

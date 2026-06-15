@@ -83,11 +83,35 @@ If `origin/main` doesn't exist, fall back to `HEAD~1`.
 
 ### 3. セッションを開始してコマンドが登録されたことを確認する
 
-```bash
-copilot
-```
+=== "Copilot CLI"
 
-セッション内で `/` を入力し、続けて `pr` と打ち始めます。自動補完に、フロントマターの説明付きで `/pr-description` が表示されるはずです。
+    ```bash
+    copilot
+    ```
+
+    セッション内で `/` を入力し、続けて `pr` と打ち始めます。自動補完に、フロントマターの説明付きで `/pr-description` が表示されるはずです。
+
+=== "VS Code Copilot Chat"
+
+    ワークスペースを VS Code で開き (`code .`)、Chat ビューを開きます
+    (`Ctrl+Alt+I`)。**新しい prompt file を作った後はウィンドウのリロードが
+    必要なケースが多い** です — VS Code は `.github/prompts/` をウィンドウ
+    起動時にスキャンします。コマンドパレット → **Developer: Reload
+    Window** で再読み込みします。
+
+    その後、チャット入力で `/` を打ち、`pr` と打ち始めると、自動補完に
+    `/pr-description` が出るはずです。
+
+    出ない場合は、VS Code がファイルを検出しているか確認します:
+
+    ```text
+    /prompts
+    ```
+
+    このショートカットで **Configure Prompt Files** メニューが開き、VS Code
+    が認識している prompt files が全部表示されます。ここに
+    `pr-description` が無ければ、[トラブルシューティング](#troubleshooting)
+    へ。
 
 ### 4. プロンプトを呼び出す
 
@@ -135,9 +159,16 @@ rm -rf .github/prompts .pr-description.md
 git restore README.md
 ```
 
-## トラブルシューティング
+## トラブルシューティング { #troubleshooting }
 
-- **`/pr-description` が自動補完に出ません。** ファイル名は必ず `.prompt.md` で終わる必要があります。`pr-description.md`（`.prompt` なし）のような名前だと無視されます。
+- **`/pr-description` が自動補完に出ません（CLI）。** ファイル名は必ず `.prompt.md` で終わる必要があります。`pr-description.md`（`.prompt` なし）のような名前だと無視されます。
+- **`/pr-description` が自動補完に出ません（VS Code）。** 上から順に確認してください:
+    1. **ウィンドウをリロード** (コマンドパレット → **Developer: Reload Window**)。VS Code は `.github/prompts/` をウィンドウ起動時にスキャンするため、セッション中に作成した新規ファイルはリロードまで認識されないことがあります。
+    2. チャット入力で **`/prompts`** を実行。これで **Configure Prompt Files** が開き、VS Code が検出した prompt files の一覧が出ます。ここに無ければ VS Code は拾えていません — 下に進んでください。
+    3. ファイルパスがちょうど `.github/prompts/pr-description.prompt.md` になっていることを確認 (拡張子は `.prompt.md`、`.md` ではない。フォルダは複数形の `prompts/`)。
+    4. ファイルを VS Code で開き、YAML フロントマターが正しいことを確認 (`---` の閉じ忘れ、タブ文字混入が無いか)。フロントマターが壊れていると、エラーを出さずに discover からドロップされます。
+    5. Settings で **`chat.promptFilesLocations`** を検索。デフォルトの `.github/prompts` エントリが `true` になっている必要があります。この設定をカスタマイズしているなら、自分のフォルダが含まれているか確認。
+    6. monorepo で prompt file が親リポにある場合は **`chat.useCustomizationsInParentRepositories`** を有効化。
 - **プロンプトは動くのに diff が見えません。** いまのブランチが `main` / `master` そのものではないことを確認してください。base との差分がないためです。まず `git checkout -b feature/test` で feature ブランチを作ってください。
 
 ## やってはいけないこと

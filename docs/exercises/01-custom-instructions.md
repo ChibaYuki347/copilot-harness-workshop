@@ -83,15 +83,41 @@ the frontmatter.
 
 ### 3. Start a session and inspect what loaded
 
-```bash
-copilot
-```
+=== "Copilot CLI"
 
-In the session, run:
+    ```bash
+    copilot
+    ```
 
-```text
-/instructions
-```
+    In the session, run:
+
+    ```text
+    /instructions
+    ```
+
+    The CLI lists both files inline, with the second one marked as scoped to
+    `**/*.py`.
+
+=== "VS Code Copilot Chat"
+
+    Open the workspace in VS Code and open the Chat view (`Ctrl+Alt+I`).
+
+    Typing `/instructions` in the chat input **opens the "Configure
+    Instructions and Rules" menu via the Command Palette** — that's
+    intentional. The list shown in that menu *is* what VS Code discovered.
+    The CLI-style inline list doesn't exist in VS Code.
+
+    Three other ways to verify in VS Code, any one of which is sufficient:
+
+    1. **Command Palette → "Chat: Open Customizations"** opens the Agent
+       Customizations editor (Preview), which shows every discovered
+       instruction, prompt file, skill, and agent in one tree view.
+    2. **Open `.github/copilot-instructions.md` directly** — its presence is
+       enough to confirm always-on instructions are loaded.
+    3. **Agent Logs view** (Command Palette → "Chat: Show Agent Logs") shows
+       chronological prompt-file and instruction discovery for each request.
+
+    You should see **both files** with the second one's `applyTo` glob.
 
 You should see **both files** in the list, with the second one marked as scoped
 to `**/*.py`.
@@ -153,6 +179,12 @@ rm -rf .github/copilot-instructions.md .github/instructions
   typo. The repo-wide file must be exactly `.github/copilot-instructions.md`
   (singular, hyphenated), and path-specific files must end in
   `.instructions.md` inside `.github/instructions/`.
+- **VS Code: `/instructions` opens the Command Palette / search box at the top
+  of the window.** That's the expected behavior — `/instructions` in VS Code
+  Chat is a shortcut to the **Configure Instructions and Rules** menu. The
+  Command Palette IS the list, not a sign that something failed. Use
+  **Chat: Open Customizations** instead if you want a tree-view of every
+  customization VS Code discovered.
 - **Copilot ignores a rule.** Instructions are *guidance*, not enforcement. If a
   rule is critical, restate it as a stronger constraint ("**Never** use
   `print()` for logging") and put it under a `## What not to do` heading.

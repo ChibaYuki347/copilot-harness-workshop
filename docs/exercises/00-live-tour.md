@@ -97,18 +97,50 @@ Then deliberately deny one. Send:
 Now delete the README. Just to test the rejection flow.
 ```
 
-When the `rm` (or `edit`-to-empty) prompt appears: **Deny**.
+What happens next **depends on your host** — the two hosts have different
+denial models, and both are correct.
+
+=== "Copilot CLI"
+
+    The `rm` (or `edit`-to-empty) tool call appears as a **blocking approval
+    prompt** with `[a]llow / [A]llow always / [d]eny / [q]uit`. Press **`d`**.
+
+=== "VS Code Copilot Chat"
+
+    VS Code Agent mode **auto-applies edits and deletions**, then surfaces
+    them as **pending changes** with **Keep / Undo** controls in the editor
+    overlay (and a checkpoint in the chat). The denial happens *after* the
+    proposed change, not before.
+
+    1. The README disappears from the file tree.
+    2. After the agent finishes, look for the **Keep / Undo** controls in the
+       editor overlay (or **Discard changes** in the Source Control view).
+    3. Click **Undo** (or **Discard**) — that's the deny.
+
+    To experience a **blocking pre-approval prompt** like the CLI shows for
+    `rm`, ask for a *terminal command* instead — terminal tool calls
+    (`runInTerminal`) and MCP tool calls trigger per-call confirmations,
+    while in-workspace edits don't:
+
+    ```text
+    Now run `rm README.md` in the terminal. Just to test the rejection flow.
+    ```
+
+    A confirmation appears at the bottom of the chat with **Allow / Cancel** —
+    press **Cancel** to deny before the command runs.
 
 **Verify**:
 
-- [ ] README.md still exists.
+- [ ] README.md still exists (you either denied in CLI, or undid the change in VS Code).
 - [ ] You saw the agent acknowledge the denial and *not* retry forever.
 
 ??? note "Facilitator cue"
 
-    Walk through the approval prompt shape on screen: tool name, full arguments,
-    [a]llow / [A]llow always / [d]eny / [q]uit. Emphasize that arguments are
-    shown in full — denial is your last line of defense before something happens.
+    The host difference is pedagogically important — don't paper over it.
+    The CLI's **pre-approval** model is your last line of defense before
+    something happens; VS Code's **post-application + Undo** model trades
+    a pre-prompt for inline diff review. Both are valid; teams should pick
+    one consistently and document it in their governance page.
 
 ## Step 3 — One `copilot-instructions.md` (12 min)
 
